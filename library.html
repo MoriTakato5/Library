@@ -1,0 +1,2653 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Library — 原子衝突・断面積 体系辞典</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Sans+JP:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+<script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<style>
+/* ============================================================
+   Hand-written utility CSS replacing the Tailwind CDN build.
+   Generated to cover exactly the class names used in index.html.
+   Spacing scale follows Tailwind's default (1 unit = 0.25rem).
+   ============================================================ */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+/* --- Layout / display --- */
+.flex { display: flex; }
+.grid { display: grid; }
+.block { display: block; }
+.inline-block { display: inline-block; }
+.hidden { display: none; }
+.relative { position: relative; }
+.absolute { position: absolute; }
+.sticky { position: sticky; }
+.top-0 { top: 0; }
+.z-10 { z-index: 10; }
+.overflow-hidden { overflow: hidden; }
+.overflow-x-auto { overflow-x: auto; }
+.pointer-events-none { pointer-events: none; }
+.cursor-pointer { cursor: pointer; }
+
+/* --- Flex / grid behavior --- */
+.flex-1 { flex: 1 1 0%; }
+.flex-col { flex-direction: column; }
+.flex-wrap { flex-wrap: wrap; }
+.items-center { align-items: center; }
+.items-start { align-items: flex-start; }
+.justify-between { justify-content: space-between; }
+.justify-center { justify-content: center; }
+.group { /* marker class for group-hover */ }
+
+.gap-1 { gap: 0.25rem; }
+.gap-1\.5 { gap: 0.375rem; }
+.gap-2 { gap: 0.5rem; }
+.gap-3 { gap: 0.75rem; }
+.gap-4 { gap: 1rem; }
+.gap-5 { gap: 1.25rem; }
+
+.space-y-1 > * + * { margin-top: 0.25rem; }
+.space-y-1\.5 > * + * { margin-top: 0.375rem; }
+.space-y-3 > * + * { margin-top: 0.75rem; }
+.space-y-5 > * + * { margin-top: 1.25rem; }
+.space-y-7 > * + * { margin-top: 1.75rem; }
+
+/* --- Sizing --- */
+.w-full { width: 100%; }
+.max-w-3xl { max-width: 48rem; }
+.max-w-md { max-width: 28rem; }
+.h-28 { height: 7rem; }
+.h-32 { height: 8rem; }
+.h-72 { height: 18rem; }
+.min-h-screen { min-height: 100vh; }
+
+/* --- Spacing: margin / padding --- */
+.mx-auto { margin-left: auto; margin-right: auto; }
+.ml-0\.5 { margin-left: 0.125rem; }
+.ml-2 { margin-left: 0.5rem; }
+.ml-9 { margin-left: 2.25rem; }
+.mt-1 { margin-top: 0.25rem; }
+.mt-1\.5 { margin-top: 0.375rem; }
+.mt-2 { margin-top: 0.5rem; }
+.mt-2\.5 { margin-top: 0.625rem; }
+.mt-3 { margin-top: 0.75rem; }
+.mt-5 { margin-top: 1.25rem; }
+.mt-16 { margin-top: 4rem; }
+.mb-1 { margin-bottom: 0.25rem; }
+.mb-1\.5 { margin-bottom: 0.375rem; }
+.mb-2 { margin-bottom: 0.5rem; }
+.mb-3 { margin-bottom: 0.75rem; }
+.mb-4 { margin-bottom: 1rem; }
+.mb-5 { margin-bottom: 1.25rem; }
+.mb-6 { margin-bottom: 1.5rem; }
+.mb-7 { margin-bottom: 1.75rem; }
+.mb-8 { margin-bottom: 2rem; }
+.mb-10 { margin-bottom: 2.5rem; }
+.mb-14 { margin-bottom: 3.5rem; }
+.mb-16 { margin-bottom: 4rem; }
+
+.pt-1 { padding-top: 0.25rem; }
+.pt-3 { padding-top: 0.75rem; }
+.pt-4 { padding-top: 1rem; }
+.px-1 { padding-left: 0.25rem; padding-right: 0.25rem; }
+.px-1\.5 { padding-left: 0.375rem; padding-right: 0.375rem; }
+.px-2 { padding-left: 0.5rem; padding-right: 0.5rem; }
+.px-2\.5 { padding-left: 0.625rem; padding-right: 0.625rem; }
+.px-3 { padding-left: 0.75rem; padding-right: 0.75rem; }
+.px-4 { padding-left: 1rem; padding-right: 1rem; }
+.px-5 { padding-left: 1.25rem; padding-right: 1.25rem; }
+.px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
+.px-7 { padding-left: 1.75rem; padding-right: 1.75rem; }
+.px-8 { padding-left: 2rem; padding-right: 2rem; }
+.py-1 { padding-top: 0.25rem; padding-bottom: 0.25rem; }
+.py-1\.5 { padding-top: 0.375rem; padding-bottom: 0.375rem; }
+.py-2 { padding-top: 0.5rem; padding-bottom: 0.5rem; }
+.py-2\.5 { padding-top: 0.625rem; padding-bottom: 0.625rem; }
+.py-3 { padding-top: 0.75rem; padding-bottom: 0.75rem; }
+.py-4 { padding-top: 1rem; padding-bottom: 1rem; }
+.py-6 { padding-top: 1.5rem; padding-bottom: 1.5rem; }
+.py-10 { padding-top: 2.5rem; padding-bottom: 2.5rem; }
+.py-12 { padding-top: 3rem; padding-bottom: 3rem; }
+.py-16 { padding-top: 4rem; padding-bottom: 4rem; }
+
+.-right-16 { right: -4rem; }
+.-top-16 { top: -4rem; }
+
+/* --- Borders / radius --- */
+.border { border-width: 1px; border-style: solid; border-color: var(--rule); }
+.border-b { border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: var(--rule); }
+.border-t { border-top-width: 1px; border-top-style: solid; border-top-color: var(--rule); }
+.border-\[var\(--indigo\)\] { border-color: var(--indigo); }
+.border-\[var\(--rule\)\] { border-color: var(--rule); }
+.border-\[var\(--vermilion-soft\)\] { border-color: var(--vermilion-soft); }
+.rounded-sm { border-radius: 0.25rem; }
+.rounded-md { border-radius: 0.5rem; }
+
+/* --- Backgrounds --- */
+.bg-transparent { background-color: transparent; }
+.bg-\[var\(--indigo\)\] { background-color: var(--indigo); }
+.bg-\[var\(--paper\)\] { background-color: var(--paper); }
+.bg-\[var\(--paper\)\]\/90 { background-color: color-mix(in srgb, var(--paper) 90%, transparent); }
+.bg-\[var\(--paper-raised\)\] { background-color: var(--paper-raised); }
+.bg-\[rgba\(193\,80\,46\,0\.06\)\] { background-color: rgba(28,49,119,0.06); }
+.backdrop-blur { backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+
+/* --- Text color --- */
+.text-\[var\(--indigo\)\] { color: var(--indigo); }
+.text-\[var\(--ink\)\] { color: var(--ink); }
+.text-\[var\(--ink-soft\)\] { color: var(--ink-soft); }
+.text-\[var\(--ink-soft\)\]\/70 { color: color-mix(in srgb, var(--ink-soft) 70%, transparent); }
+.text-\[var\(--vermilion\)\] { color: var(--vermilion); }
+.text-white { color: #ffffff; }
+.placeholder\:text-\[var\(--ink-soft\)\]\/60::placeholder { color: color-mix(in srgb, var(--ink-soft) 60%, transparent); }
+
+/* --- Typography --- */
+.text-2xl { font-size: 1.5rem; line-height: 2rem; }
+.text-3xl { font-size: 1.875rem; line-height: 2.25rem; }
+.text-5xl { font-size: 3rem; line-height: 1; }
+.text-lg { font-size: 1.125rem; line-height: 1.75rem; }
+.text-sm { font-size: 0.875rem; line-height: 1.25rem; }
+.text-xs { font-size: 0.75rem; line-height: 1rem; }
+.text-\[10px\] { font-size: 10px; }
+.text-\[11px\] { font-size: 11px; }
+.text-\[15px\] { font-size: 15px; }
+.font-semibold { font-weight: 600; }
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.leading-none { line-height: 1; }
+.leading-relaxed { line-height: 1.625; }
+.leading-\[1\.9\] { line-height: 1.9; }
+.tracking-tight { letter-spacing: -0.025em; }
+.tracking-wide { letter-spacing: 0.025em; }
+.tracking-\[0\.2em\] { letter-spacing: 0.2em; }
+.tracking-\[0\.3em\] { letter-spacing: 0.3em; }
+.whitespace-nowrap { white-space: nowrap; }
+.underline { text-decoration-line: underline; }
+
+.line-clamp-1 {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* --- Effects / transitions --- */
+.opacity-\[0\.35\] { opacity: 0.35; }
+.outline-none { outline: none; }
+.transition-colors { transition-property: color, background-color, border-color; transition-duration: 150ms; transition-timing-function: ease; }
+.transition-shadow { transition-property: box-shadow; transition-duration: 150ms; transition-timing-function: ease; }
+.transition-transform { transition-property: transform; transition-duration: 150ms; transition-timing-function: ease; }
+
+/* --- Interactive states --- */
+.hover\:bg-\[var\(--indigo\)\]:hover { background-color: var(--indigo); }
+.hover\:bg-\[var\(--indigo-soft\)\]:hover { background-color: var(--indigo-soft); }
+.hover\:border-\[var\(--indigo\)\]:hover { border-color: var(--indigo); }
+.hover\:text-\[var\(--indigo\)\]:hover { color: var(--indigo); }
+.hover\:text-\[var\(--ink\)\]:hover { color: var(--ink); }
+.hover\:text-\[var\(--paper-raised\)\]:hover { color: var(--paper-raised); }
+.hover\:underline:hover { text-decoration-line: underline; }
+.focus\:border-\[var\(--indigo\)\]:focus { border-color: var(--indigo); }
+.disabled\:no-underline:disabled { text-decoration-line: none; }
+.disabled\:opacity-20:disabled { opacity: 0.2; }
+.disabled\:opacity-30:disabled { opacity: 0.3; }
+.group:hover .group-hover\:translate-x-1 { transform: translateX(0.25rem); }
+
+/* --- Responsive (sm: 640px+) --- */
+@media (min-width: 640px) {
+  .sm\:flex { display: flex; }
+  .sm\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .sm\:px-12 { padding-left: 3rem; padding-right: 3rem; }
+  .sm\:py-12 { padding-top: 3rem; padding-bottom: 3rem; }
+}
+
+
+  :root{
+    --paper: #FFFFFF;
+    --paper-raised: #FFFFFF;
+    --ink: #1F2421;
+    --ink-soft: #4A4F49;
+    --indigo: #1B3A5C;
+    --indigo-soft: #3E5B7A;
+    --vermilion: #1c3177;
+    --vermilion-soft: #4a6aad;
+    --rule: #D4D0C4;
+    --rule-soft: #E5E2D8;
+  }
+  html, body { background: var(--paper); }
+  body { font-family: 'IBM Plex Sans JP','IBM Plex Sans', sans-serif; color: var(--ink); }
+  button { background: transparent; border: none; padding: 0; cursor: pointer; font: inherit; color: inherit; }
+  .font-display { font-family: 'Source Serif 4', serif; }
+  .font-mono { font-family: 'IBM Plex Mono', monospace; }
+
+  .dot-grid {
+    background-image: none;
+  }
+
+  .paper-card {
+    background: var(--paper-raised);
+    border: 1px solid var(--rule);
+    box-shadow: 2px 2px 0 var(--rule-soft), 5px 5px 0 rgba(31,36,33,0.04);
+  }
+  .paper-card:hover { box-shadow: 3px 3px 0 #1c3177, 6px 6px 0 rgba(31,36,33,0.06); }
+
+  .chip {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11.5px;
+    letter-spacing: 0.01em;
+    border: 1px solid var(--indigo);
+    color: var(--indigo);
+    background: rgba(27,58,92,0.05);
+    border-radius: 3px;
+    padding: 2px 7px;
+    white-space: nowrap;
+    transition: all .15s ease;
+  }
+  .chip:hover { background: var(--indigo); color: var(--paper-raised); }
+  .chip.active { background: var(--indigo); color: var(--paper-raised); }
+  .chip.vermilion { border-color: var(--vermilion); color: var(--vermilion); background: rgba(28,49,119,0.06); }
+  .chip.vermilion:hover, .chip.vermilion.active { background: var(--vermilion); color: var(--paper-raised); }
+
+  .underline-grow { position: relative; }
+  .underline-grow::after {
+    content: ''; position: absolute; left: 0; bottom: -4px; height: 2px; width: 100%;
+    background: var(--ink); transform: scaleX(1); transform-origin: left;
+  }
+
+  .home-tile { transition: transform .2s ease, box-shadow .2s ease; }
+  .home-tile:hover { transform: translateY(-3px); }
+
+::selection { background: var(--vermilion-soft); color: white; }
+
+  .katex { font-size: 1.05em; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .fade-up { animation: fadeUp .35s ease both; }
+
+  .orbit-ring {
+    border: 1px solid var(--rule);
+    border-radius: 50%;
+  }
+</style>
+</head>
+<body class="dot-grid min-h-screen">
+<div id="root"></div>
+
+<script type="text/plain" id="app-source">
+const { useState, useMemo, useEffect, useRef } = React;
+
+/* ====================== DATA ====================== */
+
+const CATEGORIES = {
+  equipment: {
+    key: 'equipment',
+    label: 'Equipment',
+    sub: '実験装置・デバイス',
+    desc: '電子・イオン衝突実験に登場する個々の装置・コンポーネントの仕組みと役割。',
+  },
+  engineering: {
+    key: 'engineering',
+    label: 'Engineering',
+    sub: '最新の技術解説',
+    desc: '実験装置・測定技術・データ取得手法など、現代の原子衝突実験を支える工学的知識。',
+  },
+  theory: {
+    key: 'theory',
+    label: 'Theory',
+    sub: '基盤理論',
+    desc: '朝倉物理学体系「原子衝突」に準拠した、散乱現象を記述する理論的基盤。',
+  },
+  knowledge: {
+    key: 'knowledge',
+    label: 'Knowledge',
+    sub: '学部生レベルの物理化学',
+    desc: '上記2つを理解するために必要な、学部基礎レベルの物理学・化学の前提知識。',
+  },
+};
+
+const ALL_TAGS = [
+  'Electron_Collision','Ion_Collision','Atom_Target','Molecule_Target',
+  'Elastic_Scattering','Inelastic_Scattering','Excitation','Ionization',
+  'DEA','Resonance','Experiment','Theory','Electron_Beam','R_Matrix',
+  'Close_Coupling','Cross_Section','DCS','Review','Data_Compilation',
+  'Equipment','Vacuum','Detector','Beam_Optics',
+  'Theory_of_Relativity',
+];
+
+const TERMS = [
+  /* ========== Equipment ========== */
+  {
+    id: 'thermionic-cathode',
+    title: '熱陰極（Cathode / フィラメント）',
+    category: 'equipment',
+    classification: '電子源 / 熱電子放出',
+    tags: ['Equipment', 'Electron_Beam', 'Experiment'],
+    summary: '金属フィラメントを通電加熱し、熱電子放出（Richardson-Dushman則）によって電子を供給する最も一般的な電子源。構造が単純で高輝度のビームを容易に得られる。',
+    body: [
+      { type: 'text', value: 'タングステン（W）やランタンヘキサボライド（LaB₆）などの高融点材料を数千℃に加熱すると、フェルミ面近傍の電子が熱エネルギーを得てポテンシャル障壁（仕事関数 $\\phi$）を越えて真空中に飛び出す。この熱電子電流密度はRichardson-Dushman式で与えられる。' },
+      { type: 'formula', value: 'J = A_0 T^2 \\exp\\!\\left(-\\frac{e\\phi}{k_B T}\\right)' },
+      { type: 'text', value: '$A_0 \\approx 120$ A cm⁻² K⁻² はリチャードソン定数、$T$ は絶対温度。仕事関数が低いほど同じ温度でより多くの電子が放出される。LaB₆ は W に比べて $\\phi$ が小さく低温・長寿命動作が可能。' },
+      { type: 'text', value: '**エネルギー広がり**：熱電子は Maxwell-Boltzmann 分布にしたがうため、放出電子のエネルギー広がりはおよそ $\\Delta E \\sim k_B T \\approx 0.2$–$0.5$ eV（2000–5000 K）となる。この広がりがエネルギー分解能の基本的な下限を設定する。高分解能実験では後段のモノクロメーターでさらに選別する。' },
+      { type: 'text', value: '**構造**：ヘアピン型（直線ワイヤを折り曲げたもの）とディスペンサー型（多孔質Wに低仕事関数酸化物を含浸させたもの）が代表的。前者は安価で交換容易、後者は長寿命・安定電流で精密実験向き。陰極の直下にWehneltシリンダ（制御電極）を置いてビーム電流を調節するのが一般的なガン構造。' },
+    ],
+    references: ['Boness & Schulz (1974) Phys. Rev. A — Electron-Molecule Scattering'],
+  },
+  {
+    id: 'photocathode-equip',
+    title: 'フォトカソード（光陰極）',
+    category: 'equipment',
+    classification: '電子源 / 光電効果',
+    tags: ['Equipment', 'Electron_Beam', 'Experiment'],
+    summary: 'レーザー光照射による光電効果で電子を放出する電子源。熱陰極と比べてエネルギー広がりが狭く（数十meV以下）、時間構造制御が可能。',
+    body: [
+      { type: 'text', value: '光子エネルギー $h\\nu$ が仕事関数 $\\phi$ を超えると、光電効果によって電子が放出される。放出電子の最大運動エネルギーはアインシュタインの式 $E_{max} = h\\nu - \\phi$ で決まる。エネルギー広がりはレーザーの線幅と材料バンド構造に依存し、$\\sim 0.1$–$0.3$ eV が典型。' },
+      { type: 'text', value: '材料としてはCs₂Te、GaAs、Cu、Mg などが使われる。GaAs（NEA：negative electron affinity 処理）は特に低い有効仕事関数をもち、偏極電子ビーム（スピン偏極）の生成にも利用される。' },
+      { type: 'text', value: 'パルスレーザーと組み合わせると電子ビームをナノ秒〜ピコ秒オーダーでパルス化でき、時間分解衝突実験や pump-probe 測定が可能になる。ただし量子効率（光子1個あたりの放出電子数）は概して低く（$10^{-3}$–$10^{-5}$）、真空度（$< 10^{-9}$ Pa）の維持が不可欠。' },
+    ],
+    references: ['Boness & Schulz (1974) Phys. Rev. A — Electron-Molecule Scattering'],
+  },
+  {
+    id: 'gas-jet',
+    title: 'ガスジェット / 分子線（Gas jet / Molecular beam）',
+    category: 'equipment',
+    classification: '標的供給 / ガス系',
+    tags: ['Equipment', 'Experiment', 'Molecule_Target'],
+    summary: '衝突領域に局所的にガスを噴出し、ビームとの相互作用領域を空間的に絞り込む機構。残気圧を上げずにターゲット密度を確保でき、エフュジーブジェットと超音速分子線の2種がある。',
+    body: [
+      { type: 'text', value: '**エフュジーブジェット（エフュージョンセル）**：小孔（直径数十〜数百 μm）から低圧ガスをにじみ出させる方式。余弦則（Knudsen 放出）にしたがう方向分布をもち、コリメータで方向を整える。構造が単純で流量制御が容易。反応性ガスや腐食性ガスにも使いやすい。' },
+      { type: 'text', value: '**超音速分子線（Supersonic molecular beam）**：高圧ガスを小孔から真空中に膨張させると断熱膨張によってガスが冷却され、内部温度 $\\lesssim 1$ K の極低温分子線が得られる。速度分布が非常に狭く（$\\Delta v/v \\sim 1$–$5\\%$）、内部状態（振動・回転）も最低準位に集中する。希薄ガスをキャリアガス（He, Ar）に混合したSeeded beam も使われる。' },
+      { type: 'text', value: 'どちらも衝突領域以外での不要な散乱を避けるため、下流にディファレンシャルポンプを置いて真空を段階的に排気する（差動排気構造）。ガスジェット方式では衝突後のガスをビームダンプ（低温トラップやポンプ口）で回収し残気圧を抑制する。' },
+    ],
+    references: ['Brunger & Buckman (2002) Phys. Rep. — Electron-Molecule Scattering Cross-Sections and Cross-Beam Experiments'],
+  },
+  {
+    id: 'electrostatic-lens',
+    title: '静電レンズ（Einzelレンズ）',
+    category: 'equipment',
+    classification: 'ビーム光学 / 集束素子',
+    tags: ['Equipment', 'Beam_Optics', 'Electron_Beam'],
+    summary: '軸対称な複数電極に電圧を印加して電位勾配を作り、荷電粒子ビームを集束・コリメートする素子。磁石が使えない超低エネルギー領域でも動作し、Einzelレンズは入射エネルギーを変えずに集束できる。',
+    body: [
+      { type: 'text', value: '**Einzelレンズ（単純集束レンズ）**：3枚の同心円筒電極（外2枚を接地、中央に電圧 $V_L$ を印加）で構成される。中央電極の電場が軸近傍では収束作用をもつ。入射・出射電位が等しいためビームのエネルギーは変化しない。' },
+      { type: 'text', value: '荷電粒子の軌道はパラキシャル近似のもとで薄レンズ公式に類似した式で記述できる。実焦点距離は印加電圧とビームエネルギーの比 $V_L / E_{beam}$ で決まり、電圧を変えることで焦点距離を可変にできる。' },
+      { type: 'text', value: '**加速・減速レンズ**：2電極間で電位差をつけるとビームを加速または減速しながら集束でき、エネルギー変換と集束を同時に行える。モノクロメーターや分析器の前後に置いてビームエネルギーを切り替えるのに使う。' },
+      { type: 'text', value: '**収差**：球面収差（外縁を通る粒子の焦点ずれ）・色収差（エネルギー広がりによる焦点ずれ）が主な問題。エミッタンスの悪化を防ぐため、アパーチャーで外縁粒子をカットするか、収差補正レンズ（四重極・八重極）を追加する。' },
+    ],
+    references: ['Brunger & Buckman (2002) Phys. Rep. — Electron-Molecule Scattering Cross-Sections and Cross-Beam Experiments'],
+  },
+  {
+    id: 'aperture-slit',
+    title: 'アパーチャー / スリット',
+    category: 'equipment',
+    classification: 'ビーム光学 / 成形素子',
+    tags: ['Equipment', 'Beam_Optics', 'Experiment'],
+    summary: 'ビーム断面の余分な広がりを物理的にカットし、ビーム径・発散角・エミッタンスを整形する穴またはスリット状の遮蔽板。絞り込むほどビーム強度は下がるがエネルギー均一性・空間分解能は向上する。',
+    body: [
+      { type: 'text', value: 'アパーチャー（円形孔）やスリット（矩形孔）は、ビームの角度発散をカットする「角度制限アパーチャー」と、ビーム径を制限する「ビーム制限アパーチャー」の2種に大別される。どちらも後段の光学系に入射できる粒子の位相空間体積（エミッタンス）を物理的に削減する。' },
+      { type: 'text', value: '**モノクロメーターでの役割**：半球型モノクロメーターの入口・出口スリット幅 $s$ がエネルギー分解能を決める主パラメータ。$\\Delta E / E \\approx s/R$（$R$：平均半径）という関係から、スリット幅を狭めるほど分解能が向上するが透過強度（電流量）が二乗則で減少する。' },
+      { type: 'text', value: '**スキマー（超音速分子線）**：超音速分子線の Mach disc 手前に置く特殊なコーン型アパーチャー。衝撃波の外側を遮蔽し内側の低温・低発散コアのみを通過させる。' },
+      { type: 'text', value: 'アパーチャーの材料は Mo、W、ステンレス鋼などが多く、真空適合性・加工精度・スパッタ耐性が選定基準。開口部のエッジ形状（シャープエッジほど良い）も透過ビーム品質に影響する。' },
+    ],
+    references: ['Brunger & Buckman (2002) Phys. Rep. — Electron-Molecule Scattering Cross-Sections and Cross-Beam Experiments'],
+  },
+  {
+    id: 'monochromator-equip',
+    title: 'モノクロメーター（エネルギー選別器）',
+    category: 'equipment',
+    classification: 'ビーム光学 / エネルギー選別',
+    tags: ['Equipment', 'Beam_Optics', 'Electron_Beam'],
+    summary: '電場（半球型・127°型など）を利用してビームのエネルギー広がり（FWHM）を数十meV以下に絞り込む装置。熱陰極電子源の 0.3–0.5 eV 広がりを精密実験が要求する分解能まで削減する。',
+    body: [
+      { type: 'text', value: '**半球型静電アナライザー（HSA）をモノクロメーターとして使う場合**：2枚の同心半球電極間の動径電場で円運動を起こし、通過エネルギー $E_p$ に等しい粒子のみが出口スリットを通過する。エネルギー分解能は $\\Delta E \\approx E_p \\cdot s/R$（$s$：スリット幅、$R$：平均半径）。' },
+      { type: 'text', value: '低い $E_p$（パスエネルギー）ほど分解能が高いが、透過率が下がる。通常 $E_p = 0.1$–$1$ eV の範囲で動作させ、$\\Delta E \\sim 10$–$100$ meV の分解能を実現する。' },
+      { type: 'text', value: '**127° 円筒コンデンサー**：2枚の同軸円筒電極を 127.3°（= $\\pi/\\sqrt{2}$）だけ切り取った形状。入射方向と出射方向が直交するため、実験装置の幾何学的配置を組みやすい。性能は HSA と同等で構造がやや簡単。' },
+      { type: 'text', value: '電子ビームは減速してから選別し、選別後に目標エネルギーまで再加速する「減速・選別・再加速」構成が標準的。モノクロメーターの前後に静電レンズを置きビームを整形する。空間電荷効果がビーム品質を制限するため、動作電流には上限がある。' },
+    ],
+    references: ['Brunger & Buckman (2002) Phys. Rep. — Electron-Molecule Scattering Cross-Sections and Cross-Beam Experiments', 'Tanaka, Brunger, Campbell (2016) Rev. Mod. Phys. — Cross Sections and Differential Cross Sections'],
+  },
+  {
+    id: 'hsa-analyzer',
+    title: 'アナライザー（半球型静電分析器）',
+    category: 'equipment',
+    classification: 'エネルギー分析 / 検出前段',
+    tags: ['Equipment', 'Detector', 'Experiment'],
+    summary: '同心半球電極間の動径電場で粒子を分光し、散乱後の電子・イオンのエネルギーを精密に測定する装置。散乱実験・光電子分光・オージェ分光に広く使われる。',
+    body: [
+      { type: 'text', value: '内球半径 $R_1$、外球半径 $R_2$ の半球型電極間の電圧 $V$ に対して、平均半径 $R_0 = (R_1 + R_2)/2$ を通過する粒子のエネルギー（通過エネルギー $E_p$）は次式で決まる。' },
+      { type: 'formula', value: 'E_p = \\frac{eV}{2}\\left(\\frac{R_2}{R_1} - \\frac{R_1}{R_2}\\right)^{-1}' },
+      { type: 'text', value: 'エネルギー分解能は $\\Delta E / E_p \\approx s/R_0 + \\alpha^2/4$（$s$：スリット幅、$\\alpha$：入射半角）で与えられる。電圧を掃引（または入射前に減速）しながらスペクトルを取得する。' },
+      { type: 'text', value: '散乱実験では、散乱後の電子をアナライザーの入口に集束する前置レンズ系が付いており、散乱角度ごとにスペクトルを取得することで DCS（微分断面積）を決定できる。2次元位置敏感検出器と組み合わせると多チャンネル同時計測も可能。' },
+    ],
+    references: ['Tanaka, Brunger, Campbell (2016) Rev. Mod. Phys. — Cross Sections and Differential Cross Sections'],
+  },
+  {
+    id: 'retarding-electrode',
+    title: 'リターディング（減速）電極',
+    category: 'equipment',
+    classification: 'ビーム光学 / エネルギー減速',
+    tags: ['Equipment', 'Beam_Optics', 'Detector'],
+    summary: '分析器の手前でビームを急減速させ、アナライザーの実効エネルギー分解能を向上させる電極。静電レンズと組み合わせてエネルギーを可変制御する。',
+    body: [
+      { type: 'text', value: 'アナライザーの絶対エネルギー分解能 $\\Delta E = E_p \\cdot s/R$ は通過エネルギー $E_p$ に比例する。そのため、入射ビームを減速して低い $E_p$ で通過させることで同じスリット幅でも分解能が向上する。例えば 10 eV ビームを 0.5 eV まで減速すれば分解能は 20 倍改善できる。' },
+      { type: 'text', value: '減速は電位の壁（リターディングポテンシャル）によって行われる。減速後の粒子エネルギーは入射エネルギーとリターディング電圧の差 $E_{kin} - eV_R$ となるため、電圧を掃引しながら透過電流を測定するとエネルギー積分スペクトル（リターディング曲線）が得られ、微分するとエネルギー分布になる（RFEA：Retarding Field Energy Analyzer）。' },
+      { type: 'text', value: '超低エネルギー電子（1 eV 以下）を扱う場合、微小な空間電荷効果・接触電位差・地磁気が無視できなくなる。μメタルシールドや補正コイルで磁場を除去し、接触電位差をKelvinプローブで較正する必要がある。' },
+    ],
+    references: ['Brunger & Buckman (2002) Phys. Rep. — Electron-Molecule Scattering Cross-Sections and Cross-Beam Experiments'],
+  },
+  {
+    id: 'mcp',
+    title: 'MCP（マイクロチャンネルプレート）',
+    category: 'equipment',
+    classification: '検出器 / 電子増倍',
+    tags: ['Equipment', 'Detector', 'Experiment'],
+    summary: '直径数十μmのガラスチャンネルが数百万本並んだ薄板。1個の電子・光子・イオンの衝突を二次電子なだれで $10^4$–$10^7$ 倍に増幅し、二次元の位置情報とともに検出する高感度センサー。',
+    body: [
+      { type: 'text', value: 'チャンネル内壁は高抵抗ガラス（比抵抗 $10^8$–$10^{12}$ Ω cm）で、前後に電圧を印加するとチャンネル内に一様な電場が形成される。入射粒子が壁に衝突すると二次電子を放出し、それが加速されて再び壁に衝突するなだれ（シェブロン型では2枚重ねでゲイン向上）を繰り返す。' },
+      { type: 'formula', value: 'G \\sim \\exp\\!\\left(\\alpha \\frac{L}{d}\\right)' },
+      { type: 'text', value: '$L/d$（チャンネル長対直径比、アスペクト比）とバイアス電圧が増幅率 $G$ を決める。電子・イオン・光子・紫外線に対して感度をもち、時間応答が速い（$< 1$ ns）。VMI・コインシデンス測定・飛行時間（TOF）分光など多くの計測手法の中心的検出器。' },
+      { type: 'text', value: 'MCP の前面に蛍光スクリーン（フォスファースクリーン）を組み合わせると光学カメラで二次元像を撮影できる。遅延線アノード（DLD）と組み合わせると1粒子ずつの到達位置と時刻を電気的に読み出せる（タイムスタンプ型検出器）。' },
+    ],
+    references: ['Tanaka, Brunger, Campbell (2016) Rev. Mod. Phys. — Cross Sections and Differential Cross Sections'],
+  },
+  {
+    id: 'vmi-equip',
+    title: 'VMI（Velocity Map Imaging）',
+    category: 'equipment',
+    classification: '検出器 / イメージング',
+    tags: ['Equipment', 'Detector', 'DCS'],
+    summary: '等電位面がレンズのように作用するように電極電圧を調整し、同じ速度ベクトルをもつ粒子が MCP 上の同一点に集まるように「速度マッピング」を実現する画像計測装置。角度・エネルギー分布を一括取得できる。',
+    body: [
+      { type: 'text', value: '3枚の平行リング電極（リペラー・エクストラクター・グラウンド）に適切な電圧を印加すると、衝突領域からあらゆる方向に飛び出した粒子が「速度が同じ＝MCP上の同じ点」となるように収束される。古典的なTOFやエネルギー分析器が一方向しか測れないのに対し、VMI は散乱の全立体角情報を一度に取得できる。' },
+      { type: 'text', value: 'MCP＋蛍光スクリーン上に映る二次元投影像（ニュートンスフィア投影）を Abel 逆変換または pBASEX などの再構成アルゴリズムで解析すると、元の三次元速度分布 $I(v, \\theta, \\phi)$ が復元でき、DCS（微分断面積）の角度分布が得られる。' },
+      { type: 'text', value: '光電子分光（PEPICO）・イオン-中性粒子散乱・光解離・電子衝突イオン化など多くの実験に応用される。エネルギー分解能はビームスポットサイズと MCP の空間分解能に制限される（典型的には $\\Delta E/E \\sim 2$–$5\\%$）。' },
+    ],
+    references: ['Tanaka, Brunger, Campbell (2016) Rev. Mod. Phys. — Cross Sections and Differential Cross Sections'],
+  },
+  {
+    id: 'faraday-cup',
+    title: 'ファラデーカップ',
+    category: 'equipment',
+    classification: '検出器 / 電流計測',
+    tags: ['Equipment', 'Detector', 'Electron_Beam'],
+    summary: '入射した荷電粒子（電子・イオン）の電流量を直接積分して測定する金属製カップ型検出器。絶対電流値の較正に使われる最も基本的なビーム診断デバイス。',
+    body: [
+      { type: 'text', value: '金属製のカップ（コレクター）に荷電粒子ビームを導き、流れ込む電荷を電流計（pA〜μA レンジのピコアンメーター）で読む。二次電子の逃げ出しを防ぐためカップ入口に負の電圧（サプレッサー電極）をかけ、二次電子放出による誤差（測定値が真の電流より大きくなる）を排除する。' },
+      { type: 'text', value: '測定可能な最小電流はアンプのノイズフロア（通常 $\\sim 0.1$–$1$ pA）で決まり、大電流側は熱的な制限がある。構造が単純なため信頼性が高く、ビーム電流の絶対校正・ビーム位置・ビームプロファイルの粗い測定に使われる。' },
+      { type: 'text', value: '断面積の絶対値測定では散乱前のビーム電流をファラデーカップで直接計測し、これを規格化係数として使うことが多い。MCP に比べ位置分解能はないが、高電流域での飽和がなく低雑音なため直接電流測定では必須の装置。' },
+    ],
+    references: ['Brunger & Buckman (2002) Phys. Rep. — Electron-Molecule Scattering Cross-Sections and Cross-Beam Experiments'],
+  },
+  {
+    id: 'channeltron',
+    title: 'チャンネルトロン（Channeltron）',
+    category: 'equipment',
+    classification: '検出器 / 電子増倍',
+    tags: ['Equipment', 'Detector', 'Experiment'],
+    summary: '1本のらせん状ガラス管の内壁を連続ダイノードとして使う電子増倍管。MCP の単チャンネル版にあたり、単一粒子（電子・イオン・光子・中性子）の計数に使われる。',
+    body: [
+      { type: 'text', value: '細長いコーン形のガラス管（先端直径数 mm、長さ数 cm）の内壁に半導体抵抗膜を塗布し、管の両端に高電圧（約 2–3 kV）を印加する。粒子が入口付近の壁に衝突すると二次電子が放出され、それが電場で加速されて壁に再衝突するなだれを繰り返し、$10^7$–$10^8$ の増幅率を得る。' },
+      { type: 'text', value: 'MCP と違い2次元位置情報はもたないが、単体の粒子計数（counting）には十分で、DCS 測定のような「ある方向への散乱電子を一点で検出する」用途に向いている。時間分解能は数 ns 程度で、飛行時間測定にも使われる。' },
+      { type: 'text', value: '信号はパルス波高弁別器（ディスクリミネーター）を通じてカウンターに入力し、電流ではなくパルス数として計測する（単一粒子計数モード）。バックグラウンド（ダークカウント）は $\\sim 0.1$–$1$ cps（counts per second）程度と低い。' },
+    ],
+    references: ['Brunger & Buckman (2002) Phys. Rep. — Electron-Molecule Scattering Cross-Sections and Cross-Beam Experiments'],
+  },
+  {
+    id: 'uhv',
+    title: '超高真空（UHV：Ultra-High Vacuum）',
+    category: 'equipment',
+    classification: '真空技術 / 環境整備',
+    tags: ['Equipment', 'Vacuum', 'Experiment'],
+    summary: '$10^{-7}$ Pa 以下の究極にクリーンな真空環境。残留ガス分子との不要な衝突を排除し、低エネルギー電子ビームの散乱実験・表面科学・精密分光を可能にする。',
+    body: [
+      { type: 'text', value: '大気圧 ($10^5$ Pa) から UHV ($10^{-8}$–$10^{-10}$ Pa) まで13桁以上の圧力差がある。各圧力域で支配的なポンプが異なる。' },
+      { type: 'text', value: '• **粗引き（$10^5$ → $10^{-1}$ Pa）**：ロータリーベーンポンプ（RVP）/ ダイアフラムポンプ' },
+      { type: 'text', value: '• **中真空（$10^{-1}$ → $10^{-4}$ Pa）**：ターボ分子ポンプ（TMP）のスタート可能域' },
+      { type: 'text', value: '• **高真空〜超高真空（$10^{-4}$ → $10^{-10}$ Pa）**：ターボ分子ポンプ + イオンゲッターポンプ / チタンサブリメーションポンプ' },
+      { type: 'text', value: 'UHV 達成には「ベーキング（200–300℃ での加熱脱ガス）」が不可欠で、チェンバー壁・ガスケット・すべての部品から吸着水分・炭化水素を追い出す。材料は SUS316L・Cu・アルミナなど低ガス放出材料を選ぶ。フランジにはメタルガスケット（Cu または Al）を使う（ICF / CF フランジ）。' },
+      { type: 'text', value: '真空度の計測にはイオン化真空計（熱陰極イオンゲージや冷陰極ゲージ）を使い、$10^{-1}$–$10^{-2}$ Pa 域はバラトロン（キャパシタンスマノメーター）、$10^{-2}$–$10^{-4}$ Pa 域はピラニーゲージが担う。' },
+    ],
+    references: ['Brunger & Buckman (2002) Phys. Rep. — Electron-Molecule Scattering Cross-Sections and Cross-Beam Experiments'],
+  },
+  {
+    id: 'mu-metal',
+    title: 'μメタル（ミューメタル）シールド',
+    category: 'equipment',
+    classification: '磁気シールド / 環境制御',
+    tags: ['Equipment', 'Beam_Optics', 'Experiment'],
+    summary: '高透磁率合金（Ni–Fe系）製の磁気シールド材。地磁気（$\\sim 50$ μT）や周囲の浮遊磁場を数分の一以下に低減し、超低エネルギー電子（1 eV 以下）の軌道曲がりを防ぐ。',
+    body: [
+      { type: 'text', value: '1 eV 電子のサイクロトロン半径は地磁気（$B \\approx 50$ μT）中で $r_c = mv/(eB) \\approx 0.1$ m 程度であり、数十 cm スケールの実験装置では軌道が著しく曲がる。これが散乱角度の系統誤差や電流ロスの原因になる。' },
+      { type: 'formula', value: 'r_c = \\frac{m_e v}{eB} = \\frac{\\sqrt{2m_e E_{kin}}}{eB}' },
+      { type: 'text', value: 'μメタル（Permalloy 系；Ni 77–80%, Fe, Cu, Mo）は比透磁率が $\\mu_r \\sim 10^4$–$10^5$ と極めて高く、外部磁場を内部に引き込んで遮蔽する。チェンバー全体を円筒型または多層型 μメタルで囲み、残留磁場を数 nT〜数十 nT レベルまで下げる。' },
+      { type: 'text', value: 'μメタルは強い磁場にさらすと透磁率が落ちる（ヒステリシス）ため、組み立て後に消磁（ダイマグネタイズ）処理が必要。補助手段として3軸ヘルムホルツコイルで残留磁場を能動補正することもある。' },
+    ],
+    references: ['Brunger & Buckman (2002) Phys. Rep. — Electron-Molecule Scattering Cross-Sections and Cross-Beam Experiments'],
+  },
+  {
+    id: 'vacuum-gauges',
+    title: '真空計の種類（バラトロン・ピラニー・イオンゲージ等）',
+    category: 'equipment',
+    classification: '真空技術 / 圧力計測',
+    tags: ['Equipment', 'Vacuum', 'Experiment'],
+    summary: '測定圧力レンジに応じて異なる原理の真空計を使い分ける。バラトロン（容量型）・ピラニーゲージ（熱伝導型）・イオンゲージ（電離型）の3種が主流で、それぞれ適用範囲が異なる。',
+    body: [
+      { type: 'text', value: '**バラトロン（Baratron；容量ダイアフラムゲージ）**：変形するダイアフラムの静電容量変化から圧力を直接測定。ガスの種類に依存せず絶対圧がわかる。測定範囲 $10^3$–$10^{-3}$ Pa。温度安定性が高く、反応性ガス・腐食性ガスにも耐えるステンレス型がある。ビーム強度校正のためのガス圧絶対測定に使われる。' },
+      { type: 'text', value: '**ピラニーゲージ（Pirani gauge；熱伝導型）**：電流で加熱したフィラメントの熱損失（ガス分子への熱伝導）が圧力に依存することを利用。測定範囲 $10^3$–$10^{-2}$ Pa。ガス種に感度が依存する（N₂ 較正値が標準）。安価で堅牢だが絶対精度は低い。' },
+      { type: 'text', value: '**熱陰極イオンゲージ（Bayard-Alpert型）**：フィラメントから電子を放出し、それがグリッドに加速されながらガス分子をイオン化する。生成イオン電流が圧力に比例。測定範囲 $10^{-2}$–$10^{-10}$ Pa。UHV の主力計。ガス種依存の感度係数が必要。' },
+      { type: 'text', value: '**冷陰極イオンゲージ（Penning gauge）**：磁場中のグロー放電でイオン化を行う。加熱フィラメントが不要なため汚染が少なく、フィラメント断線のリスクがない。測定範囲 $10^{-2}$–$10^{-8}$ Pa。' },
+    ],
+    references: ['Brunger & Buckman (2002) Phys. Rep. — Electron-Molecule Scattering Cross-Sections and Cross-Beam Experiments'],
+  },
+  {
+    id: 'vacuum-pumps',
+    title: '真空ポンプの種類（ロータリー・ターボ・イオンゲッター）',
+    category: 'equipment',
+    classification: '真空技術 / 排気系',
+    tags: ['Equipment', 'Vacuum', 'Experiment'],
+    summary: '真空系は複数のポンプを直列に組み合わせて構成する。ロータリーポンプが大気から粗引きし、ターボ分子ポンプが高真空域を担い、イオンゲッターポンプが超高真空維持を受け持つのが典型的な構成。',
+    body: [
+      { type: 'text', value: '**ロータリーベーンポンプ（RVP）**：油回転ポンプ（オイル封止式）が最も一般的な粗引きポンプ。到達圧力 $\\sim 10^{-2}$ Pa。油蒸気の逆流（バックストリーミング）を防ぐためターボポンプとの間にゼオライトトラップを入れることが多い。ドライポンプ（スクロール・ダイアフラム）はオイルフリーで清潔な系が得られる。' },
+      { type: 'text', value: '**ターボ分子ポンプ（TMP）**：高速回転（数万 rpm）するロータが気体分子に運動量を与えて下流側に押し出す。ロータリーポンプでの粗引き後に使用する。到達圧力 $10^{-8}$–$10^{-10}$ Pa。ガス種依存が小さく汚染が少ない。磁気軸受（オイルフリー）型は振動が小さい。' },
+      { type: 'text', value: '**イオンゲッターポンプ（スパッタイオンポンプ）**：アノード・カソード間のプラズマ放電でガス分子をイオン化し、スパッタされた Ti 膜に埋め込む（ゲッタリング）。可動部がなく動作音がゼロ。到達圧力 $10^{-10}$–$10^{-11}$ Pa。希ガス（Ar）のポンプ速度が低い弱点がある。' },
+      { type: 'text', value: '**チタンサブリメーションポンプ（TSP）**：Ti フィラメントを加熱蒸発させ、チェンバー壁に新鮮な Ti 膜を形成し活性ガスを化学吸着させる。イオンゲッターポンプの補助として超高真空維持に使われる。' },
+    ],
+    references: ['Brunger & Buckman (2002) Phys. Rep. — Electron-Molecule Scattering Cross-Sections and Cross-Beam Experiments'],
+  },
+  /* ========== cross-section（先頭） ========== */
+  {
+    id: 'cross-section',
+    title: 'Cross Section（断面積）',
+    category: 'theory',
+    classification: '散乱理論 / 基本量',
+    tags: ['Cross_Section','Theory','Experiment'],
+    summary: '衝突反応の起こりやすさを面積の次元で表す基本量。原子衝突実験の最終的な観測量の多くは断面積として報告される。',
+    body: [
+      { type: 'text', value: '【理論の使われ方】断面積 $\\sigma$ は衝突物理の中心的な出力量であり、プラズマシミュレーション・大気モデル・放射線輸送コードへの入力データとして直接用いられる。J. Phys. B、ADNDT、Phys. Plasma などのジャーナルのレビュー論文は、特定の標的・入射粒子の組み合わせについて実験値と理論値を比較した断面積データの編纂（Data Compilation）を主目的としている。' },
+      { type: 'text', value: '【式と直感的解釈】断面積は「入射粒子から見た標的の実効的な的の面積」として定義される。' },
+      { type: 'formula', value: '\\sigma = \\frac{N_{scattered}}{N_{incident} \\cdot n \\cdot L}' },
+      { type: 'text', value: 'ここで $n$ は標的数密度、$L$ は相互作用領域の長さである。「$nL$ 個の標的が $\\sigma$ の面積の的を並べたとき、入射粒子がどれかに当たる確率」というイメージが直感的理解の助けになる。微分断面積 $d\\sigma/d\\Omega$ を積分すると全断面積が得られる。' },
+      { type: 'formula', value: '\\sigma_{total} = \\int_0^{2\\pi}\\!\\!\\int_0^{\\pi} \\frac{d\\sigma}{d\\Omega}\\sin\\theta\\, d\\theta\\, d\\phi' },
+      { type: 'graph', value: 'typical-cross-section' },
+      { type: 'text', value: '【背景】断面積の単位は m² だが、原子スケールでは $1\\,\\text{Å}^2 = 10^{-20}\\,\\text{m}^2$、あるいはボーア半径を基準に $\\pi a_0^2 \\approx 0.88 \\times 10^{-20}\\,\\text{m}^2$ が典型スケールとなる。' },
+    ],
+    references: ['Itikawa (2009) J. Phys. Chem. Ref. Data — Cross Sections for Electron Collisions with H2O','ADNDT Review on Electron-Atom Cross Sections'],
+  },
+  {
+    id: 'dcs',
+    title: 'DCS（微分断面積）',
+    category: 'theory',
+    classification: '散乱理論 / 角度分布',
+    tags: ['DCS','Cross_Section','Elastic_Scattering','Theory'],
+    summary: '散乱角 $\\theta$ ごとの断面積分布 $d\\sigma/d\\Omega$。全断面積よりはるかに豊富な情報を含み、散乱ポテンシャルや反応機構の検証に用いられる。',
+    body: [
+      { type: 'text', value: '【理論の使われ方】全断面積は散乱強度の「総量」だが、DCS はそれが角度方向にどう分配されるかを与える。量子干渉・共鳴構造・交換効果の指紋が角度分布に現れるため、散乱理論の精密な検証手段となる。Crossed-Beam 実験で散乱角を走査しながら計数することで測定される。' },
+      { type: 'text', value: '【式と直感的解釈】DCS は散乱振幅 $f(\\theta)$ の絶対値の2乗に等しい。' },
+      { type: 'formula', value: '\\frac{d\\sigma}{d\\Omega}(\\theta) = |f(\\theta)|^2' },
+      { type: 'text', value: '散乱振幅を部分波展開すると、各角運動量 $l$ の成分がルジャンドル多項式 $P_l(\\cos\\theta)$ として現れ、それらの干渉が角度分布の複雑な構造をつくる。' },
+      { type: 'formula', value: 'f(\\theta) = \\frac{1}{2ik}\\sum_{l=0}^{\\infty}(2l+1)\\left(e^{2i\\delta_l}-1\\right)P_l(\\cos\\theta)' },
+      { type: 'text', value: '【背景】DCS の全角積分が全断面積 $\\sigma_{total}$ を与える。前方散乱（$\\theta \\to 0$）では長距離ポテンシャルの寄与が大きく、後方散乱（$\\theta \\to \\pi$）では短距離の反発コアや交換効果が現れやすい。' },
+    ],
+    references: ['Tanaka, Brunger, Campbell (2016) Rev. Mod. Phys. — Cross Sections and Differential Cross Sections','Itikawa (2009) J. Phys. Chem. Ref. Data — Cross Sections for Electron Collisions with H2O'],
+  },
+  {
+    id: 'r-matrix',
+    title: 'R-Matrix理論',
+    category: 'theory',
+    classification: '散乱理論 / 計算手法',
+    tags: ['R_Matrix','Theory','Close_Coupling','Electron_Collision'],
+    summary: '配置空間を内部領域と外部領域に分割し、境界での対数微分（R行列）を介して接続する散乱計算手法。電子・原子（分子）衝突断面積の第一原理計算で最も広く使われる。',
+    body: [
+      { type: 'text', value: '【理論の使われ方】R-Matrix 法は低〜中エネルギー電子衝突の弾性散乱・励起・電離・DEA の断面積を第一原理から精密に計算するための標準的手法である。UK R-Matrix コード群（Belfast コード）をはじめとするパッケージが公開されており、He から重元素・分子まで広く適用されている。Advance in AMO Physics 誌のレビューでも本手法を用いた計算が多数紹介される。' },
+      { type: 'text', value: '【式と直感的解釈】配置空間を半径 $a$ で内部・外部に分割する。R行列はその境界での波動関数の対数微分の逆数にあたり、内部の多体計算の結果を外部の漸近解に接続するブリッジとなる。' },
+      { type: 'formula', value: 'R_{ij}(E) = \\frac{1}{2a}\\sum_{k} \\frac{w_{ik}\\, w_{jk}}{E_k - E}' },
+      { type: 'text', value: '直感的には「内部では電子相関を厳密に扱い、外部では粒子が独立に飛ぶ」という役割分担である。R行列の極 $E_k$ が共鳴エネルギーに近いとき断面積が急増する。' },
+      { type: 'graph', value: 'r-matrix-region' },
+      { type: 'text', value: '【背景】Close-Coupling との組み合わせ（R-Matrix with Pseudostates: RMPS）により電離チャンネルも扱える。計算精度はエネルギーメッシュと内部基底の大きさで決まり、大規模 HPC 計算が必要になる場合もある。' },
+    ],
+    references: ['Burke (2011) R-Matrix Theory of Atomic Collisions','Tennyson (2010) Phys. Rep. — Electron-Molecule Collision Calculations using R-matrix Method'],
+  },
+  {
+    id: 'close-coupling',
+    title: 'Close-Coupling近似',
+    category: 'theory',
+    classification: '散乱理論 / 計算手法',
+    tags: ['Close_Coupling','Theory','R_Matrix','Excitation'],
+    summary: '全系の波動関数を標的の有限個の固有状態で展開し、チャンネル結合した連立散乱方程式を解く近似手法。励起・電離断面積の精密計算に広く用いられる。',
+    body: [
+      { type: 'text', value: '【理論の使われ方】励起・電離断面積を精密に求めたい場合に、展開する標的状態の選択が精度を左右する。R-Matrix 法の内部領域計算と組み合わせて用いられるほか、スタークマン-マクダニエル法や CCC（Convergent Close-Coupling）法など多くの変種が提案されている。' },
+      { type: 'text', value: '【式と直感的解釈】全系の波動関数を標的固有状態 $\\phi_n$ で展開する。' },
+      { type: 'formula', value: '\\Psi = \\mathcal{A}\\sum_{n} \\phi_n(\\mathbf{x}) F_n(\\mathbf{r})' },
+      { type: 'text', value: 'これをシュレーディンガー方程式に代入すると、入射電子の動径関数 $F_n$ についての連立微分方程式が得られる。直感的には「チャンネル $n$ を伝播する電子が、ポテンシャル $V_{nm}$ を通じて別のチャンネル $m$ に散乱される」という多チャンネル散乱の描像である。' },
+      { type: 'formula', value: '\\left[\\frac{d^2}{dr^2} - \\frac{l(l+1)}{r^2} + k_n^2\\right]F_n(r) = 2\\sum_m V_{nm}(r)F_m(r)' },
+      { type: 'text', value: '【背景】展開に含める状態数を増やすほど精度は向上するが計算コストも増大する。電離チャンネルまで正確に取り込む CCC（Convergent Close-Coupling）法では連続状態を擬似状態（pseudostate）で近似する。' },
+    ],
+    references: ['Burke (2011) R-Matrix Theory of Atomic Collisions','Bartschat & Burke (1987) J. Phys. B — Close-Coupling Calculations'],
+  },
+  {
+    id: 'resonance',
+    title: 'Resonance（共鳴）',
+    category: 'theory',
+    classification: '散乱理論 / 動的過程',
+    tags: ['Resonance','Theory','Electron_Collision','DEA'],
+    summary: '入射電子が標的に一時的に捕獲され、準束縛の複合状態を形成する現象。断面積に鋭いピークまたはFano型非対称構造として現れ、DEAの中間状態ともなる。',
+    body: [
+      { type: 'text', value: '【理論の使われ方】共鳴は断面積の急激なエネルギー依存性をもたらし、プラズマ中の反応速度係数に大きく寄与する。DEA や振動励起の選択的増大など多くの現象が共鳴状態の形成・崩壊で説明される。実験的には高分解能ビーム（エネルギー幅 ＜ 50 meV）でエネルギーを細かくスキャンして観測する。' },
+      { type: 'text', value: '【式と直感的解釈】共鳴エネルギー $E_r$ 近傍での断面積の振る舞いはBreit-Wigner公式で記述される。' },
+      { type: 'formula', value: '\\sigma(E) \\propto \\frac{\\Gamma^2/4}{(E-E_r)^2 + \\Gamma^2/4}' },
+      { type: 'text', value: '幅 $\\Gamma = \\hbar/\\tau$ は複合状態の寿命 $\\tau$ の逆数に比例する。「共鳴の幅が狭い ⟺ 寿命が長い ⟺ 電子が長時間捕獲される」という直感が重要で、幅が狭いほど DEA や振動励起への分岐が増える。' },
+      { type: 'graph', value: 'breit-wigner' },
+      { type: 'text', value: '【背景】Shape 共鳴（遠心力障壁による捕獲）と Feshbach 共鳴（電子相関による閉じたチャンネルへの結合）の2種類がある。非共鳴バックグラウンドとの干渉によって Fano 型の非対称プロファイルが現れることも多い。' },
+    ],
+    references: ['Christophorou & Olthoff (2004) ADNDT — Electron Interactions with Excited Atoms and Molecules','Burke (2011) R-Matrix Theory of Atomic Collisions'],
+  },
+  {
+    id: 'dea',
+    title: 'DEA（解離性電子付着）',
+    category: 'theory',
+    classification: '散乱理論 / 反応過程',
+    tags: ['DEA','Resonance','Molecule_Target','Inelastic_Scattering'],
+    summary: '低速電子が分子に捕獲されて負イオン共鳴状態となり、解離して陰イオンと中性フラグメントを生じる過程。プラズマ化学・放射線生物学・絶縁ガス評価で重要。',
+    body: [
+      { type: 'text', value: '【理論の使われ方】DEA は分子標的に特有の反応過程で、プラズマエッチング（SF₆, CF₄）の負イオン生成、放射線によるDNA損傷の素過程（塩基への電子付着→鎖切断）、高電圧機器の絶縁破壊の評価など、幅広い応用で基礎データとして求められる。Phys. Plasma 誌でも頻繁に扱われる。' },
+      { type: 'text', value: '【式と直感的解釈】DEA は次の2段階で進む。' },
+      { type: 'formula', value: 'e^- + AB \\;\\longrightarrow\\; AB^{-*} \\;\\longrightarrow\\; A + B^-' },
+      { type: 'text', value: '第1段階（捕獲）の速さは共鳴幅 $\\Gamma$ で、第2段階（解離）の速さは分子がポテンシャル面を滑る速度で決まる。「$\\Gamma$ が小さい（寿命が長い）ほど解離に先んじて自動脱離されにくい」という競合が断面積の大きさを決定する直感的なポイントである。' },
+      { type: 'text', value: '【背景】DEA 断面積は共鳴エネルギーで鋭いピークを持ち（eV スケール以下の幅）、同位体効果（H→D 置換で断面積が大幅に変化）が顕著に現れる。これは解離速度と寿命の競合が核の質量に強く依存するためである。' },
+    ],
+    references: ['Christophorou & Olthoff (2004) ADNDT — Electron Interactions with Excited Atoms and Molecules','Fabrikant et al. (2017) Int. Rev. Phys. Chem. — Dissociative Electron Attachment'],
+  },
+  {
+    id: 'elastic-scattering',
+    title: 'Elastic Scattering（弾性散乱）',
+    category: 'theory',
+    classification: '散乱理論 / 反応過程',
+    tags: ['Elastic_Scattering','Cross_Section','DCS','Theory'],
+    summary: '標的の内部状態が変化せず運動量のみがやり取りされる散乱過程。全衝突過程の基礎となり、輸送係数・光学ポテンシャルの決定に用いられる。',
+    body: [
+      { type: 'text', value: '【理論の使われ方】弾性散乱断面積は電子の運動量輸送（拡散・ドリフト）を決定する輸送断面積の主要成分であり、プラズマ中の電子輸送シミュレーションや Swarm 実験の解析に直接使われる。また光学モデルでは弾性散乱の情報から光学ポテンシャルを構成し、非弾性チャンネルへの吸収効果を取り入れる。' },
+      { type: 'text', value: '【式と直感的解釈】弾性散乱は入射粒子と標的の内部状態が変化しない過程である。' },
+      { type: 'formula', value: 'e^-(E_0) + A \\;\\longrightarrow\\; e^-(E_0) + A' },
+      { type: 'text', value: '輸送断面積（運動量移行断面積）$\\sigma_m$ はDCSを $(1-\\cos\\theta)$ の重みで積分したもので、粒子の「実効的な制動効率」を表す。' },
+      { type: 'formula', value: '\\sigma_m = \\int (1-\\cos\\theta)\\frac{d\\sigma}{d\\Omega}\\,d\\Omega' },
+      { type: 'text', value: '【背景】低エネルギー電子衝突での Ramsauer-Townsend 効果（断面積の著しい極小）は弾性散乱の量子干渉によって生じ、Ar, Kr, Xe などの希ガスで顕著に現れる。' },
+    ],
+    references: ['Tanaka, Brunger, Campbell (2016) Rev. Mod. Phys. — Cross Sections and Differential Cross Sections'],
+  },
+  {
+    id: 'inelastic-scattering',
+    title: 'Inelastic Scattering（非弾性散乱）',
+    category: 'theory',
+    classification: '散乱理論 / 反応過程',
+    tags: ['Inelastic_Scattering','Excitation','Ionization','Theory'],
+    summary: '衝突後に標的の内部エネルギーが変化する散乱過程の総称。励起・電離・DEA などがすべてこれに属し、エネルギー損失スペクトルで同定される。',
+    body: [
+      { type: 'text', value: '【理論の使われ方】非弾性散乱断面積はどの内部状態への励起がどの程度起こるかを定量化し、プラズマ発光診断（発光係数の計算）・レーザー媒質の反転分布設計・大気の電離収支モデルなどに入力される。エネルギー損失スペクトル（電子エネルギー損失分光: EELS）によって各内部励起への断面積が分解して測定できる。' },
+      { type: 'text', value: '【式と直感的解釈】非弾性散乱では入射電子の運動エネルギーが励起エネルギー $\\Delta E$ の分だけ減少する。' },
+      { type: 'formula', value: 'E_1 = E_0 - \\Delta E_n' },
+      { type: 'text', value: '散乱後の電子エネルギー $E_1$ を分析することで、どのチャンネル（どの励起状態 $n$）に遷移したかが特定できる。終状態ごとの断面積の和が非弾性全断面積となる。' },
+      { type: 'text', value: '【背景】電離（Ionization）は非弾性散乱の特殊ケースで、終状態に散乱電子と放出電子の2つの自由電子が現れる。この三体問題は理論的に最も難しく、現在も活発に研究されている。' },
+    ],
+    references: ['Itikawa (2009) J. Phys. Chem. Ref. Data — Cross Sections for Electron Collisions with H2O','Bartschat & Burke (1987) J. Phys. B — Close-Coupling Calculations'],
+  },
+  {
+    id: 'excitation',
+    title: 'Excitation（励起）',
+    category: 'theory',
+    classification: '散乱理論 / 反応過程',
+    tags: ['Excitation','Inelastic_Scattering','Atom_Target','Close_Coupling'],
+    summary: '衝突により標的の電子が高いエネルギー準位へ遷移する過程。プラズマ発光診断・レーザー媒質設計の基礎データとなる。',
+    body: [
+      { type: 'text', value: '【理論の使われ方】プラズマの発光分光診断では、各輝線の発光強度が励起断面積と電子分布関数の積分（レート係数）で決まる。観測された輝線強度比から電子温度・密度を逆算するために、精密な励起断面積データが不可欠である。また半導体ドライエッチングプラズマや蛍光灯の設計でも励起データが利用される。' },
+      { type: 'text', value: '【式と直感的解釈】励起過程は次式で表される。' },
+      { type: 'formula', value: 'e^- + A(n_0) \\;\\longrightarrow\\; e^- + A^*(n)' },
+      { type: 'text', value: '励起断面積はしきい値 $E_{th} = E_n - E_{n_0}$ 付近で急激に立ち上がり、高エネルギーでは $\\sigma \\propto \\ln(E)/E$（光学許容遷移）または $\\sigma \\propto 1/E$（禁制遷移）の漸近形を取る。「許容遷移は遠距離の双極子相互作用が有効で断面積が大きい」という直感がある。' },
+      { type: 'text', value: '【背景】Close-Coupling 法や R-Matrix 法でしきい近傍の共鳴構造まで含めて計算される。実験では EELS（電子エネルギー損失分光）やレーザー誘起蛍光（LIF）で各励起状態への断面積を測定する。' },
+    ],
+    references: ['Bartschat & Burke (1987) J. Phys. B — Close-Coupling Calculations','Itikawa (2009) J. Phys. Chem. Ref. Data — Cross Sections for Electron Collisions with H2O'],
+  },
+  {
+    id: 'ionization',
+    title: 'Ionization（電離）',
+    category: 'theory',
+    classification: '散乱理論 / 反応過程',
+    tags: ['Ionization','Inelastic_Scattering','Electron_Collision'],
+    summary: '衝突により標的から電子が放出されイオンが生成される過程。終状態に2つの自由電子が現れる三体問題であり、理論的に最も難しい衝突過程の一つ。',
+    body: [
+      { type: 'text', value: '【理論の使われ方】電離断面積はプラズマの電離平衡・帯電粒子の輸送・医療用放射線の線量計算の基礎データとなる。また宇宙線や荷電粒子ビームによる物質の電離に関わる阻止能計算の根拠でもある。実験では散乱電子と放出電子を同時検出する coincidence 測定（$(e,2e)$ 法）で三重微分断面積まで決定できる。' },
+      { type: 'text', value: '【式と直感的解釈】電子衝突電離は終状態に2つの自由電子が現れる。' },
+      { type: 'formula', value: 'e^-(E_0) + A \\;\\longrightarrow\\; A^+ + 2e^-' },
+      { type: 'text', value: '高エネルギー極限では Bethe 近似（ボルン近似の対数補正版）が成立し、断面積はエネルギーの対数増加を示す。' },
+      { type: 'formula', value: '\\sigma_{ion}(E) \\approx \\frac{4\\pi a_0^2 R^2}{E}\\left[ M^2 \\ln\\!\\left(\\frac{4E}{R}\\right) + C \\right]' },
+      { type: 'text', value: '電離ポテンシャル $I_p$ 直上では断面積がゼロから急激に立ち上がり（Wannier 則：$\\sigma \\propto (E-I_p)^{1.127}$）、数倍 $I_p$ で極大を持つ典型的な形状を示す。' },
+      { type: 'text', value: '【背景】終状態の2電子が Coulomb 引力でイオンと相互作用する三体問題は、解析的に解けない。CCC 法や ECS（Exterior Complex Scaling）法などが現在の精密計算手法として使われる。' },
+    ],
+    references: ['Itikawa (2009) J. Phys. Chem. Ref. Data — Cross Sections for Electron Collisions with H2O','Kim & Rudd (1994) Phys. Rev. A — Binary-Encounter-Dipole Model for Ionization'],
+  },
+  {
+    id: 'electron-beam',
+    title: 'Electron Beam（電子ビーム）',
+    category: 'engineering',
+    classification: '実験技術 / 粒子源',
+    tags: ['Electron_Beam','Experiment','Electron_Collision'],
+    summary: '電子衝突実験における入射粒子源。エネルギー幅・強度・角度収束性が測定精度を左右する。',
+    body: [
+      { type: 'text', value: '【目的・使われ方】電子ビームは衝突実験の「入射粒子」であり、そのエネルギー幅・電流・空間的広がりが断面積データの精度を直接決定する。熱電子放出型フィラメントから生成した電子を静電レンズ系で収束・加速し、モノクロメーターでエネルギー幅を絞ってから標的に入射する。' },
+      { type: 'graph', value: 'beam-apparatus' },
+      { type: 'text', value: '【式と直感的解釈】電子の de Broglie 波長は運動エネルギー $E$ と次の関係にある。' },
+      { type: 'formula', value: '\\lambda = \\frac{h}{\\sqrt{2m_e E}} \\approx \\frac{12.3\\,\\text{Å}}{\\sqrt{E/\\text{eV}}}' },
+      { type: 'text', value: '例えば 10 eV の電子の波長は約 3.9 Å で、原子サイズ（1–3 Å）と同程度になる。この一致が低エネルギー電子散乱で量子干渉（Ramsauer-Townsend 効果、共鳴）が顕著に現れる理由の直感的な説明となる。' },
+      { type: 'text', value: '【背景】Trochoidal Electron Monochromator（TEM）や Hemispherical Energy Analyser（HEA）による単色化で典型的エネルギー幅は数十 meV まで絞られる。ビーム電流の安定性とエネルギー較正の精度が断面積データの信頼性を左右するため、装置開発自体がレビュー論文のテーマとなることも多い。' },
+    ],
+    references: ['Brunger & Buckman (2002) Phys. Rep. — Electron-Molecule Scattering Cross-Sections and Cross-Beam Experiments'],
+  },
+  {
+    id: 'electron-collision',
+    title: 'Electron Collision（電子衝突）',
+    category: 'engineering',
+    classification: '実験分野 / 衝突過程',
+    tags: ['Electron_Collision','Electron_Beam','Experiment','Cross_Section'],
+    summary: '電子を入射粒子とする衝突過程全般。プラズマ・大気・放射線生物学など幅広い分野の基礎データ源であり、原子衝突物理学の中心的研究対象。',
+    body: [
+      { type: 'text', value: '【目的・使われ方】電子衝突断面積は、プラズマ物理（電子温度・密度の診断）、大気科学（電離層のモデリング）、放射線生物学（DNA損傷の素過程）、半導体プロセス（エッチングプラズマの設計）など幅広い応用分野で不可欠な基礎データである。実験室では電子ビームを標的ガスと交差させ、散乱電子・生成イオン・発光を検出して断面積を決定する。' },
+      { type: 'text', value: '【式と直感的解釈】電子衝突実験の最終的な出力は断面積 $\\sigma(E)$ であり、測定される観測量（カウントレート $R$）との関係は次式で与えられる。' },
+      { type: 'formula', value: 'R = J_e \\cdot n_t \\cdot L \\cdot \\sigma(E)' },
+      { type: 'text', value: 'ここで $J_e$ は電子束（flux）、$n_t$ は標的数密度、$L$ は相互作用長である。$J_e$, $n_t$, $L$ をすべて独立に較正する必要があり、各量の系統誤差がそのまま断面積の絶対値誤差に反映される。' },
+      { type: 'text', value: '【背景】主な測定手法として Crossed-Beam 法（角度・エネルギー分解 DCS）、Swarm 法（輸送パラメーターから断面積セットを逆算）、Trapped Electron 法（共鳴位置の精密測定）があり、各手法が得意とするエネルギー領域と観測量が異なる。' },
+    ],
+    references: ['Brunger & Buckman (2002) Phys. Rep. — Electron-Molecule Scattering Cross-Sections and Cross-Beam Experiments','Tanaka, Brunger, Campbell (2016) Rev. Mod. Phys. — Cross Sections and Differential Cross Sections'],
+  },
+  {
+    id: 'ion-collision',
+    title: 'Ion Collision（イオン衝突）',
+    category: 'engineering',
+    classification: '実験分野 / 衝突過程',
+    tags: ['Ion_Collision','Experiment','Cross_Section'],
+    summary: 'イオンを入射粒子とする衝突過程。電荷移行・多重電離など電子衝突にはない反応チャンネルを持ち、核融合プラズマ・イオンビーム応用の基礎データ源となる。',
+    body: [
+      { type: 'text', value: '【目的・使われ方】核融合プラズマ（ITER 等）では高Z不純物イオンの電荷移行断面積が輻射損失評価に直結する。また、がん治療用の重粒子ビームでは阻止能（stopping power）と二次電子生成断面積が線量計算の基礎となる。加速器やイオン源で生成したビームを標的原子・分子に入射し、荷電変換後のビーム・反跳イオン・放出電子を検出する。' },
+      { type: 'text', value: '【式と直感的解釈】イオン衝突特有の反応として電荷移行（Charge Transfer）がある。' },
+      { type: 'formula', value: 'A^{q+} + B \\;\\longrightarrow\\; A^{(q-1)+} + B^+' },
+      { type: 'text', value: 'この過程は電子衝突では起きない。衝突速度が電子の軌道速度と一致する条件（速度整合）でとくに断面積が大きくなる直感があり、$v_{ion} \\approx v_{e,orbital} \\sim Z_B e^2/\\hbar$ が効率の良い移行条件となる。' },
+      { type: 'text', value: '【背景】重イオン衝突では多重電離も重要な過程となる。ADNDT や Atomic Data and Nuclear Data Tablesには核融合プラズマ向けのイオン衝突断面積が体系的に編纂されており、NIFS（核融合科学研究所）などのデータベースも整備されている。' },
+    ],
+    references: ['Stancil & Schultz Rev. — Ion-Atom Collision Cross Sections for Fusion Plasma Diagnostics'],
+  },
+  {
+    id: 'atom-target',
+    title: 'Atom Target（原子標的）',
+    category: 'engineering',
+    classification: '実験技術 / 標的',
+    tags: ['Atom_Target','Experiment'],
+    summary: '希ガスやアルカリ金属蒸気など、単原子を標的とする衝突実験のセットアップ。内部自由度が電子配置のみで理論との比較が行いやすく、断面積の基準データとして多用される。',
+    body: [
+      { type: 'text', value: '【目的・使われ方】単原子標的は振動・回転自由度がなく、理論計算との直接比較が最も行いやすい系である。新しい計算手法の検証や断面積の絶対値較正の基準（He, Ar が代表的）として、衝突物理の基礎研究で繰り返し測定される。' },
+      { type: 'text', value: '【式と直感的解釈】標的の数密度 $n_t$ はガスセルでは理想気体の式で求められる。' },
+      { type: 'formula', value: 'n_t = \\frac{P}{k_B T}' },
+      { type: 'text', value: 'ここで $P$ はガス圧力、$T$ はセル温度である。$n_t$ の不確かさが断面積絶対値の系統誤差の主要因となるため、圧力計・温度計の較正が実験精度を左右する。エフュージブルビーム源では Knudsen セルからの放出フラックスを幾何学的に評価することで $n_t$ を決定する。' },
+      { type: 'text', value: '【背景】希ガス（He, Ne, Ar, Kr, Xe）は化学的に不活性で取り扱いが容易なため広く使われる。アルカリ金属（Li, Na, K）はオーブン加熱で原子ビームを生成し、既知フラックスで供給する。励起状態の原子を標的にする場合は放電セルやレーザーポンピングで準備する。' },
+    ],
+    references: ['Brunger & Buckman (2002) Phys. Rep. — Electron-Molecule Scattering Cross-Sections and Cross-Beam Experiments'],
+  },
+  {
+    id: 'molecule-target',
+    title: 'Molecule Target（分子標的）',
+    category: 'engineering',
+    classification: '実験技術 / 標的',
+    tags: ['Molecule_Target','Experiment','DEA'],
+    summary: '分子を標的とする衝突実験。振動・回転自由度や解離チャンネルを持つため反応が複雑化する一方、プラズマ・大気・生体関連分子の基礎データとして応用上の重要性が高い。',
+    body: [
+      { type: 'text', value: '【目的・使われ方】プラズマエッチングガス（CF₄, SF₆ 等）、大気分子（N₂, O₂, H₂O）、生体関連分子（DNA塩基、アミノ酸）の電子衝突断面積は、それぞれ半導体プロセス・大気科学・放射線生物学の計算に直接入力されるデータである。振動状態・解離チャンネルごとに分解した断面積が求められることが多い。' },
+      { type: 'text', value: '【式と直感的解釈】極性分子では長距離双極子相互作用が低エネルギー散乱を支配する。双極子モーメント $\\mu$ による回転励起（$J \\to J+1$）断面積はBorn近似で次のように書かれる。' },
+      { type: 'formula', value: '\\sigma_{rot}(J \\to J+1) = \\frac{8\\pi}{3}\\frac{\\mu^2}{a_0^2}\\frac{(J+1)}{(2J+1)}\\frac{1}{E}' },
+      { type: 'text', value: '$\\sigma \\propto 1/E$ という強いエネルギー依存性が現れ、低エネルギーほど全断面積が大きくなる直感が得られる。これは双極子ポテンシャルが $1/r^2$ と長距離まで届くことに起因する。' },
+      { type: 'text', value: '【背景】DEA（解離性電子付着）は分子標的にのみ現れる反応過程で、プラズマ化学・放射線生物学で特に重要である。分子ビームの準備ではガスセルのほか、超音速ジェット膨張による振動冷却（内部温度を数K まで下げる）が精密測定に使われる。' },
+    ],
+    references: ['Brunger & Buckman (2002) Phys. Rep. — Electron-Molecule Scattering Cross-Sections and Cross-Beam Experiments','Fabrikant et al. (2017) Int. Rev. Phys. Chem. — Dissociative Electron Attachment'],
+  },
+  {
+    id: 'photocathode-gun',
+    title: '光陰極（フォトカソード）型電子銃',
+    category: 'engineering',
+    classification: '実験技術 / 粒子源',
+    tags: ['Electron_Beam', 'Experiment'],
+    summary: 'レーザー光を光陰極に照射して光電効果で電子を放出させる電子銃。低エミッタンス・高輝度・パルス化が容易で、精密衝突実験の電子源として有用。',
+    body: [
+      { type: 'text', value: '【目的・使われ方】精密な低エネルギー電子衝突実験では、ビームのエミッタンス（位相空間の広がり）が小さいほど標的との交差領域を絞れ、角度分解能・エネルギー分解能が向上する。フォトカソード電子銃は熱電子銃より桁違いに低いエミッタンスを実現でき、レーザーの時間構造を活かしてパルスビームにも容易に変換できる。' },
+      { type: 'text', value: '【式と直感的解釈】光電子の最大運動エネルギーはEinsteinの光電効果の式で決まる。' },
+      { type: 'formula', value: 'E_{kin}^{max} = h\\nu - \\phi' },
+      { type: 'text', value: 'ここで $h\\nu$ は光子エネルギー、$\\phi$ は陰極の仕事関数である。$h\\nu - \\phi$ を小さく設定するほど放出電子の初期エネルギー幅が狭くなり、後段のモノクロメーターなしでもエネルギー幅の小さいビームが得られる。光子フラックスに対する放出電子数の比を量子効率（QE）と呼び、材料選択と表面処理で改善できる。' },
+      { type: 'text', value: '【背景】一般的な陰極材料としてはCs₂Te（紫外域、QE～数%）、GaAs（近赤外、スピン偏極電子の生成も可能）、金属薄膜（低QEだが真空条件が緩い）などが用いられる。熱電子型に比べて超高真空管理とレーザー光学系が必要になるが、スピン偏極ビームや精密時間相関測定が必要な実験では不可欠な技術である。' },
+    ],
+    references: ['Brunger & Buckman (2002) Phys. Rep. — Electron-Molecule Scattering Cross-Sections and Cross-Beam Experiments'],
+  },
+  {
+    id: 'field-emission-gun',
+    title: '電界放出（フィールドエミッション）型電子銃（FEG）',
+    category: 'engineering',
+    classification: '実験技術 / 粒子源',
+    tags: ['Electron_Beam', 'Experiment'],
+    summary: '曲率半径 nm スケールの鋭い金属先端に強電場を印加し、量子トンネル効果で電子を引き出す電子銃。エネルギー幅 0.2–0.5 eV と熱電子型より狭く、高輝度ビームを実現する。',
+    body: [
+      { type: 'text', value: '【目的・使われ方】電子衝突実験でエネルギー幅を最小化したい場合、あるいは走査電子顕微鏡・電子線リソグラフィで極細ビームが必要な場合に用いられる。衝突実験では後段のモノクロメーターと組み合わせることでエネルギー分解能を数 meV まで向上させられる。' },
+      { type: 'text', value: '【式と直感的解釈】先端への電流密度はFowler-Nordheim方程式で記述される。' },
+      { type: 'formula', value: 'J = A\\frac{F^2}{\\phi}\\exp\\!\\left(-B\\frac{\\phi^{3/2}}{F}\\right)' },
+      { type: 'text', value: 'ここで $F$ は先端での電場強度、$\\phi$ は仕事関数、$A, B$ は定数である。指数関数の引数が $\\phi^{3/2}/F$ であることから、電場をわずかに増やすだけで電流が急激に増加する（非線形性が強い）。先端の曲率半径 $r$ を小さくするほど $F \\propto V/r$ が大きくなり、低印加電圧でもトンネル電流が流れる。' },
+      { type: 'text', value: '【背景】先端材料としてはタングステン（W）の単結晶〈310〉面、あるいは酸化ジルコニウムを被覆した ZrO/W（ショットキー型）が広く使われる。10⁻⁹ Pa 台の超高真空が不可欠で、残留ガスの吸着による先端汚染（フラッシング）が最大の課題である。' },
+    ],
+    references: ['Brunger & Buckman (2002) Phys. Rep. — Electron-Molecule Scattering Cross-Sections and Cross-Beam Experiments'],
+  },
+  {
+    id: 'radioisotope-moderator',
+    title: '放射性同位体（β⁺ 崩壊）＋モデレータ',
+    category: 'engineering',
+    classification: '実験技術 / 粒子源',
+    tags: ['Experiment'],
+    summary: 'β⁺ 崩壊核種から放出される高速陽電子を固体モデレーターで eV 以下に減速し、低エネルギー陽電子ビームを生成する標準的な手法。',
+    body: [
+      { type: 'text', value: '【目的・使われ方】陽電子（ポジトロン）衝突断面積の測定、ポジトロニウム（Ps）形成、反水素生成実験などに必要な低エネルギー陽電子ビームを供給する。電子衝突では観測できない電荷移行チャンネル（Ps形成）や交換散乱の符号反転効果を調べるために電子との比較測定が行われる。' },
+      { type: 'text', value: '【式と直感的解釈】最もよく用いられる核種 ²²Na の β⁺ 崩壊は次の反応である。' },
+      { type: 'formula', value: '{}^{22}\\mathrm{Na} \\;\\longrightarrow\\; {}^{22}\\mathrm{Ne} + e^+ + \\nu_e + \\gamma\\,(1.27\\,\\mathrm{MeV})' },
+      { type: 'text', value: '放出陽電子の運動エネルギーは最大数百 keV に及ぶ。これを固体ネオン（Ne）や多結晶タングステン（W）のモデレーター薄膜に入射すると、陽電子は固体中で多数の非弾性衝突でエネルギーを失い、最終的に仕事関数の負の面から数 eV の狭いエネルギー幅で再放出される（負の仕事関数効果）。モデレーター効率は典型的に 10⁻³–10⁻⁴ と低いため、線源活度（MBq〜GBq）が重要になる。' },
+      { type: 'text', value: '【背景】線源として ²²Na（半減期 2.6 年）が最も一般的。より高強度の陽電子ビームにはリニアックや電子蓄積リング由来の対生成陽電子源が用いられる。得られたビームはさらに Buffer-Gas-Trap で蓄積・冷却してから実験に使用されることが多い。' },
+    ],
+    references: ['Brunger & Buckman (2002) Phys. Rep. — Electron-Molecule Scattering Cross-Sections and Cross-Beam Experiments'],
+  },
+  {
+    id: 'buffer-gas-trap',
+    title: 'Buffer-Gas-Trap',
+    category: 'engineering',
+    classification: '実験技術 / 粒子蓄積・冷却',
+    tags: ['Experiment'],
+    summary: '陽電子や反陽子などの荷電粒子をバッファーガスとの非弾性衝突で冷却しながら電磁気トラップに蓄積する装置。高密度・低エネルギーのパルスビームを生成できる。',
+    body: [
+      { type: 'text', value: '【目的・使われ方】放射性同位体線源から連続的に生成される低強度の陽電子ビームを一時的に蓄積し、定期的に圧縮・放出してパルス化することで、飛行時間（TOF）分光や coincidence 実験に必要なパルス陽電子ビームを得る。蓄積数は典型的に 10⁷–10⁸ 個/パルスに達する。' },
+      { type: 'text', value: '【式と直感的解釈】Penning-Malmberg 型トラップでは、軸方向に電位井戸 $\\Phi(z)$、径方向に磁場 $B$ を印加して粒子を閉じ込める。粒子はサイクロトロン運動しながら軸方向の電位井戸に捕獲される。' },
+      { type: 'formula', value: 'E_{\\perp} = \\frac{1}{2}m_e v_{\\perp}^2 \\;\\xrightarrow{\\text{冷却}}\\; k_B T_{\\perp}' },
+      { type: 'text', value: '捕獲直後の陽電子は N₂ などのバッファーガスとの非弾性衝突で垂直運動エネルギーを失い（サイクロトロン放射冷却も寄与）、最終的に室温程度まで熱化される。段階的な電位勾配（多段トラップ）を使うことで冷却効率を高めている。' },
+      { type: 'text', value: '【背景】Surko グループ（UCSD）が 1980 年代に開発した手法で、現在は陽電子物理のほぼすべての精密実験で用いられる基盤技術となっている。反水素生成実験（ALPHA, ATRAP 実験）への応用でも中心的役割を果たしている。' },
+    ],
+    references: ['Brunger & Buckman (2002) Phys. Rep. — Electron-Molecule Scattering Cross-Sections and Cross-Beam Experiments'],
+  },
+  {
+    id: 'electrostatic-analyzer',
+    title: '静電エネルギー分析器（静電アナライザー）',
+    category: 'engineering',
+    classification: '実験技術 / エネルギー分析',
+    tags: ['Experiment', 'DCS', 'Electron_Beam'],
+    summary: '荷電粒子を湾曲した電極間の静電場で偏向させ、エネルギーによって軌道が異なることを利用してエネルギーを選別・測定する装置。散乱電子のエネルギー損失スペクトルや DCS 測定に不可欠。',
+    body: [
+      { type: 'text', value: '【目的・使われ方】Crossed-beam 型電子衝突実験では、散乱電子の到達角度と運動エネルギーを同時に分解することで微分断面積（DCS）およびエネルギー損失断面積を決定する。静電アナライザーはそのエネルギー分析部として機能する。' },
+      { type: 'text', value: '【式と直感的解釈】半球型静電アナライザー（HDA）では、内外半球間の電位差 $\\Delta V$ によってつくられる静電場が粒子を円軌道に誘導する。パス半径 $R_0$ の粒子のエネルギーとエネルギー分解能は次式で表される。' },
+      { type: 'formula', value: 'E_{pass} = \\frac{e\\Delta V}{2}\\frac{R_1 R_2}{R_2^2 - R_1^2}\\cdot 2R_0' },
+      { type: 'formula', value: '\\frac{\\Delta E}{E_{pass}} \\approx \\frac{w}{2R_0}' },
+      { type: 'text', value: 'ここで $w$ は入口スリット幅、$R_0$ は中心軌道半径である。「分解能はスリット幅 / 軌道直径」という直感が成立する。パスエネルギーを下げるほど絶対エネルギー幅 $\\Delta E$ が小さくなるが、透過強度も下がるためトレードオフがある。' },
+      { type: 'text', value: '【背景】主な型として HDA（Hemispherical Deflector Analyser）、CMA（Cylindrical Mirror Analyser）、127° セクターアナライザーがある。HDA は高分解能向き（数 meV）、CMA は高い角度受容と高透過率が特徴で、Auger 電子分光や光電子分光でも同じ原理が用いられる。' },
+    ],
+    references: ['Tanaka, Brunger, Campbell (2016) Rev. Mod. Phys. — Cross Sections and Differential Cross Sections', 'Brunger & Buckman (2002) Phys. Rep. — Electron-Molecule Scattering Cross-Sections and Cross-Beam Experiments'],
+  },
+  {
+    id: 'vmi',
+    title: 'Velocity Map Imaging（VMI）法 / 運動量画像計測法',
+    category: 'engineering',
+    classification: '実験技術 / 検出・画像計測',
+    tags: ['Experiment', 'Ionization', 'DCS'],
+    summary: '電離や解離で生成したイオン・電子の三次元速度分布を静電レンズで2次元検出器上に速度マップとして投影する手法。単一実験で角度・エネルギー分布を並列取得できる。',
+    body: [
+      { type: 'text', value: '【目的・使われ方】光電離・電子衝突電離・レーザー解離実験で生成したフラグメントの三次元運動量分布を一括取得し、微分断面積・角度非対称性・ブランチング比などを決定する。特に多体分解（三体以上）の coincidence 実験で威力を発揮する。' },
+      { type: 'text', value: '【式と直感的解釈】「速度マッピング」の要点は、同じ速度ベクトルを持つ粒子が出発位置によらず検出面上の同一点に集まるように静電レンズを設計することにある。検出面上の位置 $(x, y)$ は速度の横成分 $(v_x, v_y)$ に比例する。' },
+      { type: 'formula', value: 'x = \\frac{L}{v_z}\\,v_x,\\quad y = \\frac{L}{v_z}\\,v_y \\quad\\Rightarrow\\quad r = L\\tan\\theta \\approx L\\cdot\\frac{v_\\perp}{v_z}' },
+      { type: 'text', value: '検出された2次元像は軸対称分布の投影（Abel変換）であるため、pBasex や BASEX などの逆Abel変換アルゴリズムで元の3次元分布を再構成できる。' },
+      { type: 'text', value: '【背景】1997 年に Eppink と Parker が開発（Rev. Sci. Instrum. 68, 3477）。それ以前の「Ion Imaging」は出発位置のぼやけで分解能が制限されていたが、VMI では電極形状の最適化でこれを解決した。現在は COLTRIMS（反跳イオン運動量分光）や REMI（Reaction Microscope）へと発展している。' },
+    ],
+    references: ['Tanaka, Brunger, Campbell (2016) Rev. Mod. Phys. — Cross Sections and Differential Cross Sections'],
+  },
+  {
+    id: 'monochromator',
+    title: 'モノクロメーター（エネルギー選別器）',
+    category: 'engineering',
+    classification: '実験技術 / エネルギー選別',
+    tags: ['Electron_Beam', 'Experiment', 'Resonance'],
+    summary: '電子銃からの広帯域ビームを静電アナライザーで選別し、エネルギー幅を数十 meV 以下に絞る装置。共鳴構造や振動励起しきい値を高分解能で観測するために不可欠。',
+    body: [
+      { type: 'text', value: '【目的・使われ方】電子衝突断面積の共鳴構造（幅が数十〜数百 meV）を観測するためには、入射ビームのエネルギー幅がそれより十分小さくなければならない。モノクロメーターを挿入することで、例えば DEA の共鳴ピーク形状や CO の振動励起断面積の細かい構造を分解できるようになる。' },
+      { type: 'text', value: '【式と直感的解釈】モノクロメーターとして最もよく用いられる半球型アナライザー（HDA）では、パスエネルギー $E_p$ を小さくするほど透過電子のエネルギー幅が狭まる。' },
+      { type: 'formula', value: '\\Delta E_{FWHM} \\approx E_p \\cdot \\frac{w}{2R_0}' },
+      { type: 'text', value: 'ここで $w$ はスリット幅、$R_0$ は中心軌道半径。$E_p$ を下げれば $\\Delta E$ は小さくなるが、透過電流も $\\propto E_p^{3/2}$ で減少するため、S/N との兼ね合いで最適化する。トロコイダル型（TEM）は軸方向磁場との組み合わせで高透過率・小型化が可能。' },
+      { type: 'text', value: '【背景】現代の精密電子衝突装置では入射側にモノクロメーター、散乱側に半球型アナライザーを配置する二重分析器構成が標準的である。エネルギー幅 20–100 meV が典型的で、液体ヘリウム冷却によって熱ノイズを抑えた高分解能装置では 5 meV 以下の達成報告もある。' },
+    ],
+    references: ['Brunger & Buckman (2002) Phys. Rep. — Electron-Molecule Scattering Cross-Sections and Cross-Beam Experiments', 'Tanaka, Brunger, Campbell (2016) Rev. Mod. Phys. — Cross Sections and Differential Cross Sections'],
+  },
+  {
+    id: 'threshold-photoelectron',
+    title: 'しきい光電子（Threshold Photoelectron）',
+    category: 'engineering',
+    classification: '実験技術 / 分光手法',
+    tags: ['Experiment', 'Ionization'],
+    summary: '光電離のイオン化しきい直上でほぼゼロ運動エネルギーで放出される電子を選択的に検出する分光手法（TPES）。イオン化エネルギーや振動状態を高精度で決定できる。',
+    body: [
+      { type: 'text', value: '【目的・使われ方】光電離実験において、特定の振動・電子状態へのイオン化エネルギーを精密に決定したい場合に用いられる。検出感度が従来の光電子分光（PES）より大幅に高く、シンクロトロン放射光と組み合わせて分子の電子構造・解離経路の研究に広く使われる。' },
+      { type: 'text', value: '【式と直感的解釈】光子エネルギー $h\\nu$ とイオン化ポテンシャル $I_p$、生成イオンの内部エネルギー $E_{int}$、電子の運動エネルギー $E_{kin}$ の間のエネルギー保存則は次の通り。' },
+      { type: 'formula', value: 'h\\nu = I_p + E_{int} + E_{kin}' },
+      { type: 'text', value: '$E_{kin} \\to 0$ の極限（しきい条件）では $h\\nu = I_p + E_{int}$ となり、光子エネルギーをスキャンしながら ZERO 運動エネルギー電子（ZEKE）だけを選別することで、各振動レベル $E_{vib}$ への正確なイオン化エネルギーが読み取れる。「しきい直上の電子だけ集める」ことで残留エネルギーの不定性をゼロにするのが直感的なポイント。' },
+      { type: 'text', value: '【背景】実験では VMI や静電遅延電場（retarding field）でほぼゼロ運動エネルギーの電子を選別する。同時にイオンを検出する TPEPICO（Threshold Photoelectron-Photoion COincidence）法は、解離経路ごとのイオン化エネルギーや解離速度定数を決定するための強力な手法で、燃焼化学・大気化学の素反応研究で重要な役割を担っている。' },
+    ],
+    references: ['Tanaka, Brunger, Campbell (2016) Rev. Mod. Phys. — Cross Sections and Differential Cross Sections'],
+  },
+  {
+    id: 'retarding-field',
+    title: '遅延電場（Retardation）技術',
+    category: 'engineering',
+    classification: '実験技術 / エネルギー分析',
+    tags: ['Experiment', 'Cross_Section', 'Electron_Beam'],
+    summary: '対向電場（遅延電場）で一定エネルギー以下の荷電粒子を遮断し、コレクタ電流の電圧微分からエネルギー分布を求める最もシンプルなエネルギー分析手法。',
+    body: [
+      { type: 'text', value: '【目的・使われ方】散乱電子や光電子のエネルギー分布を測定する手段として、静電アナライザーより構造が簡単で真空系が小型化できる。電子なだれ（Swarm）実験では気体中を漂う電子の平均エネルギーをこの手法で決定し、漂流速度・拡散係数などの輸送パラメーターと組み合わせて弾性散乱断面積を決定する。' },
+      { type: 'text', value: '【式と直感的解釈】遅延電位 $V_R$ を印加したとき、コレクタに到達できる電子は $E_{kin} \\geq eV_R$ を満たすものだけである。コレクタ電流 $I(V_R)$ は分布の積分となり、その微分がエネルギー分布 $N(E)$ を与える。' },
+      { type: 'formula', value: 'I(V_R) = C\\int_{eV_R}^{\\infty} N(E)\\,dE \\quad\\Longrightarrow\\quad N(eV_R) = -\\frac{1}{C}\\frac{dI}{dV_R}' },
+      { type: 'text', value: '「電圧を少し上げたときに遮られる電子の数」を数えることでエネルギー分布が得られる、という直感である。測定精度はグリッド電位の均一性と電場の安定性に依存する。' },
+      { type: 'text', value: '【背景】構造上のシンプルさから多段グリッド型（RFA: Retarding Field Analyser）や球形 RFA が幅広い実験に使われてきた。エネルギー分解能は HDA より劣る（電場の不均一性が主要因）が、低エネルギー電子の全断面積測定や宇宙プラズマ診断器（ランミューアプローブの発展形）として今なお重要な手法である。' },
+    ],
+    references: ['Brunger & Buckman (2002) Phys. Rep. — Electron-Molecule Scattering Cross-Sections and Cross-Beam Experiments'],
+  },
+  {
+    id: 'partial-wave',
+    title: '部分波展開',
+    category: 'knowledge',
+    classification: '量子力学 / 散乱理論基礎',
+    tags: ['Theory','Cross_Section'],
+    summary: '球対称ポテンシャルによる散乱波動関数を角運動量 $l$ ごとの部分波に分解する手法。断面積計算・R-Matrix法・Close-Coupling法の共通基盤。',
+    body: [
+      { type: 'text', value: '【使われ方】部分波展開は中心力場中の散乱を解くための基本的な数学的道具であり、R-Matrix 法や Close-Coupling 法はすべてこの枠組みの上に構築されている。展開の打ち切り次数 $l_{max}$ を決めることで計算量をコントロールする。' },
+      { type: 'text', value: '【式と直感的解釈】平面波を球面波に展開すると角運動量 $l$ ごとに独立な動径方程式に帰着できる。' },
+      { type: 'formula', value: 'e^{ikz} = \\sum_{l=0}^{\\infty}(2l+1)\\,i^l\\, j_l(kr)P_l(\\cos\\theta)' },
+      { type: 'text', value: 'ポテンシャルが存在すると各部分波に位相シフト $\\delta_l$ が生じる。「$l$ が大きい部分波ほど遠心力障壁でポテンシャル領域に近づけない」ため、低エネルギーでは $s$ 波（$l=0$）が支配的になる直感が重要。' },
+      { type: 'text', value: '【背景】有限距離のポテンシャルでは $k a \\lesssim l$ の条件で部分波の寄与が急減するため、$l_{max} \\sim ka$ で展開を打ち切れる。クーロンポテンシャルは長距離なのでこの収束が遅く、特別な処理が必要になる。' },
+    ],
+    references: ['Burke (2011) R-Matrix Theory of Atomic Collisions'],
+  },
+  {
+    id: 'schrodinger-eq',
+    title: 'シュレーディンガー方程式',
+    category: 'knowledge',
+    classification: '量子力学 / 基礎方程式',
+    tags: ['Theory'],
+    summary: '量子系の時間発展・定常状態を記述する基礎方程式。原子衝突理論の全ての計算手法はこの方程式に適切な境界条件を課すことから始まる。',
+    body: [
+      { type: 'text', value: '【使われ方】散乱問題ではエネルギー $E$ を固定した定常シュレーディンガー方程式を解き、漸近領域で「入射平面波＋散乱球面波」の境界条件を課す。R-Matrix 法・Close-Coupling 法・ボルン近似など全ての計算手法はこの定式化を出発点とする。' },
+      { type: 'text', value: '【式と直感的解釈】時間依存形（一般形）と定常形を示す。' },
+      { type: 'formula', value: 'i\\hbar \\frac{\\partial \\Psi}{\\partial t} = \\hat{H}\\Psi' },
+      { type: 'formula', value: '\\hat{H}\\psi(\\mathbf{r}) = E\\psi(\\mathbf{r}), \\qquad \\hat{H} = -\\frac{\\hbar^2}{2m}\\nabla^2 + V(\\mathbf{r})' },
+      { type: 'text', value: '第1項が運動エネルギー演算子（粒子の波としての振る舞い）、第2項がポテンシャルエネルギーである。散乱問題では $E > 0$（連続状態）を扱い、解は束縛状態と異なり規格化できない（デルタ関数規格化）。' },
+      { type: 'text', value: '【背景】非相対論的近似（$v \\ll c$）が前提で、電子衝突では数 keV 以下で良い近似となる。高エネルギーや重イオン衝突ではディラック方程式が必要になる。' },
+    ],
+    references: [],
+  },
+  {
+    id: 'energy-level',
+    title: 'エネルギー準位と量子数',
+    category: 'knowledge',
+    classification: '原子物理学 / 基礎',
+    tags: ['Atom_Target'],
+    summary: '原子・分子が取りうる離散的なエネルギー状態と量子数の体系。励起・電離断面積は準位間の遷移として定義されるため、標的の準位構造の理解が前提となる。',
+    body: [
+      { type: 'text', value: '【使われ方】励起断面積や電離断面積は特定の量子状態間の遷移として定義される。どの準位からどの準位へ、というチャンネル指定には量子数 $(n, l, m, s)$ の体系が必要であり、Close-Coupling 計算では展開する準位の選択が計算精度を左右する。' },
+      { type: 'text', value: '【式と直感的解釈】水素様原子の準位は主量子数 $n$ のみで決まる。' },
+      { type: 'formula', value: 'E_n = -13.6\\,\\text{eV}\\times\\frac{Z^2}{n^2}' },
+      { type: 'text', value: '$n$ が大きいほど準位間隔が狭まり（$\\Delta E \\propto 1/n^3$）、電離限界（$E = 0$）に収束する。多電子原子では電子間反発で $l$ 縮退が解け、同じ $n$ でも $l$ によってエネルギーが異なる（量子欠損）。' },
+      { type: 'text', value: '【背景】スピン-軌道相互作用によって $l$ と $s$ が結合し、項記号 $^{2S+1}L_J$ で表される微細構造準位に分裂する。この分裂が励起断面積のチャンネル分岐比に影響するため、精密実験では状態分解（state-resolved）測定が求められる。' },
+    ],
+    references: [],
+  },
+  {
+    id: 'cm-frame',
+    title: '重心系とエネルギー変換',
+    category: 'knowledge',
+    classification: '古典力学 / 衝突運動学',
+    tags: ['Experiment'],
+    summary: '実験室系（Lab frame）と重心系（CM frame）の間でエネルギー・角度を変換する衝突運動学の基礎。理論計算との比較に不可欠。',
+    body: [
+      { type: 'text', value: '【使われ方】理論計算は重心系（散乱中心が静止した系）で行われるが、実験は実験室系（標的が静止し入射粒子が運動する系）で行われる。両者を比較するために換算エネルギーと散乱角の変換が必要であり、すべての衝突実験のデータ解析で最初に行うステップとなる。' },
+      { type: 'text', value: '【式と直感的解釈】質量 $m_1$ の入射粒子が静止した質量 $m_2$ の標的に衝突する場合の重心系換算エネルギーは次の通り。' },
+      { type: 'formula', value: 'E_{CM} = \\frac{m_2}{m_1+m_2}\\,E_{Lab}' },
+      { type: 'text', value: '$m_1 \\ll m_2$（電子が重い原子核に衝突）では $E_{CM} \\approx E_{Lab}$ となり換算はほぼ不要だが、$m_1 \\approx m_2$（陽子-水素衝突など）では $E_{CM} = E_{Lab}/2$ となり無視できない。「重い標的ほど重心系はほぼ静止した標的と同じ」という直感が成立する。' },
+      { type: 'text', value: '【背景】散乱角の変換も質量比に依存し、実験室系での前方散乱が重心系では大きな角度になることがある（特に $m_1 > m_2$ の場合）。この幾何学的効果を無視すると DCS の角度依存性に系統誤差が生じる。' },
+    ],
+    references: ['Stancil & Schultz Rev. — Ion-Atom Collision Cross Sections for Fusion Plasma Diagnostics'],
+  },
+  {
+    id: 'emittance',
+    title: 'エミッタンス（Emittance）',
+    category: 'knowledge',
+    classification: 'ビーム物理 / ビーム品質',
+    tags: ['Knowledge', 'Beam_Optics', 'Electron_Beam'],
+    summary: 'ビームの「位相空間体積」を表す量。位置と角度（または運動量）の積の広がりで定義され、エミッタンスが小さいほどビームを細く集束でき、輝度が高い。',
+    body: [
+      { type: 'text', value: 'ビームを構成する粒子は、位置 $x$ と発散角（運動量の横成分）$x\'= p_x/p_z$ を軸にとった「位相空間（トレース空間）」に分布する。この分布が占める面積をエミッタンス $\\varepsilon$ と定義する（通常 $\\pi$ mm·mrad 単位）。' },
+      { type: 'formula', value: '\\varepsilon_x = \\pi \\sqrt{\\langle x^2\\rangle\\langle x\'^2\\rangle - \\langle xx\'\\rangle^2}' },
+      { type: 'text', value: 'Liouville の定理によれば、保存力系（摩擦なし・放射なし）ではビームの位相空間体積は保存される。これが「エミッタンスは保存される」という直感の根拠。アパーチャーで粒子を削ると一見エミッタンスが小さくなるが、それは粒子数を減らしているだけであり残った粒子の位相空間密度（輝度）は変わらない。' },
+      { type: 'text', value: '実用的には $\\varepsilon$ が小さいほど同じ電流密度でビームを細く絞れる（高輝度）。熱陰極では熱エネルギー $k_B T$ が横方向速度を与えるため、熱陰極エミッタンスは $\\varepsilon_{thermal} \\approx r_s \\sqrt{k_B T / m_e c^2}$（$r_s$：ソース半径）で制限される。光陰極はソースサイズを小さくできるためエミッタンスが低い。' },
+      { type: 'text', value: '空間電荷効果（粒子間クーロン反発）はエミッタンスを増大させる主な原因の一つで、ビーム電流が大きいほど問題になる。モノクロメーターでは動作電流に上限が設けられるのはこのため。' },
+    ],
+    references: ['Brunger & Buckman (2002) Phys. Rep. — Electron-Molecule Scattering Cross-Sections and Cross-Beam Experiments'],
+  },
+  {
+    id: 'resolution-fwhm',
+    title: '分解能 / 半値幅（Resolution / FWHM）',
+    category: 'knowledge',
+    classification: 'ビーム物理 / 測定精度',
+    tags: ['Knowledge', 'Beam_Optics', 'Experiment'],
+    summary: 'スペクトルや像において、2つの近接したピークを区別できる最小間隔（分解能）と、単一ピークの広がりを表す半値全幅（FWHM）。実験装置の性能指標として最も頻繁に使われる量。',
+    body: [
+      { type: 'text', value: '**半値全幅（FWHM：Full Width at Half Maximum）**：ピーク強度の半分の高さにおける幅。ガウス関数 $f(x) = A\\exp(-x^2/2\\sigma^2)$ の場合、$\\text{FWHM} = 2\\sqrt{2\\ln 2}\\,\\sigma \\approx 2.355\\,\\sigma$。エネルギー広がり・空間分解能・時間分解能を表現する標準的な指標。' },
+      { type: 'formula', value: '\\text{FWHM} = 2\\sqrt{2\\ln 2}\\;\\sigma \\approx 2.355\\,\\sigma' },
+      { type: 'text', value: '**エネルギー分解能**：散乱実験では「ビームのエネルギー広がり（FWHM）」が実験エネルギー分解能の下限を決める。例えば弾性散乱ピークの FWHM が 50 meV ならば、それより近接した励起準位（例：40 meV 間隔）は分離できない。エネルギー分解能はモノクロメーターのパスエネルギーとスリット幅の比で制御される。' },
+      { type: 'text', value: '**角度分解能**：VMI や回転アナライザーでは角度 FWHM が DCS の角度精度を制限する。コリメーターの開口角・電子光学の収差・ビームのエミッタンスがすべて寄与し、実効的な角度 FWHM は各誤差の二乗和の平方根（加算則）で見積もる。' },
+      { type: 'text', value: '**Rayleigh 分解能基準**：光学・回折系では2点光源が分離して見える限界条件として Rayleigh 基準（$\\delta\\theta = 1.22\\lambda/D$）が使われる。電子顕微鏡・VMI 検出器などでの空間分解能評価にも援用される。' },
+      { type: 'text', value: '複数の広がり要因が独立ならば、全体の FWHM は各寄与の二乗和の平方根となる（ガウス分布の畳み込みが保存される性質）：$\\text{FWHM}_{total} = \\sqrt{\\sum_i \\text{FWHM}_i^2}$。' },
+    ],
+    references: ['Brunger & Buckman (2002) Phys. Rep. — Electron-Molecule Scattering Cross-Sections and Cross-Beam Experiments', 'Tanaka, Brunger, Campbell (2016) Rev. Mod. Phys. — Cross Sections and Differential Cross Sections'],
+  },
+  {
+    id: 'orbital-spin-angular-momentum',
+    title: '軌道角運動量とスピン角運動量',
+    category: 'knowledge',
+    classification: '量子力学 / 角運動量',
+    tags: ['Knowledge', 'Theory', 'Elastic_Scattering'],
+    summary: '量子力学的な角運動量の2種類。軌道角運動量 $\\mathbf{L}$ は空間的な回転運動、スピン $\\mathbf{S}$ は粒子固有の内部自由度で、衝突物理では両者の合成（$LS$ 結合・$jj$ 結合）が多電子原子の状態分類と選択律を決める。',
+    body: [
+      { type: 'text', value: '**軌道角運動量 $\\mathbf{L}$** は波動関数の空間部分から生じ、量子数 $l = 0, 1, 2, \\ldots$（s, p, d, …軌道に対応）と磁気量子数 $m_l = -l, \\ldots, +l$ で記述される。固有値は $|\\mathbf{L}|^2 = \\hbar^2 l(l+1)$, $L_z = m_l \\hbar$。' },
+      { type: 'text', value: '**スピン角運動量 $\\mathbf{S}$** は空間には由来しない内部自由度で、電子のスピン量子数は $s = 1/2$（$m_s = \\pm 1/2$）。核子やフォトンなど粒子ごとにスピンの値が異なる。' },
+      { type: 'text', value: '**$LS$ 結合（Russell-Saunders 結合）** では個々の電子の $\\mathbf{l}_i$ を合成した全軌道角運動量 $\\mathbf{L}$ と、全スピン $\\mathbf{S}$ を別々に作り、最後に合成して全角運動量 $\\mathbf{J} = \\mathbf{L} + \\mathbf{S}$ を得る。軽元素（$Z \\lesssim 30$）で成立しやすい。' },
+      { type: 'formula', value: '\\mathbf{J} = \\mathbf{L} + \\mathbf{S}, \\quad |L-S| \\leq J \\leq L+S' },
+      { type: 'text', value: '原子状態は項記号 $^{2S+1}L_J$（例：He 基底状態 $^1S_0$、He 第1励起状態 $^3S_1$）で表される。$2S+1$ は多重度（multiplicity）で、スピン縮退度を与える。重元素では $jj$ 結合が優位になり、各電子の $j_i = l_i + s_i$ をまず合成してから足し合わせる。' },
+      { type: 'text', value: '衝突物理における役割：(1) 部分波展開では入射粒子の軌道角運動量 $l$ が散乱チャンネルを決める。(2) スピン多重度の違いにより一重項・三重項断面積が異なる（交換散乱）。(3) スピン軌道相互作用 $\\xi(r)\\,\\mathbf{L}\\cdot\\mathbf{S}$ が $l \\neq 0$ の準位を微細構造に分裂させ、しきい値エネルギーを変える。' },
+    ],
+    references: ['Burke (2011) R-Matrix Theory of Atomic Collisions'],
+  },
+  {
+    id: 'born-oppenheimer',
+    title: 'ボルン・オッペンハイマー近似',
+    category: 'knowledge',
+    classification: '量子力学 / 近似手法',
+    tags: ['Knowledge', 'Theory', 'Molecule_Target'],
+    summary: '電子は原子核に比べて質量が小さく動きが速いため、電子の運動と核の運動を分離して解ける、という近似。分子の電子構造計算・振動・回転を独立に扱う基礎。',
+    body: [
+      { type: 'text', value: '電子の質量 $m_e$ と核の質量 $M$ の比 $m_e/M \\sim 10^{-3}\\text{–}10^{-4}$ が小さいことを利用する。核が動く時間スケールで見ると電子は瞬時に平衡状態に達するため、核座標 $\\mathbf{R}$ を外部パラメータとして固定した電子固有値問題を解き、そのエネルギー $E_n(\\mathbf{R})$ を核の「ポテンシャルエネルギー面（PES）」として使う。' },
+      { type: 'formula', value: '\\Psi(\\mathbf{r},\\mathbf{R}) \\approx \\phi_n(\\mathbf{r};\\mathbf{R})\\,\\chi_n(\\mathbf{R})' },
+      { type: 'text', value: '$\\phi_n$ は核座標 $\\mathbf{R}$ をパラメータとする電子固有関数、$\\chi_n$ は PES $E_n(\\mathbf{R})$ 上を運動する核の波動関数（振動・回転を記述）。' },
+      { type: 'text', value: 'BO 近似が崩れる場面：(1) PES の交差（avoided crossing）付近で非断熱遷移が起きる。(2) 光電離や電子衝突による高速な電子移動では核が動く前に遷移が完了する（Franck-Condon 原理と表裏一体）。(3) 軽い核（特に H・プロトン）では核の量子効果（トンネル、ゼロ点エネルギー）が大きく BO 近似が粗くなる。' },
+      { type: 'text', value: '衝突物理との関係：電子-分子衝突の計算（R-Matrix + nuclear motion）では、固定核（fixed-nucleus）近似でまず電子固有値問題を解き、その後核の波動関数との重なりを計算して振動・回転分解断面積を得る。これは BO 近似の直接的応用。' },
+    ],
+    references: ['Brunger & Buckman (2002) Phys. Rep. — Electron-Molecule Scattering Cross-Sections and Cross-Beam Experiments', 'Burke (2011) R-Matrix Theory of Atomic Collisions'],
+  },
+  {
+    id: 'rotation-vibration',
+    title: '回転運動と振動運動',
+    category: 'knowledge',
+    classification: '分子物理 / 内部自由度',
+    tags: ['Knowledge', 'Molecule_Target', 'Inelastic_Scattering'],
+    summary: '分子の内部自由度のうち核の集団運動に由来するもの。剛体回転子モデルで回転エネルギー準位を、調和・非調和振動子モデルで振動エネルギー準位を記述する。',
+    body: [
+      { type: 'text', value: '**回転：剛体回転子モデル**　慣性モーメント $I$ をもつ剛体の回転エネルギー準位は量子数 $J = 0, 1, 2, \\ldots$ で離散化される。' },
+      { type: 'formula', value: 'E_J = \\frac{\\hbar^2}{2I}J(J+1) = hcBJ(J+1)' },
+      { type: 'text', value: '回転定数 $B = \\hbar/(4\\pi c I)$ は分子の幾何学（核間距離）から決まり、マイクロ波分光で精密測定できる。準位間隔は $J$ に比例して広がる（$\\Delta E = 2hcB(J+1)$）。低質量・短結合長の分子ほど $B$ が大きく準位間隔が広い（例：H$_2$ はエネルギー間隔 $\\sim 40$ meV）。' },
+      { type: 'text', value: '**振動：調和振動子モデル**　結合ポテンシャルを平衡点近傍で二次近似すると等間隔の準位が得られる。' },
+      { type: 'formula', value: 'E_v = \\hbar\\omega_e\\left(v + \\frac{1}{2}\\right), \\quad v = 0, 1, 2, \\ldots' },
+      { type: 'text', value: '$v = 0$ でもゼロ点エネルギー $\\hbar\\omega_e/2$ が残ることが量子力学的特徴。実際の分子では高次の非調和項があり（Morse ポテンシャルなど）、上の準位ほど間隔が狭まる（非調和振動子）。解離エネルギー $D_0 = D_e - \\hbar\\omega_e/2$ が実験的に意味をもつ量。' },
+      { type: 'text', value: '衝突物理との関係：電子-分子衝突で $\\Delta v = 0, \\pm 1, \\pm 2, \\ldots$ の各振動遷移断面積、$\\Delta J = 0, \\pm 1, \\pm 2$ の回転遷移断面積が個別に測定・計算される（state-resolved cross section）。振動励起断面積はプラズマ中の分子解離率モデルに直結する。' },
+    ],
+    references: ['Brunger & Buckman (2002) Phys. Rep. — Electron-Molecule Scattering Cross-Sections and Cross-Beam Experiments'],
+  },
+  {
+    id: 'franck-condon',
+    title: '電子遷移とフランク・コンドン原理',
+    category: 'knowledge',
+    classification: '分子物理 / 光学遷移',
+    tags: ['Knowledge', 'Molecule_Target', 'Excitation'],
+    summary: '電子遷移は核の配置がほぼ変化しない短時間で起きる（垂直遷移）。そのため核波動関数の重なり積分（フランク・コンドン因子）が各振動バンドの強度を決める。',
+    body: [
+      { type: 'text', value: 'ボルン・オッペンハイマー近似のもとで、電子遷移の遷移モーメントは電子部分と核部分（振動波動関数の重なり）に分解できる。フランク・コンドン（FC）因子は終状態の振動量子数 $v\'$ と初状態 $v$ の組に対してその強度比を与える。' },
+      { type: 'formula', value: '\\text{FC factor} = |\\langle \\chi_{v\'}(R) | \\chi_v(R) \\rangle|^2' },
+      { type: 'text', value: '**垂直遷移の概念**：電子遷移の時間スケール（$\\sim 10^{-16}$ s）は核の振動周期（$\\sim 10^{-13}$ s）より遥かに短い。そのため遷移中に核間距離 $R$ はほぼ動かない。ポテンシャルエネルギー図上では「垂直線」として描かれる。' },
+      { type: 'text', value: 'FC 因子が大きい振動バンドが強く現れる。例えば基底状態と励起状態の平衡核間距離が大きく異なれば、$v \' = 0$ への遷移より $v \' > 0$ の高励起バンドの方が強くなることがある（"分布の山がずれる"）。' },
+      { type: 'text', value: '電子衝突との関係：光学選択律に縛られる光吸収と異なり、電子衝突励起では禁制遷移も起こりうる。しかし電子衝突によって電子状態が変わる場合も、核の動きは同様に遅いためFC原理は適用できる。振動分解励起断面積の $v\'$ 依存性はFC因子の計算値と比較される。' },
+    ],
+    references: ['Brunger & Buckman (2002) Phys. Rep. — Electron-Molecule Scattering Cross-Sections and Cross-Beam Experiments', 'Itikawa (2009) J. Phys. Chem. Ref. Data — Cross Sections for Electron Collisions with H2O'],
+  },
+  {
+    id: 'selection-rules',
+    title: '選択律',
+    category: 'knowledge',
+    classification: '量子力学 / 遷移則',
+    tags: ['Knowledge', 'Excitation', 'Theory'],
+    summary: '量子系の遷移に許容・禁制の条件を与える規則。光吸収・放出では角運動量保存と空間反転対称性から電気双極子選択律が導かれる。電子衝突励起ではこの選択律が緩まり、光では禁制の遷移も高い確率で起きる。',
+    body: [
+      { type: 'text', value: '**光学（電気双極子）選択律**：電磁波（光子）の吸収・放出では角運動量 $\\Delta J = 0, \\pm 1$（ただし $J=0 \\to J=0$ 禁制）、パリティ変化あり（$g \\leftrightarrow u$）、$\\Delta S = 0$（スピン禁制）という条件が成立する。違反すると「電気双極子禁制」となり、電気四重極・磁気双極子遷移として非常に弱い強度でしか現れない。' },
+      { type: 'text', value: '**電子衝突励起との違い**：電子は光子と異なりスピン $1/2$ をもち、交換相互作用を通じて $\\Delta S = 1$ の遷移（スピン禁制遷移、例：一重項→三重項励起）を引き起こせる。またパリティや軌道角運動量の選択律も衝突エネルギーに応じて緩まる。このため電子衝突では光で励起できない準安定状態（メタ安定状態）への励起断面積が特に重要になる。' },
+      { type: 'text', value: 'ボルン近似の枠内では、衝突による非弾性遷移の選択律は運動量移行 $q$ に対する遷移行列要素のマルチポール展開で決まる。$q \\to 0$（前方散乱）の極限では光学選択律に一致し、$q$ が大きくなると高次多重極遷移も寄与する。' },
+      { type: 'text', value: '分子の場合さらに振動（$\\Delta v$）や回転（$\\Delta J$）の選択律が加わる。例えばラマン遷移（$\\Delta J = 0, \\pm 2$）は直接双極子遷移（$\\Delta J = \\pm 1$）とは異なる経路で起き、電子衝突励起ではどちらのタイプも観測される。' },
+    ],
+    references: ['Burke (2011) R-Matrix Theory of Atomic Collisions', 'Brunger & Buckman (2002) Phys. Rep. — Electron-Molecule Scattering Cross-Sections and Cross-Beam Experiments'],
+  },
+  {
+    id: 'feynman-diagram',
+    title: 'ファインマン・ダイアグラム',
+    category: 'knowledge',
+    classification: '場の量子論 / 摂動論',
+    tags: ['Knowledge', 'Theory'],
+    summary: '量子電磁力学（QED）や場の量子論における摂動展開の各項を視覚的に表す図式。複雑な散乱振幅の計算を体系的に組み立てるための道具であり、どの物理過程が「何次の過程か」を直感的に示す。',
+    body: [
+      { type: 'text', value: 'ファインマン・ダイアグラムは摂動展開の各項に対応する図で、**線（伝播子）**と**頂点（相互作用）**から構成される。頂点の数が結合定数 $\\alpha = e^2/(4\\pi\\varepsilon_0\\hbar c) \\approx 1/137$ のべき次数に対応し、頂点が多いほど高次（小さい補正）の過程を表す。' },
+      { type: 'text', value: 'QED の典型的な頂点は「光子（波線）と電子（実線）の3本脚の結合 $\\sim e\\bar{\\psi}A\\!\\!/\\psi$」。' },
+      { type: 'text', value: '衝突物理への応用例：' },
+      { type: 'text', value: '• **モット散乱**（電子-電子）は最低次（1光子交換）の1つのダイアグラムで記述され、ラザフォード公式に対応。' },
+      { type: 'text', value: '• **2光子過程**（2頂点）は $\\alpha^2$ 次の補正で、輻射補正（Lamb シフト）や2光子電離に対応。' },
+      { type: 'text', value: '• **真空偏極・電子の自己エネルギー**（ループダイアグラム）は QED の繰り込み計算で現れ、原子エネルギー準位の精密計算に寄与する。' },
+      { type: 'text', value: '衝突物理の多くは非相対論的で QED ではなく量子力学的散乱理論（Born 近似・R-Matrix 法）を使うが、ファインマン図の考え方は「どの相互作用が何次か」「どの過程が干渉するか」を整理するメンタルモデルとして有用。' },
+    ],
+    references: ['Burke (2011) R-Matrix Theory of Atomic Collisions'],
+  },
+  {
+    id: 'relativistic-heavy-particle',
+    title: '重い粒子の相対論的効果',
+    category: 'knowledge',
+    classification: '相対論的量子力学 / 原子構造',
+    tags: ['Knowledge', 'Ion_Collision', 'Theory', 'Theory_of_Relativity'],
+    summary: '重元素（$Z \\gtrsim 50$）では内殻電子の速度が光速に近づき、相対論的効果が原子構造・断面積に無視できない補正をもたらす。スピン軌道相互作用の増大（$jj$ 結合）、軌道収縮・拡張がその代表例。',
+    body: [
+      { type: 'text', value: '内殻電子の典型速度を見積もると、水素様原子の $1s$ 軌道では $v \\approx Z\\alpha c$（$\\alpha \\approx 1/137$）となる。$Z = 80$（水銀）では $v \\approx 0.58c$ に達し、相対論的効果は無視できない。' },
+      { type: 'formula', value: 'v_{1s} \\approx Z\\alpha c \\implies \\gamma = \\frac{1}{\\sqrt{1-v^2/c^2}} > 1' },
+      { type: 'text', value: '**主要な相対論的効果：**' },
+      { type: 'text', value: '①**軌道収縮**：$s$・$p$ 軌道は相対論的質量増大により収縮し、核への有効電荷が増す。金（Au）の黄色い色や水銀（Hg）の常温液体性はこれに由来。' },
+      { type: 'text', value: '②**軌道拡張**：$d$・$f$ 軌道は $s$・$p$ 軌道の収縮による遮蔽増大で拡張する。' },
+      { type: 'text', value: '③**スピン軌道相互作用の増大**：$\\xi(r) \\propto Z^4/n^3$ のスケーリングにより、重元素では $ls$ 結合が BO 近似より強く、$LS$ 結合より $jj$ 結合が適切になる。微細構造のエネルギー分裂が大きくなり、衝突のしきい値エネルギーが $LS$ 結合予測から外れる。' },
+      { type: 'text', value: '衝突計算への影響：重イオンの電子衝突断面積をディラック方程式（4成分スピノル）ベースの相対論的 R-Matrix 法や GRASP/DARC コードで計算すると、非相対論的計算に比べて断面積が数十 % 変わることがある。ADNDT に収録される重元素の衝突データはほぼすべて相対論的計算に基づいている。' },
+    ],
+    references: ['Burke (2011) R-Matrix Theory of Atomic Collisions', 'Stancil & Schultz Rev. — Ion-Atom Collision Cross Sections for Fusion Plasma Diagnostics'],
+  },
+  {
+    id: 'potential-scattering',
+    title: 'ポテンシャル散乱（Potential scattering）',
+    category: 'theory',
+    classification: '散乱理論 / 基本過程',
+    tags: ['Theory', 'Elastic_Scattering', 'Cross_Section'],
+    summary: '保存ポテンシャル中を運動する粒子の散乱。弾性散乱理論の最も基本的な枠組みであり、部分波展開・ボルン近似・R-Matrix 法の共通出発点となる。',
+    body: [
+      { type: 'text', value: '【理論の使われ方】弾性散乱断面積・DCS・輸送断面積を計算する際の基礎的な定式化。2体の衝突問題を重心系に移して1粒子問題に帰着させることで、複雑な多体問題を扱いやすくする。電子-原子からイオン-分子まですべての衝突系で最初に行われる標準的手続きである。' },
+      { type: 'text', value: '【式と直感的解釈】漸近領域（$r \\to \\infty$）での波動関数は入射平面波と散乱球面波の和として書かれる。' },
+      { type: 'formula', value: '\\psi(\\mathbf{r}) \\xrightarrow{r\\to\\infty} e^{ikz} + f(\\theta)\\frac{e^{ikr}}{r}' },
+      { type: 'text', value: '散乱振幅 $f(\\theta)$ がすべての断面積情報を担う。全断面積は光学定理によって前方散乱振幅の虚部と結びついており、「前方に多く散乱するほど全断面積も大きい」という直感を定量化している。' },
+      { type: 'formula', value: '\\sigma_{total} = \\frac{4\\pi}{k}\\,\\mathrm{Im}\\,f(0)' },
+      { type: 'text', value: '【背景】ポテンシャルが中心対称（$V=V(r)$）であれば部分波展開によって各 $l$ の動径方程式に分解でき、数値計算が大幅に簡略化される。非中心ポテンシャル（分子標的など）では多極子展開で対応する。' },
+    ],
+    references: ['Burke (2011) R-Matrix Theory of Atomic Collisions'],
+  },
+  {
+    id: 'central-force',
+    title: '中心力場（Central force field）',
+    category: 'theory',
+    classification: '散乱理論 / 相互作用',
+    tags: ['Theory', 'Elastic_Scattering'],
+    summary: 'ポテンシャルが粒子間距離 $r$ のみに依存する場。角運動量が保存して部分波が独立に伝播し、散乱問題を大幅に簡略化する。',
+    body: [
+      { type: 'text', value: '【理論の使われ方】希ガスや水素様原子との電子衝突では、標的の球対称性から中心力場近似が成立する。この対称性によって角運動量が厳密な良い量子数となり、$l$ ごとの動径方程式に分解して解くことができる。Close-Coupling 法でも各チャンネルの結合ポテンシャルを多極子展開した「有効中心力場」が基礎に置かれる。' },
+      { type: 'text', value: '【式と直感的解釈】中心力場中の動径方程式には遠心力ポテンシャル項が現れる。' },
+      { type: 'formula', value: '\\left[-\\frac{\\hbar^2}{2\\mu}\\frac{d^2}{dr^2} + \\frac{\\hbar^2 l(l+1)}{2\\mu r^2} + V(r)\\right]u_l(r) = E\\,u_l(r)' },
+      { type: 'text', value: '遠心力障壁 $\\propto l(l+1)/r^2$ は $l$ が大きいほど高くなり、入射粒子を標的から遠ざける。低エネルギーでは $l$ が小さい部分波しかこの障壁を越えられないため、収束が速い（$s$ 波支配）という直感が成立する。' },
+      { type: 'text', value: '【背景】電子-多電子原子の衝突では交換ポテンシャルや分極ポテンシャルによって球対称性がわずかに破れる。それでも「有効中心ポテンシャル」（Hartree-Fock 平均場＋分極補正）として扱うことが多い。' },
+    ],
+    references: ['Burke (2011) R-Matrix Theory of Atomic Collisions'],
+  },
+  {
+    id: 'partial-wave-method',
+    title: '部分波展開（Method of partial waves）',
+    category: 'theory',
+    classification: '散乱理論 / 計算手法',
+    tags: ['Theory', 'Cross_Section', 'DCS'],
+    summary: '散乱波動関数を角運動量 $l$ の成分（部分波）に分解し、それぞれの位相シフトから断面積を組み立てる計算手法。低〜中エネルギー領域の弾性断面積計算の標準的手法。',
+    body: [
+      { type: 'text', value: '【手法の使われ方】弾性散乱の積分断面積・DCSを数値的に精度よく求める際の主要手法。エネルギーが低いほど寄与する部分波数が少なく収束が速い。R-Matrix 法・Kohn変分法・数値積分法（Numerov法）などすべてが最終的に位相シフト $\\delta_l$ を出力し、本公式で断面積を組み立てる。' },
+      { type: 'text', value: '【式と直感的解釈】散乱振幅を部分波に分解すると各 $l$ の寄与が独立に現れる。' },
+      { type: 'formula', value: 'f(\\theta) = \\frac{1}{2ik}\\sum_{l=0}^{\\infty}(2l+1)\\bigl(e^{2i\\delta_l}-1\\bigr)P_l(\\cos\\theta)' },
+      { type: 'text', value: '全弾性断面積は各部分波の寄与の和として書ける。' },
+      { type: 'formula', value: '\\sigma_{el} = \\frac{4\\pi}{k^2}\\sum_{l=0}^{\\infty}(2l+1)\\sin^2\\delta_l' },
+      { type: 'text', value: '$\\sin^2\\delta_l$ は0〜1の値をとり、$\\delta_l = \\pi/2$ のとき最大（共鳴条件）になる。各部分波の最大断面積 $(2l+1) \\cdot 4\\pi/k^2$ は半古典的な「衝突パラメータ $b \\approx l/k$ のリング面積」に対応する。' },
+      { type: 'text', value: '【背景】中心力場の球対称性から角運動量が保存するため、異なる $l$ の部分波が混合しない。この直交性が部分波展開の収束を保証する。非球対称系（分子標的）では多極子展開との組み合わせが必要になる。' },
+    ],
+    references: ['Burke (2011) R-Matrix Theory of Atomic Collisions', 'Tanaka, Brunger, Campbell (2016) Rev. Mod. Phys. — Cross Sections and Differential Cross Sections'],
+  },
+  {
+    id: 'phase-shift',
+    title: '位相のずれ / 位相シフト（Phase shift）',
+    category: 'theory',
+    classification: '散乱理論 / 基本量',
+    tags: ['Theory', 'Elastic_Scattering', 'Cross_Section'],
+    summary: '各部分波がポテンシャルとの相互作用によって受ける漸近的な位相のずれ $\\delta_l$。断面積・DCS・散乱振幅はすべてこの量から組み立てられる基本量。',
+    body: [
+      { type: 'text', value: '【理論の使われ方】部分波展開法の最終出力として数値計算コードが返す量。$\\delta_l$ の集合がわかれば弾性・反応断面積・DCS・偏光パラメータなどすべての観測量を決定できる。共鳴エネルギーでの急変を追うことで準束縛状態の位置と幅も決定できる。' },
+      { type: 'text', value: '【式と直感的解釈】ポテンシャルがない自由粒子の漸近形に対し、ポテンシャルがあると漸近波形が $\\delta_l$ だけずれる。' },
+      { type: 'formula', value: 'u_l(r) \\xrightarrow{r\\to\\infty} \\sin\\!\\left(kr - \\frac{l\\pi}{2} + \\delta_l\\right)' },
+      { type: 'text', value: '引力ポテンシャルは波を「引き込む」ので $\\delta_l > 0$（位相が進む）、斥力は波を「押し返す」ので $\\delta_l < 0$（位相が遅れる）。位相シフトが $\\pi/2$ を通過する付近では各部分波断面積が最大となり、共鳴の特徴的な指標になる。' },
+      { type: 'text', value: '【背景】Levinson の定理によれば $\\delta_l(0) - \\delta_l(\\infty) = n_b \\pi$（$n_b$ は束縛状態数）が成立し、位相シフトの全体的な振る舞いが束縛状態の存在と深く結びついている。' },
+    ],
+    references: ['Burke (2011) R-Matrix Theory of Atomic Collisions', 'Tanaka, Brunger, Campbell (2016) Rev. Mod. Phys. — Cross Sections and Differential Cross Sections'],
+  },
+  {
+    id: 'coulomb-scattering',
+    title: 'クーロン散乱（Coulomb scattering）',
+    category: 'theory',
+    classification: '散乱理論 / 長距離相互作用',
+    tags: ['Theory', 'Ion_Collision', 'DCS'],
+    summary: 'クーロンポテンシャルによる荷電粒子間の散乱。古典極限がラザフォード公式に帰着し、量子力学的扱いではクーロン波動関数が必要となる。',
+    body: [
+      { type: 'text', value: '【理論の使われ方】イオン-原子・プロトン-電子などの荷電粒子衝突において、長距離クーロン相互作用を正しく取り込むための基礎理論。高エネルギー重イオン衝突の散乱断面積や、軽粒子の前方散乱ピークを解釈するために不可欠。DWBA やCCC などの計算コードでは入射/終状態の漸近境界条件としてクーロン波動関数を組み込む。' },
+      { type: 'text', value: '【式と直感的解釈】古典的なクーロン散乱の微分断面積はラザフォード公式で与えられる。' },
+      { type: 'formula', value: '\\frac{d\\sigma}{d\\Omega}\\bigg|_{Ruth} = \\left(\\frac{Z_1 Z_2 e^2}{4E_{CM}}\\right)^2 \\frac{1}{\\sin^4(\\theta/2)}' },
+      { type: 'text', value: '$\\sin^4(\\theta/2)$ の発散は前方（$\\theta \\to 0$）で積分断面積が無限大になることを意味し、長距離力の特徴である。量子力学的クーロン波動関数は超幾何関数で表され、通常の平面波からの補正（クーロン位相 $\\sigma_l$）を含む。' },
+      { type: 'text', value: '【背景】純クーロンポテンシャルでは部分波の位相シフト収束が極めて遅いため、通常は短距離の「核ポテンシャル」と長距離クーロン部分を分離して扱う（modified Coulomb法）。核融合プラズマ診断研究ではクーロン散乱断面積の精密測定が求められている。' },
+    ],
+    references: ['Stancil & Schultz Rev. — Ion-Atom Collision Cross Sections for Fusion Plasma Diagnostics'],
+  },
+  {
+    id: 'resonance-scattering',
+    title: '共鳴散乱（Resonance scattering）',
+    category: 'theory',
+    classification: '散乱理論 / 動的過程',
+    tags: ['Theory', 'Resonance', 'Cross_Section'],
+    summary: '入射エネルギーが複合系の準束縛状態に一致するとき断面積が急増する現象。Breit-Wigner公式や Fano 公式で記述され、自動電離状態の研究に広く使われる。',
+    body: [
+      { type: 'text', value: '【理論の使われ方】電子衝突の励起断面積・電離断面積のエネルギー依存性に現れる急峻な構造を解釈・フィットするために使う。形状共鳴（入射電子が遠心力障壁に捕捉される）や Feshbach 共鳴（電子が標的の励起状態に束縛される）の分類・幅の決定に不可欠。しきい値近傍の断面積精度を左右する重要因子でもある。' },
+      { type: 'text', value: '【式と直感的解釈】共鳴エネルギー $E_r$ 付近で位相シフトが急速に $\\pi/2$ を通過し、Breit-Wigner形式で断面積が極大になる。' },
+      { type: 'formula', value: 'e^{2i\\delta_l} = \\frac{E - E_r - i\\Gamma/2}{E - E_r + i\\Gamma/2}' },
+      { type: 'text', value: '幅 $\\Gamma = \\hbar/\\tau$ は準束縛状態の寿命 $\\tau$ に反比例する。非共鳴バックグラウンドと干渉すると Fano 型の非対称プロファイルが現れ、断面積が共鳴エネルギーのわずかに上でゼロになることがある。' },
+      { type: 'formula', value: '\\sigma(E) \\propto \\frac{(q+\\varepsilon)^2}{1+\\varepsilon^2},\\quad \\varepsilon = \\frac{E-E_r}{\\Gamma/2}' },
+      { type: 'text', value: '【背景】ヘリウムの $^1P$ 自動電離状態（1s2p）が初めて同定された 1960 年代以来、Fano パラメータ $q$ による非対称性の解析が標準的手法になっている。形状共鳴は負イオン形成とも深く関わる。' },
+    ],
+    references: ['Burke (2011) R-Matrix Theory of Atomic Collisions', 'Christophorou & Olthoff (2004) ADNDT — Electron Interactions with Excited Atoms and Molecules'],
+  },
+  {
+    id: 'scattering-amplitude',
+    title: '散乱振幅（Scattering amplitude）',
+    category: 'theory',
+    classification: '散乱理論 / 基本量',
+    tags: ['Theory', 'DCS', 'Cross_Section'],
+    summary: '漸近波動関数に現れる複素量 $f(\\theta)$。絶対値の2乗が微分断面積に等しく、DCS・積分断面積・光学定理をつなぐ中心的な量。',
+    body: [
+      { type: 'text', value: '【理論の使われ方】実験で直接測定される DCS と理論計算をつなぐ橋渡し役。各計算手法（Born 近似・DWBA・R-Matrix など）はそれぞれ $f(\\theta)$ を近似的に求め、その絶対値の2乗を観測量と比較する。位相情報を含む複素量であるため、コヒーレント散乱（干渉効果）の記述にも必要。' },
+      { type: 'text', value: '【式と直感的解釈】散乱振幅の絶対値の2乗が微分断面積を与える。' },
+      { type: 'formula', value: '\\frac{d\\sigma}{d\\Omega} = |f(\\theta)|^2' },
+      { type: 'text', value: '非弾性散乱では入射チャンネル $i$ から終状態チャンネル $f$ への遷移振幅が T 行列の行列要素として定義される。' },
+      { type: 'formula', value: 'f_{fi}(\\theta) = -\\frac{\\mu}{2\\pi\\hbar^2}\\frac{k_f}{k_i}\\langle \\mathbf{k}_f\\phi_f | V | \\mathbf{k}_i\\phi_i\\rangle' },
+      { type: 'text', value: '振幅は複素数であるため、位相情報が干渉項（例：同種粒子衝突、重ね合わせ状態）に影響する。前方散乱の虚部が全断面積を与える光学定理も散乱振幅の性質から導かれる。' },
+      { type: 'text', value: '【背景】実験的に散乱振幅の位相まで決定するには、干渉実験（電子‐原子コヒーレント散乱）や偏光相関測定が必要で、これらは衝突物理の最前線課題の一つ。' },
+    ],
+    references: ['Burke (2011) R-Matrix Theory of Atomic Collisions', 'Tanaka, Brunger, Campbell (2016) Rev. Mod. Phys. — Cross Sections and Differential Cross Sections'],
+  },
+  {
+    id: 'identical-particle-collision',
+    title: '同種粒子の衝突（Collision of identical particles）',
+    category: 'theory',
+    classification: '散乱理論 / 量子効果',
+    tags: ['Theory', 'Electron_Collision', 'Elastic_Scattering'],
+    summary: '区別できない同種粒子どうしの衝突では交換対称性（フェルミオン：反対称、ボゾン：対称）が干渉項をもたらし、古典的予測から系統的に外れる。',
+    body: [
+      { type: 'text', value: '【理論の使われ方】電子-原子衝突で散乱電子と標的の束縛電子が同種粒子であることから、計算・実験両面で必ず考慮が必要。Mott 散乱（電子-電子）や He 同位体散乱など、同種粒子効果が顕著に現れる系の断面積計算に使う。スピン偏極実験の解釈にも欠かせない。' },
+      { type: 'text', value: '【式と直感的解釈】同種粒子では「粒子1が角度 $\\theta$ に散乱」と「粒子2が角度 $\\pi-\\theta$ に散乱」の2経路が区別できないため、振幅を足し合わせる（ボゾン）または引き算する（フェルミオン）必要がある。' },
+      { type: 'formula', value: 'f_{\\pm}(\\theta) = f(\\theta) \\pm f(\\pi - \\theta)' },
+      { type: 'text', value: '微分断面積 $|f(\\theta) \\pm f(\\pi-\\theta)|^2$ は $\\theta = \\pi/2$ で古典値の2倍（ボゾン）または0（フェルミオン）になる。この非古典的な干渉ピーク/ディップが実験で観測されれば同種粒子量子効果の直接証拠となる。' },
+      { type: 'text', value: '【背景】フェルミオンのスピン状態（一重項 vs 三重項）によって交換振幅の符号が変わるため、スピン非偏極実験では両スピン配置の平均として測定される。偏極電子ビームを用いれば一重項・三重項断面積を個別に決定できる。' },
+    ],
+    references: ['Burke (2011) R-Matrix Theory of Atomic Collisions'],
+  },
+  {
+    id: 'internal-degrees-of-freedom',
+    title: '内部自由度（Internal degrees of freedom）',
+    category: 'theory',
+    classification: '散乱理論 / 標的構造',
+    tags: ['Theory', 'Molecule_Target', 'Inelastic_Scattering'],
+    summary: '原子・分子標的が持つ電子配置・振動・回転などの量子状態。内部自由度の存在が非弾性チャンネルを開き、衝突問題を多チャンネル化する。',
+    body: [
+      { type: 'text', value: '【理論の使われ方】分子標的との衝突で、どの内部状態への遷移が断面積にどう寄与するかを整理するための概念。振動・回転を分解した断面積（state-resolved cross section）はプラズマ診断・レーザー冷却・大気化学モデルで需要が高い。Close-Coupling 計算では内部状態の種類と数がそのまま計算コストを決める。' },
+      { type: 'text', value: '【式と直感的解釈】全系のハミルトニアンを相対運動・標的内部・相互作用に分解する。' },
+      { type: 'formula', value: 'H = T_{rel} + H_{target} + V(\\mathbf{r}, \\{\\mathbf{R}\\})' },
+      { type: 'text', value: '$H_{target}$ の固有状態（電子・振動・回転の各量子数）が開いているチャンネルを決める。入射粒子エネルギーが各内部準位のしきい値を超えると対応するチャンネルが開き、非弾性断面積が立ち上がる。これが断面積のステップ状エネルギー依存性の起源。' },
+      { type: 'text', value: '【背景】Born-Oppenheimer 近似のもとでは電子・振動・回転が分離でき、電子構造計算と核の動力学計算を分けて扱える。この分離が「電子衝突→電子励起断面積」「電子衝突→振動励起断面積」を独立に議論する根拠。' },
+    ],
+    references: ['Burke (2011) R-Matrix Theory of Atomic Collisions', 'Brunger & Buckman (2002) Phys. Rep. — Electron-Molecule Scattering Cross-Sections and Cross-Beam Experiments'],
+  },
+  {
+    id: 'inelastic-collision',
+    title: '非弾性衝突（Inelastic collision）',
+    category: 'theory',
+    classification: '散乱理論 / 反応過程',
+    tags: ['Theory', 'Inelastic_Scattering', 'Excitation', 'Ionization'],
+    summary: '衝突後に標的の内部エネルギーが変化する過程の総称。励起・電離・解離など多様なチャンネルを含み、エネルギー収支はQ値で表される。',
+    body: [
+      { type: 'text', value: '【理論の使われ方】電子・イオン衝突による励起・電離・解離・電荷移換などの断面積を分類・計算する際の基本枠組み。エネルギー損失スペクトル測定と組み合わせることで、どの内部状態への遷移が起きたかを特定できる。プラズマ・大気・宇宙物理モデルで必要とされる速度係数（rate coefficient）の計算にも直結する。' },
+      { type: 'text', value: '【式と直感的解釈】衝突前後のエネルギー収支を Q 値で表す。' },
+      { type: 'formula', value: 'E_0 + Q = E_1 + E_{internal}' },
+      { type: 'text', value: 'Q < 0 のエンドサーミック反応では、重心系でしきい値エネルギー $E_{th} = |Q|(1 + m_1/m_2)$ を超えなければ反応が起きない。このしきい値の近傍では断面積がゼロから立ち上がり、その形状（s 波・p 波しきい値則）が反応機構を反映している。' },
+      { type: 'text', value: '【背景】非弾性断面積の全チャンネル和は光学定理から求まる全断面積から弾性断面積を差し引いて推定できる（$\\sigma_{inel} = \\sigma_{tot} - \\sigma_{el}$）。個々のチャンネル断面積は詳細釣り合い（詳細平衡）によって逆過程の断面積と結びつく。' },
+    ],
+    references: ['Itikawa (2009) J. Phys. Chem. Ref. Data — Cross Sections for Electron Collisions with H2O', 'Tanaka, Brunger, Campbell (2016) Rev. Mod. Phys. — Cross Sections and Differential Cross Sections'],
+  },
+  {
+    id: 'distorted-wave',
+    title: 'ひずみ波近似（Distorted wave approximation）',
+    category: 'theory',
+    classification: '散乱理論 / 計算手法',
+    tags: ['Theory', 'Close_Coupling', 'Inelastic_Scattering'],
+    summary: '入射波・終状態波を平均ポテンシャルで歪めた波（distorted wave）として扱い、残留相互作用を摂動として扱う近似。ボルン近似の上位版にあたる。',
+    body: [
+      { type: 'text', value: '【手法の使われ方】中〜高エネルギー領域の非弾性断面積（励起・電離）を計算する際の主要手法。ボルン近似が過小評価するような強い弾性散乱ポテンシャルが存在する場合（重イオン、低〜中エネルギー電子）でも入射波のひずみを適切に取り込める。DWBA コードはイオン衝突・電子衝突の両方で広く使われており、ADAS・FLYCHK 等のプラズマコードへの断面積入力として実績がある。' },
+      { type: 'text', value: '【式と直感的解釈】相互作用 $V$ をスタティックポテンシャル $U$（光学ポテンシャル）と残留相互作用 $V - U$ に分解し、$U$ は厳密に解いた歪み波で記述、残差を1次摂動として扱う。' },
+      { type: 'formula', value: 'T_{fi} = \\langle \\chi_f^{(-)} | V - U | \\chi_i^{(+)} \\rangle' },
+      { type: 'text', value: '$\\chi_i^{(+)}$ と $\\chi_f^{(-)}$ は光学ポテンシャル $U$ で歪めた入射・終状態波動関数。$U = 0$ とすると平面波に戻りボルン近似に帰着する。歪み波を使うことで前方散乱ピーク（クーロン由来）を正しく再現できる。' },
+      { type: 'text', value: '【背景】DWA はチャンネル間カップリングを無視するため、閾値近傍や強い共鳴構造がある領域では Close-Coupling 法に比べ精度が落ちる。中間エネルギー以上では計算コストを抑えながら十分な精度が得られるため、データベース整備での一括計算に適している。' },
+    ],
+    references: ['Burke (2011) R-Matrix Theory of Atomic Collisions', 'Bartschat & Burke (1987) J. Phys. B — Close-Coupling Calculations'],
+  },
+  {
+    id: 'detailed-balance',
+    title: '個別釣合いの原理（Principle of detailed balance）',
+    category: 'theory',
+    classification: '散乱理論 / 対称性',
+    tags: ['Theory', 'Cross_Section', 'Excitation'],
+    summary: '時間反転対称性から導かれる原理。正反応と逆反応の断面積を統計的重みを通じて結びつけ、測定困難な逆過程の断面積を推定するために用いられる。',
+    body: [
+      { type: 'text', value: '【理論の使われ方】直接測定が難しい逆過程（脱励起、三体再結合など）の断面積を、順過程の断面積データから導く際に使う。プラズマ診断コードや電離平衡計算では逆過程の速度係数が必要になることが多く、詳細釣り合いによる推定が広く利用されている。Klein-Rosseland 関係（励起↔脱励起）や Milne 関係（光電離↔放射再結合）がその代表例。' },
+      { type: 'text', value: '【式と直感的解釈】ハミルトニアンが時間反転対称（T対称）であれば、正反応と逆反応の断面積は統計的重みと波数によって結びつく。' },
+      { type: 'formula', value: 'g_i k_i^2\\, \\sigma_{i\\to f}(E_i) = g_f k_f^2\\, \\sigma_{f\\to i}(E_f)' },
+      { type: 'text', value: '$g_i$, $g_f$ は初・終状態の統計的重み（スピン縮退度）、$k_i$, $k_f$ は各チャンネルの波数。$k^2 \\propto E$ なので、断面積比は「終状態の利用可能な位相空間の比」として直感的に理解できる。エネルギーが高い方向（発熱反応）の断面積が大きくなるというエントロピー的な傾向を反映している。' },
+      { type: 'text', value: '【背景】詳細釣り合いは T 対称の帰結であるため、磁場・時間反転非対称項がある場合（スピン軌道相互作用が大きい系）では補正が必要になることがある。' },
+    ],
+    references: ['Burke (2011) R-Matrix Theory of Atomic Collisions'],
+  },
+  {
+    id: 'born-approximation',
+    title: 'ボルン近似（Born approximation）',
+    category: 'theory',
+    classification: '散乱理論 / 計算手法',
+    tags: ['Theory', 'Cross_Section', 'Inelastic_Scattering'],
+    summary: '入射粒子の波動関数を自由平面波で近似し、ポテンシャルを1次摂動として扱う最も基本的な近似手法。高エネルギー領域で精度がよく、解析的な断面積公式が得られる。',
+    body: [
+      { type: 'text', value: '【手法の使われ方】高エネルギー（数百 eV 以上）の電子・イオン衝突の励起・電離断面積を解析的または半解析的に計算する際の出発点。Bethe 公式や Kim-Rudd モデル（BED/BEB法）による電離断面積もボルン近似の枠内に位置づけられる。計算コストが極めて低いため、広いエネルギー範囲を素早くスキャンするスクリーニング計算にも使われる。' },
+      { type: 'text', value: '【式と直感的解釈】Lippmann-Schwinger 方程式を反復展開して1次項のみ残すと、散乱振幅はポテンシャルの運動量移行 $q$ でのフーリエ変換として得られる。' },
+      { type: 'formula', value: 'f^{(1)}(\\theta) = -\\frac{\\mu}{2\\pi\\hbar^2}\\tilde{V}(q),\\quad q = 2k\\sin(\\theta/2)' },
+      { type: 'text', value: 'ポテンシャルの Fourier 変換が大きい $q$ では DCS が大きく、小さい $q$（前方散乱）では長距離クーロン成分が支配的になる、という直感的な角度分布の理解が得られる。' },
+      { type: 'text', value: '【背景】ボルン近似の妥当条件は $|V| \\ll E$ であり、しきい値近傍・共鳴構造・低エネルギー散乱では過小評価になる。これを改善したのが DWA（歪み波ボルン近似）であり、さらに反復を続けると Born 級数になる。' },
+    ],
+    references: ['Burke (2011) R-Matrix Theory of Atomic Collisions', 'Itikawa (2009) J. Phys. Chem. Ref. Data — Cross Sections for Electron Collisions with H2O'],
+  },
+  {
+    id: 'generalized-oscillator-strength',
+    title: '一般化振動子強度（Generalized oscillator strength）',
+    category: 'theory',
+    classification: '散乱理論 / 遷移強度',
+    tags: ['Theory', 'Excitation', 'Ionization'],
+    summary: '光学振動子強度を運動量移行 $q$ の関数に拡張した量。ボルン近似の枠組みで非弾性断面積と光学データを統一的に結びつける。',
+    body: [
+      { type: 'text', value: '【理論の使われ方】電子衝突励起断面積を光学データ（吸収スペクトル・光電離断面積）から推定・補完するために用いる。Bethe 法では GOS の運動量移行依存性を外挿することで、実験が難しいエネルギー領域の断面積を埋める。また GOS 行列要素の計算は量子化学コード（Gaussian, MOLPRO 等）で得られた遷移双極子モーメントから直接できるため、理論補完が容易。' },
+      { type: 'text', value: '【式と直感的解釈】第1ボルン近似のもとで非弾性微分断面積は GOS $df/dE(q)$ を通じて書かれる。' },
+      { type: 'formula', value: '\\frac{d\\sigma}{d\\Omega} = \\frac{4}{a_0^2 q^2}\\frac{k_f}{k_i}\\frac{df(q)}{dE}' },
+      { type: 'text', value: '$q \\to 0$（前方散乱・光学極限）では GOS は通常の光学振動子強度 $f$ に一致する。Bethe-plot（$df/dE$ を $\\ln q^2$ に対してプロット）は高 $q$ で定数に漸近するため、このグラフの傾きと切片から断面積の高エネルギー漸近形を決定できる。' },
+      { type: 'text', value: '【背景】Bethe の理論（1930 年代）に端を発し、Inokuti（1971, Rev. Mod. Phys.）によって体系化された。電離断面積の BEB/BED モデルもこの枠組みの延長上にある。' },
+    ],
+    references: ['Kim & Rudd (1994) Phys. Rev. A — Binary-Encounter-Dipole Model for Ionization', 'Itikawa (2009) J. Phys. Chem. Ref. Data — Cross Sections for Electron Collisions with H2O'],
+  },
+  {
+    id: 'stopping-power',
+    title: '阻止能（Stopping power）',
+    category: 'theory',
+    classification: '散乱理論 / エネルギー損失',
+    tags: ['Theory', 'Ion_Collision', 'Ionization', 'Theory_of_Relativity'],
+    summary: '荷電粒子が物質中を通過する際の単位長さあたりのエネルギー損失 $-dE/dx$。電子的阻止能と核的阻止能の和で表される。',
+    body: [
+      { type: 'text', value: '【理論の使われ方】放射線治療（粒子線がん治療）・核融合炉壁材料・宇宙線シールド設計において、荷電粒子のレンジ（飛程）と線量分布を計算する基礎量。SRIM/TRIM コード・GEANT4 シミュレーションの核心部分に阻止能データが入力される。実験的には TOF（飛行時間）法や残留エネルギー測定から評価される。' },
+      { type: 'text', value: '【式と直感的解釈】高エネルギー領域の電子的阻止能は Bethe-Bloch 公式で記述される。' },
+      { type: 'formula', value: '-\\frac{dE}{dx}\\bigg|_{el} = \\frac{4\\pi e^4 Z_1^2 N Z_2}{m_e v^2}\\left[\\ln\\frac{2m_e v^2}{\\bar{I}} - \\ln(1-\\beta^2) - \\beta^2\\right]' },
+      { type: 'text', value: '$1/v^2$ 依存性が特徴的で、粒子が減速するほどエネルギー損失率が増大する（Bragg ピーク）。これが粒子線治療で腫瘍直前に線量が集中する物理的根拠。$\\bar{I}$ は標的原子の平均励起エネルギーで、Z 依存性を通じて元素固有の量。' },
+      { type: 'text', value: '【背景】低速イオン（$v < v_0 Z_2^{2/3}$）では電子的阻止能が Lindhard-Scharff 則（$\\propto v$）に従い、さらに核的阻止能（弾性衝突でのエネルギー移行）が支配的になる。阻止能データは ASTAR/PSTAR（NIST）・SRIM に体系的に整備されている。' },
+    ],
+    references: ['ADNDT Review on Electron-Atom Cross Sections', 'Stancil & Schultz Rev. — Ion-Atom Collision Cross Sections for Fusion Plasma Diagnostics'],
+  },
+  {
+    id: 'adiabatic-approximation',
+    title: '断熱近似（Adiabatic approximation）',
+    category: 'theory',
+    classification: '散乱理論 / 近似手法',
+    tags: ['Theory', 'Inelastic_Scattering', 'Molecule_Target'],
+    summary: '衝突時間 $\\tau_c$ が標的内部運動の時定数 $\\tau_{int}$ より十分長い極限での近似。内部状態が相互作用に追随するため状態間遷移が起きない断熱定理が成立する。',
+    body: [
+      { type: 'text', value: '【理論の使われ方】低速イオン-分子衝突・重粒子間電荷移換など、衝突時間が電子運動周期より長い系で用いられる。Born-Oppenheimer 近似もこの枠組みの応用で、電子が常に核配置に追随するとした断熱近似。一方、高速衝突では突然近似が適用され、どちらが妥当かはアジアバティシティーパラメータ $\\xi = \\Delta E \\cdot \\tau_c / \\hbar$ で判定する。' },
+      { type: 'text', value: '【式と直感的解釈】断熱近似では、核間距離 $R$ をパラメータとして電子ハミルトニアンを対角化した断熱固有状態が定義される。' },
+      { type: 'formula', value: 'H_{el}(\\mathbf{r};R)\\phi_n^{ad}(\\mathbf{r};R) = E_n(R)\\phi_n^{ad}(\\mathbf{r};R)' },
+      { type: 'text', value: '断熱ポテンシャルエネルギー面 $E_n(R)$ に沿って核が運動し、非断熱カップリング（$\\langle \\phi_m | \\partial/\\partial R | \\phi_n \\rangle$）が小さければ状態間遷移は抑制される。$\\xi \\gg 1$ なら断熱、$\\xi \\ll 1$ なら突然近似が成立する。' },
+      { type: 'text', value: '【背景】断熱状態の交差回避（avoided crossing）付近では非断熱遷移が起きやすく、Landau-Zener 公式で遷移確率が推定される。電荷移換断面積の計算では、断熱ポテンシャル面の構造と非断熱カップリングの大きさが断面積を決める主要因となる。' },
+    ],
+    references: ['Burke (2011) R-Matrix Theory of Atomic Collisions', 'Brunger & Buckman (2002) Phys. Rep. — Electron-Molecule Scattering Cross-Sections and Cross-Beam Experiments'],
+  },
+  {
+    id: 'dirac-equation',
+    title: 'ディラック方程式（Dirac equation）',
+    category: 'theory',
+    classification: '相対論的量子力学 / 基礎方程式',
+    tags: ['Theory', 'Electron_Collision', 'Ion_Collision', 'Theory_of_Relativity'],
+    summary: 'スピン 1/2 の粒子に対する相対論的波動方程式。電子スピンと反粒子（陽電子）を自然に導き、重元素の原子構造・衝突断面積の精密計算に不可欠。',
+    body: [
+      { type: 'text', value: '【理論の使われ方】重元素（$Z \\gtrsim 50$）との電子衝突断面積を精密に計算する場合、非相対論的なシュレーディンガー方程式では内殻電子の相対論的効果（軌道収縮・スピン軌道相互作用増大）を正しく取り込めない。ディラック方程式をベースにした R-Matrix 法（DARC コード）や Convergent Close-Coupling（DRCCC）が重元素の DCS・積分断面積計算に使われる。' },
+      { type: 'text', value: '【式と直感的解釈】ディラック方程式は 4 成分スピノル $\\Psi$ に対する一階の偏微分方程式として書かれる。' },
+      { type: 'formula', value: '\\left(i\\hbar\\gamma^\\mu\\partial_\\mu - m_e c\\right)\\Psi = 0' },
+      { type: 'text', value: '$\\gamma^\\mu$（$\\mu = 0,1,2,3$）はディラック行列（$4\\times 4$）。4成分のうち大成分2つが「粒子」、小成分2つが「反粒子」に対応し、低速（非相対論的）極限では大成分がパウリのスピノルに帰着してシュレーディンガー方程式に戻る。電磁場との最小結合 $\\partial_\\mu \\to \\partial_\\mu - ieA_\\mu/\\hbar c$ を入れると原子の微細構造・スピン軌道相互作用が自動的に導かれる。' },
+      { type: 'text', value: '【背景】1928年、ディラックが相対性理論と量子力学を統合して導いた。反粒子（陽電子）の存在を理論的に予言し、1932年にアンダーソンが実験で発見。原子物理では電子の $g$ 因子（$g_e \\approx 2$）もディラック方程式から自然に得られ、QED 補正（$g-2$）と合わせて最も精密な物理定数として知られる。' },
+    ],
+    references: ['Burke (2011) R-Matrix Theory of Atomic Collisions', 'Stancil & Schultz Rev. — Ion-Atom Collision Cross Sections for Fusion Plasma Diagnostics'],
+  },
+  {
+    id: 'fine-structure',
+    title: '微細構造（Fine structure）',
+    category: 'theory',
+    classification: '原子構造 / スペクトル',
+    tags: ['Theory', 'Electron_Collision', 'Excitation', 'Theory_of_Relativity'],
+    summary: 'スピン軌道相互作用によって生じる原子エネルギー準位の小さな分裂。衝突断面積のしきい値エネルギーと多重項構造を決め、DCS の共鳴構造や偏極測定の解釈に直結する。',
+    body: [
+      { type: 'text', value: '【理論の使われ方】電子衝突励起断面積では各微細構造準位（$J$ 準位）への遷移断面積が個別に計算・測定される。しきい値エネルギーが $J$ ごとに異なるため、励起断面積のエネルギー依存性に段階的な立ち上がりが現れる（微細構造しきい値）。重元素や希ガスの実験では $J$ 分解断面積が重要なデータとなる。' },
+      { type: 'text', value: '【式と直感的解釈】スピン軌道相互作用ハミルトニアン $H_{SO} = \\xi(r)\\,\\mathbf{L}\\cdot\\mathbf{S}$ が摂動として加わると、$L$ と $S$ を合成した全角運動量 $J$ が良い量子数になり、準位が分裂する。' },
+      { type: 'formula', value: 'E_{SO} = \\frac{\\xi}{2}\\bigl[J(J+1) - L(L+1) - S(S+1)\\bigr]' },
+      { type: 'text', value: '$\\xi = \\langle \\xi(r) \\rangle$ は動径積分で決まる結合定数で、$Z^4/n^3$ に比例して重元素・高主量子数ほど大きくなる（ランデの間隔則）。例えば Ar の $^3P_0, ^3P_1, ^3P_2$ 準位の間隔は 0.18 eV と 0.07 eV であり、電子衝突実験ではこの間隔の分解が実験エネルギー分解能の指標になる。' },
+      { type: 'text', value: '【背景】水素原子の微細構造はディラック方程式から厳密に計算でき、$1s_{1/2}$–$2p_{1/2}$ 間のラム・シフト（0.035 cm⁻¹）まで含めると QED の精密検証に使われる。多電子原子では LS 結合（軽元素）から $jj$ 結合（重元素）への移行があり、両極限の中間が実際の重元素に多い。' },
+    ],
+    references: ['Burke (2011) R-Matrix Theory of Atomic Collisions', 'Christophorou & Olthoff (2004) ADNDT — Electron Interactions with Excited Atoms and Molecules'],
+  },
+  {
+    id: 'spin-polarized-scattering',
+    title: 'スピン偏極散乱（Spin-polarized scattering）',
+    category: 'theory',
+    classification: '散乱理論 / スピン効果',
+    tags: ['Theory', 'Electron_Collision', 'DCS', 'Elastic_Scattering'],
+    summary: 'スピン偏極した電子ビームを用いて一重項・三重項散乱振幅を分離し、交換相互作用・スピン軌道相互作用の寄与を定量化する手法。スピン非偏極実験では見えない情報が得られる。',
+    body: [
+      { type: 'text', value: '【理論の使われ方】スピン 1/2 の電子と標的（スピン $s_t$）の衝突では、全スピン $S_{total}$ の値ごとに散乱振幅が異なる。スピン非偏極実験ではこれらの重みつき平均しか得られないが、偏極電子ビームを用いると一重項（$S=0$）・三重項（$S=1$）振幅を個別に決定でき、交換相互作用の大きさを直接測定できる。' },
+      { type: 'text', value: '【式と直感的解釈】スピン偏極した電子と無偏極標的の弾性散乱では、スピン非交換（direct）振幅 $f$ と交換（exchange）振幅 $g$ を用いて微分断面積と交換非対称度 $A$ が書かれる。' },
+      { type: 'formula', value: '\\frac{d\\sigma}{d\\Omega} = |f|^2 + |g|^2,\\quad A = \\frac{|f|^2 - |g|^2}{|f|^2 + |g|^2}' },
+      { type: 'text', value: '非対称度 $A$（Sherman 関数）は交換振幅なし（$g=0$）で $A=1$、direct と exchange が等しければ $A=0$ になる。重元素標的ではスピン軌道相互作用によって even/odd パリティ振幅に位相差が生じ、$A \\neq 0$ となる「スピン軌道非対称度」も現れる。' },
+      { type: 'text', value: '偏極電子源（GaAs フォトカソード）と Mott 散乱偏極計を組み合わせた実験装置では、左右の散乱強度差から $A$ を決定できる。測定された $A$ の角度依存性は理論モデル（相対論的 R-Matrix・DWBA）の厳しい検証になる。' },
+      { type: 'text', value: '【背景】1970〜80 年代に Kessler らのグループがスピン偏極電子散乱の実験技術を確立。以来、重元素（Hg, Xe, Au など）での測定が理論の相対論的補正・交換効果の検証に使われてきた。スピン偏極測定は同種粒子の衝突での交換振幅決定とも深く関わる。' },
+    ],
+    references: ['Burke (2011) R-Matrix Theory of Atomic Collisions', 'Tanaka, Brunger, Campbell (2016) Rev. Mod. Phys. — Cross Sections and Differential Cross Sections'],
+  },
+  {
+    id: 'lorentz-transformation',
+    title: 'ローレンツ変換（Lorentz transformation）',
+    category: 'theory',
+    classification: '特殊相対論 / 時空変換',
+    tags: ['Theory', 'Theory_of_Relativity', 'Ion_Collision'],
+    summary: '異なる慣性系間で時空座標・エネルギー・運動量を変換する規則。高速粒子の衝突運動学・実験室系と重心系の変換・相対論的エネルギー-運動量関係の基礎。',
+    body: [
+      { type: 'text', value: '【理論の使われ方】高エネルギーイオン衝突では粒子速度が $v \\sim 0.1$–$0.9c$ に達し、非相対論的運動学では実験室系と重心系の換算が不正確になる。ローレンツ変換を使った相対論的運動学が必要で、特に荷電粒子の飛程計算（阻止能の $\\beta$ 補正）・粒子生成しきい値・ドップラーシフト補正に使われる。衝突後の粒子の4元運動量を変換して検出角・エネルギーを予測する計算でも不可欠。' },
+      { type: 'text', value: '【式と直感的解釈】$x$ 方向に速度 $v$（$\\beta = v/c$, $\\gamma = 1/\\sqrt{1-\\beta^2}$）で動く慣性系 $S\'$ から見た時空座標は次のように変換される。' },
+      { type: 'formula', value: '\\begin{pmatrix}ct\'\\\\x\'\\end{pmatrix} = \\begin{pmatrix}\\gamma & -\\gamma\\beta \\\\ -\\gamma\\beta & \\gamma\\end{pmatrix}\\begin{pmatrix}ct\\\\x\\end{pmatrix}' },
+      { type: 'text', value: '時間と空間が混合する（時間膨張・長さ収縮）のがローレンツ変換の本質。エネルギー-運動量についても同様の変換が成り立ち、4元運動量 $(E/c,\\, \\mathbf{p})$ はローレンツ変換で混合する。不変量 $s = (E/c)^2 - p^2c^2 = (m_0 c)^2$ は全慣性系で等しく、重心系エネルギー $\\sqrt{s}$ は反応の利用可能エネルギーを表す。' },
+      { type: 'text', value: '【背景】1905年、アインシュタインの特殊相対性理論が Maxwell 方程式の共変性を出発点として導いた。ローレンツ自身は電磁気学の文脈で変換式を先に書いていたが、物理的解釈を完成させたのはアインシュタイン。現代の粒子物理・重イオン物理では4元ベクトル表記が標準的。' },
+    ],
+    references: ['Stancil & Schultz Rev. — Ion-Atom Collision Cross Sections for Fusion Plasma Diagnostics'],
+  },
+  {
+    id: 's-matrix',
+    title: 'S行列（Scattering matrix）',
+    category: 'theory',
+    classification: '散乱理論 / 形式論',
+    tags: ['Theory', 'Cross_Section', 'Theory_of_Relativity'],
+    summary: '入射状態から散乱後の終状態への遷移振幅をすべてまとめた行列。ユニタリー性・時間反転対称性・解析性などの一般的制約から断面積に関する正確な関係式（光学定理・詳細平衡など）が導かれる。',
+    body: [
+      { type: 'text', value: '【理論の使われ方】散乱問題の形式論として、個々の計算手法（ボルン近似・R-Matrix・CCなど）が出力するT行列・K行列を統一的に扱う枠組みを提供する。S行列のユニタリー性は確率の保存（全断面積の正値性）を保証し、解析性は共鳴の複素極として記述することを可能にする。場の量子論では摂動展開のファインマン図の総和がS行列要素に対応する。' },
+      { type: 'text', value: '【式と直感的解釈】S行列は時刻 $t \\to -\\infty$ の入射状態 $|i\\rangle$ から $t \\to +\\infty$ の終状態 $|f\\rangle$ への遷移振幅として定義される。' },
+      { type: 'formula', value: 'S_{fi} = \\langle f | S | i \\rangle = \\delta_{fi} - 2\\pi i\\,\\delta(E_f - E_i)\\,T_{fi}' },
+      { type: 'text', value: 'T行列部分 $T_{fi}$ が実際の散乱振幅を担う。S行列のユニタリー性 $S^\\dagger S = 1$ を展開すると、$\\mathrm{Im}\\,T_{ii} = -(\\pi/2)\\sum_f |T_{fi}|^2$ が得られ、これが光学定理（前方散乱振幅の虚部 $\\propto$ 全断面積）の起源。' },
+      { type: 'text', value: 'K行列（反応行列）は $S = (1+iK)/(1-iK)$ の関係で S行列と結びつき、実数であることが保証されるため数値計算の安定性が高く、R-Matrix 法の内部行列として広く使われる。' },
+      { type: 'text', value: '【背景】1940年代にハイゼンベルクが導入。観測可能量（断面積）のみを扱い、内部構造の詳細に依存しない「S行列プログラム」は場の量子論の基礎にある。弦理論でも振幅の解析性からS行列ブートストラップが研究されている。' },
+    ],
+    references: ['Burke (2011) R-Matrix Theory of Atomic Collisions'],
+  },
+  {
+    id: 'quark-gluon-plasma',
+    title: 'クォーク・グルーオン・プラズマ（QGP）',
+    category: 'theory',
+    classification: '高エネルギー核物理 / 相転移',
+    tags: ['Theory', 'Theory_of_Relativity', 'Ion_Collision'],
+    summary: '極めて高い温度・密度（$T \\gtrsim 150$ MeV $\\approx 10^{12}$ K）でハドロンが溶け、クォークとグルーオンが閉じ込めから解放された状態。重イオン衝突実験で生成・研究される QCD の相転移産物。',
+    body: [
+      { type: 'text', value: '【理論の使われ方】CERN の LHC（Pb+Pb 衝突）や BNL の RHIC（Au+Au 衝突）では重イオンを超高エネルギーで衝突させ、QGP を生成して探索している。QGP の性質（粘性・音速・エネルギー損失）を理解することは、宇宙初期（ビッグバン後 $\\sim 1$ μs）の物質状態の解明につながる。原子衝突物理の文脈では、重イオン衝突実験の「外側」に位置する高エネルギー核物理の話題だが、イオンビーム技術・衝突運動学・衝突断面積の概念が共通して使われる。' },
+      { type: 'text', value: '【式と直感的解釈】量子色力学（QCD）の結合定数 $\\alpha_s$ は高エネルギー（短距離）で小さくなる（漸近的自由性）。温度が QCD スケール $\\Lambda_{QCD} \\approx 200$ MeV を大きく超えると $\\alpha_s \\to 0$ となり、クォークとグルーオンが自由粒子に近い状態になる。' },
+      { type: 'formula', value: '\\alpha_s(Q^2) = \\frac{2\\pi}{\\beta_0 \\ln(Q/\\Lambda_{QCD})}, \\quad \\beta_0 = 11 - \\frac{2N_f}{3}' },
+      { type: 'text', value: '$Q$ はエネルギースケール（運動量移行）、$N_f$ はクォークのフレーバー数。QGP 中では通常は閉じ込められているクォークとグルーオンが自由度として現れ、その集団的振る舞いは「ほぼ完全流体」（粘性 $\\eta/s \\approx 1/(4\\pi)$、ホログラフィック下限に近い）であることが実験から示されている。' },
+      { type: 'text', value: '【背景】格子 QCD 計算によって QGP への相転移（クロスオーバー）温度 $T_c \\approx 155$ MeV が予測され、RHIC・LHC の実験がこれを裏付けた。J/ψ メソンの抑制（Debye 遮蔽）・楕円流（$v_2$）・ジェットクエンチングが QGP の間接的証拠として挙げられる。' },
+    ],
+    references: ['Stancil & Schultz Rev. — Ion-Atom Collision Cross Sections for Fusion Plasma Diagnostics'],
+  },
+];
+
+/* ====================== Related-term inference ======================
+   方針：出典論文の共有を主軸（+3点/件）、タグの重なりを補助（+1点/件）としてスコアリングし、
+   同一用語内では上位4件を「関連の強い用語」として提示する。手動指定は行わない。
+======================================================================= */
+
+function computeRelated(term, allTerms, limit = 4) {
+  const refs = new Set((term.references || []).map(r => r.trim().toLowerCase()).filter(Boolean));
+  const tags = new Set(term.tags || []);
+
+  const scored = allTerms
+    .filter(t => t.id !== term.id)
+    .map(t => {
+      const otherRefs = new Set((t.references || []).map(r => r.trim().toLowerCase()).filter(Boolean));
+      const otherTags = new Set(t.tags || []);
+      let sharedRefs = 0;
+      refs.forEach(r => { if (otherRefs.has(r)) sharedRefs++; });
+      let sharedTags = 0;
+      tags.forEach(tg => { if (otherTags.has(tg)) sharedTags++; });
+      const score = sharedRefs * 3 + sharedTags * 1;
+      return { term: t, score, sharedRefs, sharedTags };
+    })
+    .filter(x => x.score > 0)
+    .sort((a, b) => b.score - a.score || a.term.title.localeCompare(b.term.title, 'ja'));
+
+  return scored.slice(0, limit);
+}
+
+function slugify(title) {
+  const base = title
+    .toLowerCase()
+    .replace(/[（(].*?[）)]/g, '')
+    .trim()
+    .replace(/[^a-z0-9\u4e00-\u9fff\u3040-\u30ff]+/g, '-')
+    .replace(/(^-|-$)/g, '');
+  return base || ('term-' + Date.now().toString(36));
+}
+
+function uniqueId(baseTitle, existingIds) {
+  let slug = slugify(baseTitle);
+  let candidate = slug;
+  let n = 2;
+  while (existingIds.has(candidate)) {
+    candidate = `${slug}-${n}`;
+    n++;
+  }
+  return candidate;
+}
+
+/* ====================== Search ranking ======================
+   方針：タイトル一致を最優先、続いてタグ、要約、本文（formula含む）の順で
+   重み付けスコアを与え、ヒットしたものを降順に並べる。
+================================================================= */
+
+function bodyToSearchableText(term) {
+  return (term.body || []).map(b => b.value).join(' ');
+}
+
+function scoreTermForQuery(term, q) {
+  const query = q.toLowerCase().trim();
+  if (!query) return 0;
+  const title = term.title.toLowerCase();
+  const tags = term.tags.join(' ').toLowerCase();
+  const summary = (term.summary || '').toLowerCase();
+  const body = bodyToSearchableText(term).toLowerCase();
+  const classification = (term.classification || '').toLowerCase();
+  const refs = (term.references || []).join(' ').toLowerCase();
+
+  let score = 0;
+  if (title === query) score += 100;
+  else if (title.startsWith(query)) score += 60;
+  else if (title.includes(query)) score += 40;
+
+  if (tags.includes(query)) score += 18;
+  if (classification.includes(query)) score += 10;
+  if (summary.includes(query)) score += 8;
+  if (refs.includes(query)) score += 6;
+  if (body.includes(query)) score += 4;
+
+  return score;
+}
+
+function rankBySearch(terms, query) {
+  return terms
+    .map(t => ({ term: t, score: scoreTermForQuery(t, query) }))
+    .filter(x => x.score > 0)
+    .sort((a, b) => b.score - a.score || a.term.title.localeCompare(b.term.title, 'ja'))
+    .map(x => x.term);
+}
+
+/* ====================== UTIL: KaTeX render ====================== */
+
+function MathText({ text }) {
+  const ref = useRef(null);
+  useEffect(() => {
+    if (ref.current && window.renderMathInElement) {
+      window.renderMathInElement(ref.current, {
+        delimiters: [{ left: '$', right: '$', display: false }],
+        throwOnError: false,
+      });
+    }
+  }, [text]);
+  return <span ref={ref}>{text}</span>;
+}
+
+/* Inline KaTeX for a single $...$ segment */
+function InlineMath({ tex }) {
+  const ref = useRef(null);
+  useEffect(() => {
+    if (ref.current && window.katex) {
+      try { window.katex.render(tex, ref.current, { throwOnError: false, displayMode: false }); }
+      catch(e) { ref.current.textContent = '$' + tex + '$'; }
+    }
+  }, [tex]);
+  return <span ref={ref} />;
+}
+
+/*
+ * RichText: renders body text with
+ *   - $...$ inline math (via InlineMath)
+ *   - **...** bold
+ *   - term title matches → clickable link (onOpen)
+ */
+function RichText({ text, termLinks, onOpen }) {
+  // Split text into math / non-math segments
+  const segments = useMemo(() => {
+    const segs = [];
+    const re = /\$([^$]+)\$/g;
+    let last = 0, m;
+    while ((m = re.exec(text)) !== null) {
+      if (m.index > last) segs.push({ type: 'text', value: text.slice(last, m.index) });
+      segs.push({ type: 'math', value: m[1] });
+      last = m.index + m[0].length;
+    }
+    if (last < text.length) segs.push({ type: 'text', value: text.slice(last) });
+    return segs;
+  }, [text]);
+
+  // Split a plain-text chunk into bold / plain / link sub-parts
+  function parseTextChunk(chunk) {
+    const parts = [];
+    // First handle **bold**
+    const boldRe = /\*\*(.+?)\*\*/g;
+    let last = 0, m;
+    while ((m = boldRe.exec(chunk)) !== null) {
+      if (m.index > last) parts.push({ type: 'plain', value: chunk.slice(last, m.index) });
+      parts.push({ type: 'bold', value: m[1] });
+      last = m.index + m[0].length;
+    }
+    if (last < chunk.length) parts.push({ type: 'plain', value: chunk.slice(last) });
+
+    // Within plain parts, find term links
+    if (!termLinks || termLinks.length === 0) return parts;
+    const pattern = termLinks.map(e => e.text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|');
+    const linkRe = new RegExp(`(${pattern})`);
+    const result = [];
+    for (const part of parts) {
+      if (part.type !== 'plain') { result.push(part); continue; }
+      const tokens = part.value.split(linkRe);
+      for (const tok of tokens) {
+        if (!tok) continue;
+        const entry = termLinks.find(e => e.text === tok);
+        result.push(entry ? { type: 'link', value: tok, id: entry.id } : { type: 'plain', value: tok });
+      }
+    }
+    return result;
+  }
+
+  return (
+    <span>
+      {segments.map((seg, i) => {
+        if (seg.type === 'math') return <InlineMath key={i} tex={seg.value} />;
+        return parseTextChunk(seg.value).map((part, j) => {
+          if (part.type === 'bold') return <strong key={`${i}-${j}`}>{part.value}</strong>;
+          if (part.type === 'link') return (
+            <button key={`${i}-${j}`} onClick={() => onOpen(part.id)}
+              className="text-[var(--indigo)] underline decoration-dotted hover:decoration-solid transition-all font-medium">
+              {part.value}
+            </button>
+          );
+          return <span key={`${i}-${j}`}>{part.value}</span>;
+        });
+      })}
+    </span>
+  );
+}
+
+function MathBlock({ tex }) {
+  const ref = useRef(null);
+  useEffect(() => {
+    if (ref.current && window.katex) {
+      try {
+        window.katex.render(tex, ref.current, { throwOnError: false, displayMode: true });
+      } catch (e) { ref.current.textContent = tex; }
+    }
+  }, [tex]);
+  return <div ref={ref} className="overflow-x-auto py-1"></div>;
+}
+
+/* ====================== SVG mini graphs (illustrative) ====================== */
+
+function GraphIllustration({ kind }) {
+  if (kind === 'typical-cross-section') {
+    return (
+      <svg viewBox="0 0 300 140" className="w-full h-32">
+        <line x1="30" y1="110" x2="280" y2="110" stroke="var(--ink-soft)" strokeWidth="1"/>
+        <line x1="30" y1="110" x2="30" y2="15" stroke="var(--ink-soft)" strokeWidth="1"/>
+        <path d="M30,108 C60,108 70,40 95,25 C120,15 150,30 180,60 C210,85 240,100 280,105"
+          fill="none" stroke="var(--vermilion)" strokeWidth="2"/>
+        <text x="150" y="130" fontSize="10" fill="var(--ink-soft)" textAnchor="middle" fontFamily="IBM Plex Mono">Energy (eV)</text>
+        <text x="12" y="20" fontSize="10" fill="var(--ink-soft)" textAnchor="middle" fontFamily="IBM Plex Mono">σ</text>
+      </svg>
+    );
+  }
+  if (kind === 'r-matrix-region') {
+    return (
+      <svg viewBox="0 0 300 140" className="w-full h-32">
+        <circle cx="150" cy="70" r="50" fill="rgba(27,58,92,0.06)" stroke="var(--indigo)" strokeWidth="1.5"/>
+        <circle cx="150" cy="70" r="2" fill="var(--vermilion)"/>
+        <line x1="150" y1="70" x2="150" y2="20" stroke="var(--indigo-soft)" strokeWidth="1" strokeDasharray="3,3"/>
+        <text x="155" y="35" fontSize="10" fill="var(--indigo)" fontFamily="IBM Plex Mono">a</text>
+        <text x="150" y="74" fontSize="10" fill="var(--indigo)" textAnchor="middle" fontFamily="IBM Plex Mono">internal</text>
+        <text x="240" y="40" fontSize="10" fill="var(--ink-soft)" fontFamily="IBM Plex Mono">external region</text>
+      </svg>
+    );
+  }
+  if (kind === 'breit-wigner') {
+    return (
+      <svg viewBox="0 0 300 140" className="w-full h-32">
+        <line x1="30" y1="110" x2="280" y2="110" stroke="var(--ink-soft)" strokeWidth="1"/>
+        <line x1="30" y1="110" x2="30" y2="15" stroke="var(--ink-soft)" strokeWidth="1"/>
+        <path d="M30,108 C90,108 120,108 135,40 C145,15 155,15 165,40 C180,108 210,108 280,108"
+          fill="none" stroke="var(--vermilion)" strokeWidth="2"/>
+        <text x="150" y="130" fontSize="10" fill="var(--ink-soft)" textAnchor="middle" fontFamily="IBM Plex Mono">E (eV)</text>
+        <text x="150" y="10" fontSize="9" fill="var(--ink-soft)" textAnchor="middle" fontFamily="IBM Plex Mono">Eᵣ</text>
+      </svg>
+    );
+  }
+  if (kind === 'beam-apparatus') {
+    return (
+      <svg viewBox="0 0 300 100" className="w-full h-28">
+        <rect x="20" y="40" width="30" height="20" fill="none" stroke="var(--indigo)" strokeWidth="1.3"/>
+        <text x="35" y="35" fontSize="8" fill="var(--ink-soft)" textAnchor="middle" fontFamily="IBM Plex Mono">gun</text>
+        <line x1="50" y1="50" x2="230" y2="50" stroke="var(--vermilion)" strokeWidth="1.5" strokeDasharray="4,3"/>
+        <circle cx="150" cy="50" r="4" fill="var(--vermilion)"/>
+        <rect x="130" y="20" width="40" height="60" fill="rgba(27,58,92,0.06)" stroke="var(--indigo)" strokeWidth="1"/>
+        <text x="150" y="15" fontSize="8" fill="var(--ink-soft)" textAnchor="middle" fontFamily="IBM Plex Mono">target cell</text>
+        <rect x="240" y="40" width="30" height="20" fill="none" stroke="var(--indigo)" strokeWidth="1.3"/>
+        <text x="255" y="35" fontSize="8" fill="var(--ink-soft)" textAnchor="middle" fontFamily="IBM Plex Mono">detector</text>
+      </svg>
+    );
+  }
+  return null;
+}
+
+/* ====================== Tag chip ====================== */
+
+function Tag({ tag, onClick, active, variant }) {
+  return (
+    <button
+      onClick={() => onClick && onClick(tag)}
+      className={"chip" + (variant === 'vermilion' ? ' vermilion' : '') + (active ? ' active' : '')}
+    >
+      #{tag}
+    </button>
+  );
+}
+
+/* ====================== Home ====================== */
+
+function Home({ onNavigate, onSearch }) {
+  const [query, setQuery] = useState('');
+
+  const submit = (e) => {
+    e.preventDefault();
+    if (query.trim()) onSearch(query.trim());
+  };
+
+  return (
+    <div className="max-w-3xl mx-auto px-6 py-16 fade-up">
+      <div className="mb-14 text-center">
+        <p className="font-mono text-xs tracking-[0.3em] text-[var(--indigo)] mb-3">ATOMIC &amp; MOLECULAR COLLISION DICTIONARY</p>
+        <h1 className="font-display text-5xl font-semibold tracking-tight">Library</h1>
+        <p className="text-[var(--ink-soft)] mt-3 text-sm">原子衝突・断面積測定分野の体系的辞典</p>
+      </div>
+
+      <form onSubmit={submit} className="mb-16">
+        <div className="flex items-center gap-3 paper-card rounded-sm px-4 py-3">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--ink-soft)" strokeWidth="2">
+            <circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+          <input
+            value={query}
+            onChange={e => setQuery(e.target.value)}
+            placeholder="用語・タグを検索（例：R-Matrix, DEA, Cross Section）"
+            className="flex-1 bg-transparent outline-none text-sm placeholder:text-[var(--ink-soft)]/60"
+          />
+          <button type="submit" className="font-mono text-xs text-[var(--indigo)] hover:underline">検索</button>
+        </div>
+      </form>
+
+      <div className="grid gap-5">
+        {Object.values(CATEGORIES).map((cat, i) => (
+          <button
+            key={cat.key}
+            onClick={() => onNavigate(cat.key)}
+            className="home-tile paper-card rounded-sm text-left px-7 py-6 flex items-start justify-between group"
+          >
+            <div>
+              <h2 className="font-display text-2xl font-semibold underline-grow inline-block mb-1">{cat.label}</h2>
+              <p className="font-mono text-xs text-[var(--vermilion)] mt-2 mb-2">{cat.sub}</p>
+              <p className="text-sm text-[var(--ink-soft)] leading-relaxed">{cat.desc}</p>
+            </div>
+            <span className="font-mono text-xs text-[var(--ink-soft)] mt-1 group-hover:translate-x-1 transition-transform">→</span>
+          </button>
+        ))}
+      </div>
+
+      <p className="text-center text-xs text-[var(--ink-soft)] mt-16 font-mono">
+        based on: J.Phys.B · ADNDT · Phys.Plasma · Adv. At. Mol. Opt. Phys.
+      </p>
+    </div>
+  );
+}
+
+/* ====================== Term Card (in list) ====================== */
+
+function TermCard({ term, onOpen, onTagClick, highlightTag }) {
+  return (
+    <div className="paper-card rounded-sm px-5 py-4 cursor-pointer transition-shadow" onClick={() => onOpen(term.id)}>
+      <div className="flex items-start justify-between gap-3">
+        <h3 className="font-display text-lg font-semibold underline-grow inline-block">{term.title}</h3>
+        <span className="font-mono text-[var(--ink-soft)] text-sm leading-none">⋮</span>
+      </div>
+      <div className="flex flex-wrap gap-1.5 mt-3 mb-2">
+        {term.tags.map(t => (
+          <Tag key={t} tag={t} active={t === highlightTag} onClick={(tag) => { onTagClick && onTagClick(tag); }} />
+        ))}
+      </div>
+      <p className="font-mono text-xs text-[var(--ink-soft)] mb-1">Classification: {term.classification}</p>
+      <p className="text-sm text-[var(--ink-soft)] leading-relaxed line-clamp-2">
+        {term.summary}
+      </p>
+    </div>
+  );
+}
+
+/* ====================== Category / List page ====================== */
+
+const PAGE_SIZE = 6;
+
+function CategoryPage({ categoryKey, allTerms, onHome, onOpen, onCreate, initialTag, initialQuery }) {
+  const cat = CATEGORIES[categoryKey];
+  const [activeTags, setActiveTags] = useState(initialTag ? [initialTag] : []);
+  const [query, setQuery] = useState(initialQuery || '');
+  const [page, setPage] = useState(1);
+
+  useEffect(() => { setPage(1); }, [activeTags, query]);
+  useEffect(() => { setActiveTags(initialTag ? [initialTag] : []); }, [initialTag, categoryKey]);
+  useEffect(() => { setQuery(initialQuery || ''); }, [initialQuery, categoryKey]);
+
+  const filtered = useMemo(() => {
+    const base = allTerms.filter(t => t.category === categoryKey)
+      .filter(t => activeTags.length === 0 || activeTags.every(at => t.tags.includes(at)));
+    if (!query.trim()) return base;
+    return rankBySearch(base, query);
+  }, [allTerms, categoryKey, activeTags, query]);
+
+  const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
+  const pageItems = filtered.slice((page-1)*PAGE_SIZE, page*PAGE_SIZE);
+
+  const toggleTag = (tag) => {
+    setActiveTags(prev => prev.includes(tag) ? prev.filter(t => t !== tag) : [...prev, tag]);
+  };
+
+  const relevantTags = useMemo(() => {
+    const counts = {};
+    allTerms.filter(t => t.category === categoryKey).forEach(t => t.tags.forEach(tag => {
+      counts[tag] = (counts[tag]||0)+1;
+    }));
+    return Object.entries(counts).sort((a,b)=>b[1]-a[1]).map(([t])=>t);
+  }, [allTerms, categoryKey]);
+
+
+
+  return (
+    <div className="max-w-3xl mx-auto px-6 py-10 fade-up">
+      <div className="flex items-center gap-4 mb-2">
+        <button onClick={onHome} className="text-[var(--ink-soft)] hover:text-[var(--ink)]" title="ホームへ">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
+            <path d="M3 11.5L12 4l9 7.5"/><path d="M5 10v9a1 1 0 001 1h12a1 1 0 001-1v-9"/>
+          </svg>
+        </button>
+        <h1 className="font-display text-3xl font-semibold flex-1">{cat.label}</h1>
+        <button onClick={() => onCreate(categoryKey)} className="font-mono text-xs text-[var(--indigo)] border border-[var(--indigo)] rounded-sm px-3 py-1.5 hover:bg-[var(--indigo)] hover:text-[var(--paper-raised)] transition-colors whitespace-nowrap">
+          ＋ 用語を追加
+        </button>
+      </div>
+      <p className="text-sm text-[var(--ink-soft)] ml-9 mb-6">{cat.desc}</p>
+
+      <div className="flex items-center gap-3 paper-card rounded-sm px-4 py-2.5 mb-5">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--ink-soft)" strokeWidth="2">
+          <circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+        <input
+          value={query}
+          onChange={e => setQuery(e.target.value)}
+          placeholder="このカテゴリ内を検索"
+          className="flex-1 bg-transparent outline-none text-sm"
+        />
+        {query && <button onClick={()=>setQuery('')} className="text-[var(--ink-soft)] text-xs font-mono">×</button>}
+      </div>
+
+      <div className="flex flex-wrap gap-1.5 mb-7">
+        {relevantTags.map(tag => (
+          <Tag key={tag} tag={tag} active={activeTags.includes(tag)} onClick={toggleTag} />
+        ))}
+      </div>
+
+      {filtered.length > 0 && (
+        <div className="flex items-center justify-between mb-4 font-mono text-xs text-[var(--ink-soft)]">
+          <button disabled={page<=1} onClick={() => setPage(p => Math.max(1, p-1))}
+            className="underline disabled:no-underline disabled:opacity-30">← 前へ</button>
+          <span>{page}/{totalPages} ページ（全{filtered.length}件）</span>
+          <button disabled={page>=totalPages} onClick={() => setPage(p => Math.min(totalPages, p+1))}
+            className="underline disabled:no-underline disabled:opacity-30">次へ →</button>
+        </div>
+      )}
+
+      <div className="grid gap-4">
+        {pageItems.length === 0 && (
+          <p className="text-sm text-[var(--ink-soft)] font-mono py-10 text-center">該当する用語が見つかりません。</p>
+        )}
+        {pageItems.map(term => (
+          <TermCard key={term.id} term={term} onOpen={onOpen} onTagClick={toggleTag} />
+        ))}
+
+        {filtered.length > 0 && (
+          <div className="flex items-center justify-between mt-2 font-mono text-xs text-[var(--ink-soft)]">
+            <button disabled={page<=1} onClick={() => setPage(p => Math.max(1, p-1))}
+              className="underline disabled:no-underline disabled:opacity-30">← 前へ</button>
+            <span>{page}/{totalPages} ページ（全{filtered.length}件）</span>
+            <button disabled={page>=totalPages} onClick={() => setPage(p => Math.min(totalPages, p+1))}
+              className="underline disabled:no-underline disabled:opacity-30">次へ →</button>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+/* ====================== Term Detail Page ====================== */
+
+function TermDetailPage({ termId, allTerms, onHome, onOpen, onTagClick, onEdit }) {
+  const term = allTerms.find(t => t.id === termId);
+  if (!term) return null;
+  const cat = CATEGORIES[term.category];
+  const related = useMemo(() => computeRelated(term, allTerms), [term, allTerms]);
+
+  // Build list of linkable term titles (sorted longest first to avoid partial matches)
+  const termLinks = useMemo(() => {
+    const entries = [];
+    const seen = new Set();
+    const add = (id, text) => {
+      const t = text.trim();
+      if (!t || seen.has(t)) return;
+      // allow all-caps abbreviations ≥2 chars (MCP, VMI, QGP, DCS…), others ≥4 chars
+      if (t.length < 2) return;
+      if (t.length < 4 && !/^[A-Z0-9\-]{2,3}$/.test(t)) return;
+      seen.add(t);
+      entries.push({ id, text: t });
+    };
+    for (const t of allTerms) {
+      if (t.id === term.id) continue;
+      const title = t.title;
+      // primary: before first （ or (
+      const primary = title.replace(/[（(【\/].*/, '').trim();
+      add(t.id, primary);
+      // secondary: inside （…） – catches English equivalents
+      const m = title.match(/[（(]([^）)]+)[）)]/);
+      if (m) {
+        const inner = m[1].trim();
+        // skip if identical to primary or too generic (single word < 5 chars)
+        if (inner !== primary) add(t.id, inner);
+      }
+      // also try English words before the slash (e.g. "Gas jet / Molecular beam")
+      const slashPart = title.match(/\/\s*(.+?)(?:[（(]|$)/);
+      if (slashPart) add(t.id, slashPart[1].trim());
+    }
+    return entries.sort((a, b) => b.text.length - a.text.length);
+  }, [allTerms, term.id]);
+
+  return (
+    <div className="max-w-3xl mx-auto px-6 py-10 fade-up">
+      <div className="flex items-center gap-4 mb-1">
+        <button onClick={onHome} className="text-[var(--ink-soft)] hover:text-[var(--ink)]" title="ホームへ">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
+            <path d="M3 11.5L12 4l9 7.5"/><path d="M5 10v9a1 1 0 001 1h12a1 1 0 001-1v-9"/>
+          </svg>
+        </button>
+        <button onClick={() => onOpen(null, term.category)} className="font-mono text-xs text-[var(--indigo)] hover:underline">
+          {cat.label}
+        </button>
+        <span className="text-[var(--ink-soft)] text-xs">/</span>
+        <span className="font-mono text-xs text-[var(--ink-soft)]">{term.classification}</span>
+        <span className="flex-1"></span>
+        <button onClick={() => onEdit(term.id)} className="font-mono text-[11px] text-[var(--ink-soft)] border border-[var(--rule)] rounded-sm px-2.5 py-1 hover:border-[var(--indigo)] hover:text-[var(--indigo)] transition-colors whitespace-nowrap">
+          編集
+        </button>
+      </div>
+
+      <h1 className="font-display text-3xl font-semibold underline-grow inline-block mt-5 mb-4">{term.title}</h1>
+
+      <div className="flex flex-wrap gap-1.5 mb-6">
+        {term.tags.map(t => (
+          <Tag key={t} tag={t} variant="vermilion" onClick={(tag) => onTagClick(tag, term.category)} />
+        ))}
+      </div>
+
+      {term.references && term.references.length > 0 && (
+        <div className="mb-10">
+          <p className="font-mono text-[11px] text-[var(--ink-soft)] tracking-wide mb-1.5">出典 — REFERENCES</p>
+          <ul className="space-y-1">
+            {term.references.map((ref, i) => (
+              <li key={i} className="text-xs text-[var(--ink-soft)] font-mono leading-relaxed">・{ref}</li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      {/* explanation area, circular-motif styled */}
+      <div className="relative paper-card rounded-md px-8 py-10 sm:px-12 sm:py-12 mb-10 overflow-hidden">
+        <svg className="absolute -right-16 -top-16 opacity-[0.35] pointer-events-none" width="260" height="260" viewBox="0 0 260 260">
+          <circle cx="130" cy="130" r="125" className="orbit-ring" fill="none"/>
+          <circle cx="130" cy="130" r="90" className="orbit-ring" fill="none"/>
+        </svg>
+        <p className="font-mono text-[11px] tracking-[0.2em] text-[var(--indigo)] mb-6 relative">説明 — EXPLANATION</p>
+
+        <div className="space-y-5 relative">
+          {term.body.map((block, i) => {
+            if (block.type === 'text') {
+              return <p key={i} className="text-[15px] leading-[1.9] text-[var(--ink)]"><RichText text={block.value} termLinks={termLinks} onOpen={onOpen} /></p>;
+            }
+            if (block.type === 'formula') {
+              return (
+                <div key={i} className="bg-[var(--paper)] border border-[var(--rule)] rounded-sm px-4 py-3">
+                  <MathBlock tex={block.value} />
+                </div>
+              );
+            }
+            if (block.type === 'graph') {
+              return (
+                <div key={i} className="bg-[var(--paper)] border border-[var(--rule)] rounded-sm px-4 py-3">
+                  <GraphIllustration kind={block.value} />
+                </div>
+              );
+            }
+            return null;
+          })}
+        </div>
+      </div>
+
+      <div>
+        <p className="font-mono text-xs text-[var(--ink-soft)] mb-1 tracking-wide">関連の強い用語</p>
+        <p className="font-mono text-[10px] text-[var(--ink-soft)]/70 mb-3">出典論文の共有・タグの重なりから自動推定</p>
+        {related.length === 0 && (
+          <p className="text-xs text-[var(--ink-soft)] font-mono">関連付けられる用語がまだありません。</p>
+        )}
+        <div className="grid sm:grid-cols-2 gap-3">
+          {related.map(({ term: r, sharedRefs, sharedTags }) => (
+            <button key={r.id} onClick={() => onOpen(r.id)} className="paper-card rounded-sm text-left px-4 py-3 group">
+              <p className="font-display text-sm font-semibold underline-grow inline-block">{r.title}</p>
+              <p className="text-xs text-[var(--ink-soft)] mt-1 line-clamp-1">{r.summary}</p>
+              <p className="font-mono text-[10px] text-[var(--vermilion)] mt-1.5">
+                {sharedRefs > 0 && `共通出典 ${sharedRefs}件`}{sharedRefs > 0 && sharedTags > 0 && ' ・ '}{sharedTags > 0 && `共通タグ ${sharedTags}件`}
+              </p>
+            </button>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ====================== Search Results ====================== */
+
+function SearchResultsPage({ query, allTerms, onHome, onOpen, onTagClick }) {
+  const results = useMemo(() => rankBySearch(allTerms, query), [allTerms, query]);
+
+  return (
+    <div className="max-w-3xl mx-auto px-6 py-10 fade-up">
+      <div className="flex items-center gap-4 mb-6">
+        <button onClick={onHome} className="text-[var(--ink-soft)] hover:text-[var(--ink)]" title="ホームへ">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
+            <path d="M3 11.5L12 4l9 7.5"/><path d="M5 10v9a1 1 0 001 1h12a1 1 0 001-1v-9"/>
+          </svg>
+        </button>
+        <h1 className="font-display text-2xl font-semibold">「{query}」の検索結果</h1>
+      </div>
+      <p className="font-mono text-xs text-[var(--ink-soft)] mb-6">{results.length}件ヒット（タイトル一致を優先表示）</p>
+      <div className="grid gap-4">
+        {results.length === 0 && <p className="text-sm text-[var(--ink-soft)] py-10 text-center font-mono">該当する用語が見つかりません。</p>}
+        {results.map(term => (
+          <TermCard key={term.id} term={term} onOpen={onOpen} onTagClick={(tag)=>onTagClick(tag, term.category)} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/* ====================== Term Editor (create / edit) ====================== */
+
+function emptyTerm(categoryKey) {
+  return {
+    id: null,
+    title: '',
+    category: categoryKey || 'theory',
+    classification: '',
+    tags: [],
+    summary: '',
+    references: [],
+    body: [{ type: 'text', value: '' }],
+  };
+}
+
+function BodyBlockEditor({ block, index, onChange, onRemove, onMove, isFirst, isLast }) {
+  return (
+    <div className="border border-[var(--rule)] rounded-sm bg-[var(--paper)] px-3 py-3">
+      <div className="flex items-center justify-between mb-2">
+        <div className="flex gap-1.5">
+          {['text','formula','graph'].map(ty => (
+            <button
+              key={ty}
+              type="button"
+              onClick={() => onChange(index, { ...block, type: ty, value: ty === block.type ? block.value : (ty === 'graph' ? 'typical-cross-section' : '') })}
+              className={"font-mono text-[10px] px-2 py-1 rounded-sm border " + (block.type === ty ? 'bg-[var(--indigo)] text-white border-[var(--indigo)]' : 'border-[var(--rule)] text-[var(--ink-soft)]')}
+            >{ty}</button>
+          ))}
+        </div>
+        <div className="flex gap-1 items-center">
+          <button type="button" disabled={isFirst} onClick={() => onMove(index, -1)} className="text-xs text-[var(--ink-soft)] disabled:opacity-20 px-1">↑</button>
+          <button type="button" disabled={isLast} onClick={() => onMove(index, 1)} className="text-xs text-[var(--ink-soft)] disabled:opacity-20 px-1">↓</button>
+          <button type="button" onClick={() => onRemove(index)} className="text-xs text-[var(--vermilion)] px-1.5">削除</button>
+        </div>
+      </div>
+      {block.type === 'text' && (
+        <textarea
+          value={block.value}
+          onChange={e => onChange(index, { ...block, value: e.target.value })}
+          placeholder="説明文。文中の数式は $...$ で囲むとインラインで表示されます（例: $\sigma = \pi r^2$）"
+          rows={3}
+          className="w-full bg-[var(--paper-raised)] border border-[var(--rule)] rounded-sm px-3 py-2 text-sm outline-none focus:border-[var(--indigo)]"
+        />
+      )}
+      {block.type === 'formula' && (
+        <div>
+          <input
+            value={block.value}
+            onChange={e => onChange(index, { ...block, value: e.target.value })}
+            placeholder="LaTeX形式の数式（例: \sigma_{total} = \int \frac{d\sigma}{d\Omega} d\Omega）"
+            className="w-full bg-[var(--paper-raised)] border border-[var(--rule)] rounded-sm px-3 py-2 text-sm font-mono outline-none focus:border-[var(--indigo)] mb-2"
+          />
+          {block.value && (
+            <div className="bg-[var(--paper-raised)] border border-[var(--rule)] rounded-sm px-3 py-2">
+              <MathBlock tex={block.value} />
+            </div>
+          )}
+        </div>
+      )}
+      {block.type === 'graph' && (
+        <div>
+          <select
+            value={block.value}
+            onChange={e => onChange(index, { ...block, value: e.target.value })}
+            className="w-full bg-[var(--paper-raised)] border border-[var(--rule)] rounded-sm px-3 py-2 text-sm outline-none focus:border-[var(--indigo)] mb-2"
+          >
+            <option value="typical-cross-section">典型的な断面積カーブ</option>
+            <option value="r-matrix-region">R-Matrix 内部・外部領域</option>
+            <option value="breit-wigner">Breit-Wigner 共鳴形状</option>
+            <option value="beam-apparatus">ビーム実験装置の模式図</option>
+          </select>
+          <div className="bg-[var(--paper-raised)] border border-[var(--rule)] rounded-sm px-3 py-2">
+            <GraphIllustration kind={block.value} />
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function TermEditorPage({ editingId, allTerms, defaultCategory, onCancel, onSave, onDelete }) {
+  const existing = editingId ? allTerms.find(t => t.id === editingId) : null;
+  const [form, setForm] = useState(() => existing ? JSON.parse(JSON.stringify(existing)) : emptyTerm(defaultCategory));
+  const [tagInput, setTagInput] = useState('');
+  const [refInput, setRefInput] = useState('');
+  const [error, setError] = useState('');
+
+  const allKnownTags = useMemo(() => {
+    const s = new Set(ALL_TAGS);
+    allTerms.forEach(t => t.tags.forEach(tag => s.add(tag)));
+    return Array.from(s).sort();
+  }, [allTerms]);
+
+  const addTag = (tag) => {
+    const clean = tag.trim().replace(/\s+/g, '_');
+    if (!clean) return;
+    if (!form.tags.includes(clean)) setForm(f => ({ ...f, tags: [...f.tags, clean] }));
+    setTagInput('');
+  };
+  const removeTag = (tag) => setForm(f => ({ ...f, tags: f.tags.filter(t => t !== tag) }));
+
+  const addReference = () => {
+    const clean = refInput.trim();
+    if (!clean) return;
+    setForm(f => ({ ...f, references: [...f.references, clean] }));
+    setRefInput('');
+  };
+  const removeReference = (i) => setForm(f => ({ ...f, references: f.references.filter((_, idx) => idx !== i) }));
+
+  const updateBlock = (index, newBlock) => {
+    setForm(f => ({ ...f, body: f.body.map((b, i) => i === index ? newBlock : b) }));
+  };
+  const removeBlock = (index) => {
+    setForm(f => ({ ...f, body: f.body.filter((_, i) => i !== index) }));
+  };
+  const moveBlock = (index, dir) => {
+    setForm(f => {
+      const arr = [...f.body];
+      const target = index + dir;
+      if (target < 0 || target >= arr.length) return f;
+      [arr[index], arr[target]] = [arr[target], arr[index]];
+      return { ...f, body: arr };
+    });
+  };
+  const addBlock = (type) => {
+    setForm(f => ({ ...f, body: [...f.body, { type, value: type === 'graph' ? 'typical-cross-section' : '' }] }));
+  };
+
+  const handleSave = () => {
+    if (!form.title.trim()) { setError('タイトルを入力してください。'); return; }
+    if (!form.classification.trim()) { setError('分類（Classification）を入力してください。'); return; }
+    if (form.tags.length === 0) { setError('タグを最低1つ設定してください。'); return; }
+    const cleanBody = form.body.filter(b => b.value && b.value.trim());
+    if (cleanBody.length === 0) { setError('説明・式・図のいずれかを最低1つ入力してください。'); return; }
+
+    const existingIds = new Set(allTerms.map(t => t.id));
+    if (editingId) existingIds.delete(editingId);
+    const id = editingId || uniqueId(form.title, existingIds);
+
+    onSave({ ...form, id, body: cleanBody, summary: form.summary.trim() || cleanBody.find(b=>b.type==='text')?.value.slice(0,60) || '' });
+  };
+
+  return (
+    <div className="max-w-3xl mx-auto px-6 py-10 fade-up">
+      <div className="flex items-center gap-4 mb-8">
+        <button onClick={onCancel} className="text-[var(--ink-soft)] hover:text-[var(--ink)]" title="戻る">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
+            <path d="M19 12H5M12 19l-7-7 7-7"/>
+          </svg>
+        </button>
+        <h1 className="font-display text-2xl font-semibold">{existing ? '用語を編集' : '新しい用語を追加'}</h1>
+      </div>
+
+      <div className="space-y-7">
+        <div>
+          <label className="font-mono text-xs text-[var(--ink-soft)] block mb-1.5">タイトル</label>
+          <input
+            value={form.title}
+            onChange={e => setForm(f => ({ ...f, title: e.target.value }))}
+            placeholder="例：Penning Ionization（ペニング電離）"
+            className="w-full bg-[var(--paper-raised)] border border-[var(--rule)] rounded-sm px-3 py-2.5 text-sm outline-none focus:border-[var(--indigo)]"
+          />
+        </div>
+
+        <div>
+          <label className="font-mono text-xs text-[var(--ink-soft)] block mb-1.5">カテゴリ</label>
+          <div className="flex gap-2">
+            {Object.values(CATEGORIES).map(c => (
+              <button
+                key={c.key}
+                type="button"
+                onClick={() => setForm(f => ({ ...f, category: c.key }))}
+                className={"flex-1 font-mono text-xs px-3 py-2 rounded-sm border " + (form.category === c.key ? 'bg-[var(--indigo)] text-white border-[var(--indigo)]' : 'border-[var(--rule)] text-[var(--ink-soft)]')}
+              >{c.label}</button>
+            ))}
+          </div>
+        </div>
+
+        <div>
+          <label className="font-mono text-xs text-[var(--ink-soft)] block mb-1.5">Classification（分類）</label>
+          <input
+            value={form.classification}
+            onChange={e => setForm(f => ({ ...f, classification: e.target.value }))}
+            placeholder="例：散乱理論 / 反応過程"
+            className="w-full bg-[var(--paper-raised)] border border-[var(--rule)] rounded-sm px-3 py-2.5 text-sm outline-none focus:border-[var(--indigo)]"
+          />
+        </div>
+
+        <div>
+          <label className="font-mono text-xs text-[var(--ink-soft)] block mb-1.5">タグ</label>
+          <div className="flex flex-wrap gap-1.5 mb-2">
+            {form.tags.map(t => (
+              <span key={t} className="chip active flex items-center gap-1">
+                #{t}
+                <button type="button" onClick={() => removeTag(t)} className="ml-0.5">×</button>
+              </span>
+            ))}
+          </div>
+          <div className="flex gap-2">
+            <input
+              value={tagInput}
+              onChange={e => setTagInput(e.target.value)}
+              onKeyDown={e => { if (e.key === 'Enter') { e.preventDefault(); addTag(tagInput); } }}
+              placeholder="新規タグ名を入力してEnter（例：Penning_Ionization）"
+              className="flex-1 bg-[var(--paper-raised)] border border-[var(--rule)] rounded-sm px-3 py-2 text-sm font-mono outline-none focus:border-[var(--indigo)]"
+            />
+            <button type="button" onClick={() => addTag(tagInput)} className="font-mono text-xs px-3 border border-[var(--rule)] rounded-sm text-[var(--ink-soft)]">追加</button>
+          </div>
+          <div className="flex flex-wrap gap-1.5 mt-2.5">
+            {allKnownTags.filter(t => !form.tags.includes(t)).slice(0, 14).map(t => (
+              <button key={t} type="button" onClick={() => addTag(t)} className="chip">#{t}</button>
+            ))}
+          </div>
+        </div>
+
+        <div>
+          <label className="font-mono text-xs text-[var(--ink-soft)] block mb-1.5">出典論文（複数可・関連用語の自動推定に使用）</label>
+          <div className="space-y-1.5 mb-2">
+            {form.references.map((ref, i) => (
+              <div key={i} className="flex items-center justify-between bg-[var(--paper-raised)] border border-[var(--rule)] rounded-sm px-3 py-1.5">
+                <span className="text-xs font-mono text-[var(--ink-soft)]">{ref}</span>
+                <button type="button" onClick={() => removeReference(i)} className="text-[var(--vermilion)] text-xs ml-2">×</button>
+              </div>
+            ))}
+          </div>
+          <div className="flex gap-2">
+            <input
+              value={refInput}
+              onChange={e => setRefInput(e.target.value)}
+              onKeyDown={e => { if (e.key === 'Enter') { e.preventDefault(); addReference(); } }}
+              placeholder="例：Itikawa (2009) J. Phys. Chem. Ref. Data — ..."
+              className="flex-1 bg-[var(--paper-raised)] border border-[var(--rule)] rounded-sm px-3 py-2 text-sm outline-none focus:border-[var(--indigo)]"
+            />
+            <button type="button" onClick={addReference} className="font-mono text-xs px-3 border border-[var(--rule)] rounded-sm text-[var(--ink-soft)]">追加</button>
+          </div>
+        </div>
+
+        <div>
+          <label className="font-mono text-xs text-[var(--ink-soft)] block mb-1.5">要約（一覧カードに表示。空欄なら本文から自動生成）</label>
+          <textarea
+            value={form.summary}
+            onChange={e => setForm(f => ({ ...f, summary: e.target.value }))}
+            rows={2}
+            placeholder="1〜2文程度の短い要約"
+            className="w-full bg-[var(--paper-raised)] border border-[var(--rule)] rounded-sm px-3 py-2.5 text-sm outline-none focus:border-[var(--indigo)]"
+          />
+        </div>
+
+        <div>
+          <label className="font-mono text-xs text-[var(--ink-soft)] block mb-2">説明・式・図（円形エリアに表示される本文ブロック）</label>
+          <div className="space-y-3">
+            {form.body.map((block, i) => (
+              <BodyBlockEditor
+                key={i}
+                block={block}
+                index={i}
+                onChange={updateBlock}
+                onRemove={removeBlock}
+                onMove={moveBlock}
+                isFirst={i === 0}
+                isLast={i === form.body.length - 1}
+              />
+            ))}
+          </div>
+          <div className="flex gap-2 mt-3">
+            <button type="button" onClick={() => addBlock('text')} className="font-mono text-[11px] px-3 py-1.5 border border-[var(--rule)] rounded-sm text-[var(--ink-soft)]">＋ 説明文</button>
+            <button type="button" onClick={() => addBlock('formula')} className="font-mono text-[11px] px-3 py-1.5 border border-[var(--rule)] rounded-sm text-[var(--ink-soft)]">＋ 数式</button>
+            <button type="button" onClick={() => addBlock('graph')} className="font-mono text-[11px] px-3 py-1.5 border border-[var(--rule)] rounded-sm text-[var(--ink-soft)]">＋ 図</button>
+          </div>
+        </div>
+
+        {error && <p className="text-xs text-[var(--vermilion)] font-mono">{error}</p>}
+
+        <div className="flex items-center justify-between pt-4 border-t border-[var(--rule)]">
+          <div>
+            {existing && (
+              <button
+                type="button"
+                onClick={() => { if (confirm('この用語を削除しますか？元に戻せません。')) onDelete(existing.id); }}
+                className="font-mono text-xs text-[var(--vermilion)] hover:underline"
+              >この用語を削除</button>
+            )}
+          </div>
+          <div className="flex gap-3">
+            <button type="button" onClick={onCancel} className="font-mono text-xs px-4 py-2.5 border border-[var(--rule)] rounded-sm text-[var(--ink-soft)]">キャンセル</button>
+            <button type="button" onClick={handleSave} className="font-mono text-xs px-5 py-2.5 bg-[var(--indigo)] text-white rounded-sm hover:bg-[var(--indigo-soft)]">保存する</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ====================== App Shell ====================== */
+
+function App() {
+  const [view, setView] = useState({ type: 'home' });
+  const [userTerms, setUserTerms] = useState([]);
+  const [deletedBuiltinIds, setDeletedBuiltinIds] = useState([]);
+  const [editedBuiltinIds, setEditedBuiltinIds] = useState({}); // id -> edited term
+  const [loaded, setLoaded] = useState(false);
+  const [saveError, setSaveError] = useState(false);
+
+  const STORAGE_KEY = 'library:user-data';
+
+  const storageGet = async () => {
+    if (window.storage) {
+      const res = await window.storage.get(STORAGE_KEY, false);
+      return res && res.value ? res.value : null;
+    }
+    return localStorage.getItem(STORAGE_KEY);
+  };
+
+  const storageSet = async (value) => {
+    if (window.storage) {
+      const result = await window.storage.set(STORAGE_KEY, value, false);
+      return !!result;
+    }
+    try { localStorage.setItem(STORAGE_KEY, value); return true; } catch (e) { return false; }
+  };
+
+  // Load persisted state on mount
+  useEffect(() => {
+    (async () => {
+      try {
+        const raw = await storageGet();
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          setUserTerms(parsed.userTerms || []);
+          setDeletedBuiltinIds(parsed.deletedBuiltinIds || []);
+          setEditedBuiltinIds(parsed.editedBuiltinIds || {});
+        }
+      } catch (e) {
+        // no saved data yet — fine, start fresh
+      } finally {
+        setLoaded(true);
+      }
+    })();
+  }, []);
+
+  const persist = async (next) => {
+    try {
+      const ok = await storageSet(JSON.stringify(next));
+      setSaveError(!ok);
+    } catch (e) {
+      setSaveError(true);
+    }
+  };
+
+  const allTerms = useMemo(() => {
+    const builtins = TERMS
+      .filter(t => !deletedBuiltinIds.includes(t.id))
+      .map(t => editedBuiltinIds[t.id] ? editedBuiltinIds[t.id] : t);
+    return [...builtins, ...userTerms];
+  }, [userTerms, deletedBuiltinIds, editedBuiltinIds]);
+
+  const goHome = () => setView({ type: 'home' });
+  const goCategory = (categoryKey, opts={}) => setView({ type: 'category', categoryKey, tag: opts.tag, query: opts.query });
+  const goTerm = (termId, fallbackCategory) => {
+    if (!termId && fallbackCategory) { goCategory(fallbackCategory); return; }
+    setView({ type: 'term', termId });
+  };
+  const goSearch = (q) => setView({ type: 'search', query: q });
+  const goTagFromAnywhere = (tag, category) => goCategory(category, { tag });
+  const goCreate = (categoryKey) => setView({ type: 'editor', editingId: null, defaultCategory: categoryKey });
+  const goEdit = (termId) => setView({ type: 'editor', editingId: termId });
+
+  const isBuiltinId = (id) => TERMS.some(t => t.id === id);
+
+  const handleSaveTerm = (term) => {
+    let nextUserTerms = userTerms;
+    let nextEdited = editedBuiltinIds;
+    let nextDeleted = deletedBuiltinIds;
+
+    if (isBuiltinId(term.id)) {
+      nextEdited = { ...editedBuiltinIds, [term.id]: term };
+      setEditedBuiltinIds(nextEdited);
+    } else {
+      const exists = userTerms.some(t => t.id === term.id);
+      nextUserTerms = exists ? userTerms.map(t => t.id === term.id ? term : t) : [...userTerms, term];
+      setUserTerms(nextUserTerms);
+    }
+    persist({ userTerms: nextUserTerms, deletedBuiltinIds: nextDeleted, editedBuiltinIds: nextEdited });
+    goTerm(term.id);
+  };
+
+  const handleDeleteTerm = (id) => {
+    let nextUserTerms = userTerms;
+    let nextDeleted = deletedBuiltinIds;
+    let nextEdited = editedBuiltinIds;
+
+    if (isBuiltinId(id)) {
+      nextDeleted = [...deletedBuiltinIds, id];
+      setDeletedBuiltinIds(nextDeleted);
+    } else {
+      nextUserTerms = userTerms.filter(t => t.id !== id);
+      setUserTerms(nextUserTerms);
+    }
+    persist({ userTerms: nextUserTerms, deletedBuiltinIds: nextDeleted, editedBuiltinIds: nextEdited });
+    goHome();
+  };
+
+  if (!loaded) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <p className="font-mono text-xs text-[var(--ink-soft)]">読み込み中…</p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen">
+      <header className="border-b border-[var(--rule)] sticky top-0 bg-[var(--paper)] z-10">
+        <div className="max-w-3xl mx-auto px-6 py-3 flex items-center justify-between">
+          <button onClick={goHome} className="font-display text-lg font-semibold tracking-tight">Library</button>
+          <nav className="flex gap-4 font-mono text-xs text-[var(--ink-soft)]">
+            {Object.values(CATEGORIES).map(c => (
+              <button key={c.key} onClick={() => goCategory(c.key)}
+                className={"hover:text-[var(--ink)] transition-colors " + (view.categoryKey===c.key ? 'text-[var(--vermilion)]' : '')}>
+                {c.label}
+              </button>
+            ))}
+          </nav>
+        </div>
+      </header>
+
+      {saveError && (
+        <div className="max-w-3xl mx-auto px-6 pt-3">
+          <p className="font-mono text-[11px] text-[var(--vermilion)] bg-[rgba(28,49,119,0.06)] border border-[var(--vermilion-soft)] rounded-sm px-3 py-2">
+            保存に失敗しました（このプレビュー環境ではデータの永続化に対応していない可能性があります）。変更内容はこのセッション中のみ有効です。
+          </p>
+        </div>
+      )}
+
+      {view.type === 'home' && <Home onNavigate={goCategory} onSearch={goSearch} />}
+      {view.type === 'category' && (
+        <CategoryPage
+          categoryKey={view.categoryKey}
+          allTerms={allTerms}
+          onHome={goHome}
+          onOpen={goTerm}
+          onCreate={goCreate}
+          initialTag={view.tag}
+          initialQuery={view.query}
+        />
+      )}
+      {view.type === 'term' && (
+        <TermDetailPage termId={view.termId} allTerms={allTerms} onHome={goHome} onOpen={goTerm} onTagClick={goTagFromAnywhere} onEdit={goEdit} />
+      )}
+      {view.type === 'search' && (
+        <SearchResultsPage query={view.query} allTerms={allTerms} onHome={goHome} onOpen={goTerm} onTagClick={goTagFromAnywhere} />
+      )}
+      {view.type === 'editor' && (
+        <TermEditorPage
+          editingId={view.editingId}
+          allTerms={allTerms}
+          defaultCategory={view.defaultCategory}
+          onCancel={() => view.editingId ? goTerm(view.editingId) : goHome()}
+          onSave={handleSaveTerm}
+          onDelete={handleDeleteTerm}
+        />
+      )}
+
+      <footer className="max-w-3xl mx-auto px-6 py-12 text-center">
+        <p className="font-mono text-[10px] text-[var(--ink-soft)] tracking-wide">
+          Library — a dictionary for atomic &amp; molecular collision physics
+        </p>
+      </footer>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+
+<script>
+  // Babel Standaloneの自動スキャン機構（type="text/babel"属性によるDOMスキャン）を使わず、
+  // ここで明示的に変換・実行する。file:// プロトコル下での動的 import 起因の失敗を避けるため。
+  (function () {
+    var sourceEl = document.getElementById('app-source');
+    var code = sourceEl.textContent;
+    try {
+      var output = Babel.transform(code, { presets: [['react', { runtime: 'classic' }]], sourceType: 'script' }).code;
+      var script = document.createElement('script');
+      script.textContent = output;
+      document.body.appendChild(script);
+    } catch (err) {
+      var root = document.getElementById('root');
+      root.innerHTML =
+        '<div style="max-width:640px;margin:60px auto;padding:24px;border:1px solid #D4D0C4;border-radius:4px;font-family:sans-serif;">' +
+        '<h2 style="margin:0 0 12px;">読み込みエラー</h2>' +
+        '<p style="white-space:pre-wrap;color:#4A4F49;font-size:13px;">' + (err && err.message ? err.message : String(err)) + '</p>' +
+        '</div>';
+      console.error('Babel transform failed:', err);
+    }
+  })();
+</script>
+</body>
+</html>
